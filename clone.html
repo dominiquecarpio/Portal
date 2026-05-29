@@ -1,0 +1,1308 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>FinancialCorp</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800;900&family=DM+Sans:wght@400;500;600&display=swap"
+        rel="stylesheet" />
+    <style>
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0
+        }
+
+        :root {
+            --navy: #0c1a2d;
+            --gold: #f6941e;
+            --white: #ffffff;
+            --muted: #8a94aa;
+            --radius: 16px;
+            --nav-height: 70px
+        }
+
+        html {
+            scroll-behavior: smooth
+        }
+
+        body {
+            background: var(--white);
+            color: var(--navy);
+            font-family: 'DM Sans', sans-serif;
+            min-height: 100vh;
+            overflow-x: hidden
+        }
+
+        nav {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 52px;
+            height: var(--nav-height);
+            background: var(--navy);
+            border-bottom: 1px solid rgba(201, 150, 42, 0.15)
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+            flex-shrink: 0
+        }
+
+        .logo-text {
+            font-family: 'Sora', sans-serif;
+            font-size: 26px;
+            font-weight: 800;
+            color: var(--white);
+            letter-spacing: .04em
+        }
+
+        .logo-text span {
+            color: var(--gold)
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 36px;
+            list-style: none
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 17px;
+            font-weight: 500;
+            position: relative;
+            padding-bottom: 4px;
+            transition: color .2s
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--gold);
+            transition: width .25s;
+            border-radius: 2px
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: var(--white)
+        }
+
+        .nav-links a:hover::after,
+        .nav-links a.active::after {
+            width: 100%
+        }
+
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 16px
+        }
+
+        .btn-login {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 9px 22px;
+            border: 1.5px solid var(--gold);
+            border-radius: 8px;
+            color: var(--gold);
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            background: transparent;
+            text-decoration: none;
+            transition: background .2s, color .2s, transform .2s;
+            font-family: 'DM Sans', sans-serif;
+            white-space: nowrap
+        }
+
+        .btn-login:hover {
+            background: var(--gold);
+            color: var(--navy);
+            transform: translateY(-2px)
+        }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 5px;
+            width: 40px;
+            height: 40px;
+            background: transparent;
+            border: 1.5px solid rgba(255, 255, 255, 0.2);
+            border-radius: 8px;
+            cursor: pointer;
+            padding: 8px;
+            transition: border-color .2s, background .2s
+        }
+
+        .hamburger:hover {
+            border-color: var(--gold);
+            background: rgba(246, 148, 30, 0.08)
+        }
+
+        .hamburger .bar {
+            width: 20px;
+            height: 2px;
+            background: var(--white);
+            border-radius: 2px;
+            transition: transform .3s ease, opacity .3s ease, width .3s ease;
+            transform-origin: center
+        }
+
+        .hamburger.open .bar:nth-child(1) {
+            transform: translateY(7px) rotate(45deg)
+        }
+
+        .hamburger.open .bar:nth-child(2) {
+            opacity: 0;
+            width: 0
+        }
+
+        .hamburger.open .bar:nth-child(3) {
+            transform: translateY(-7px) rotate(-45deg)
+        }
+
+        .mobile-menu {
+            display: none;
+            position: fixed;
+            top: var(--nav-height);
+            left: 0;
+            right: 0;
+            z-index: 99;
+            background: var(--navy);
+            border-bottom: 2px solid rgba(246, 148, 30, 0.3);
+            padding: 0;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height .35s cubic-bezier(.22, .68, 0, 1), padding .35s ease
+        }
+
+        .mobile-menu.open {
+            max-height: 400px;
+            padding: 16px 0 24px
+        }
+
+        .mobile-menu ul {
+            list-style: none;
+            padding: 0 24px;
+            margin-bottom: 20px
+        }
+
+        .mobile-menu ul li {
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06)
+        }
+
+        .mobile-menu ul li:last-child {
+            border-bottom: none
+        }
+
+        .mobile-menu ul a {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 14px 4px;
+            text-decoration: none;
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 16px;
+            font-weight: 500;
+            transition: color .2s, padding-left .2s
+        }
+
+        .mobile-menu ul a::before {
+            content: '';
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--gold);
+            flex-shrink: 0;
+            opacity: 0.5;
+            transition: opacity .2s
+        }
+
+        .mobile-menu ul a:hover,
+        .mobile-menu ul a.active {
+            color: var(--white);
+            padding-left: 6px
+        }
+
+        .mobile-menu ul a:hover::before,
+        .mobile-menu ul a.active::before {
+            opacity: 1
+        }
+
+        .mobile-menu-footer {
+            padding: 0 24px
+        }
+
+        .btn-login-mobile {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            width: 100%;
+            padding: 13px 22px;
+            border: 1.5px solid var(--gold);
+            border-radius: 8px;
+            color: var(--gold);
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            background: transparent;
+            font-family: 'DM Sans', sans-serif;
+            transition: background .2s, color .2s
+        }
+
+        .btn-login-mobile:hover {
+            background: var(--gold);
+            color: var(--navy)
+        }
+
+        .hero {
+            position: relative;
+            overflow: hidden;
+            padding: 80px 52px 90px;
+            background: linear-gradient(135deg, #e8f0f8 0%, #f5f0e8 100%)
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 1500px;
+            margin: 0 auto
+        }
+
+        .hero h1 {
+            font-family: 'Sora', sans-serif;
+            font-size: clamp(36px, 6vw, 76px);
+            font-weight: 900;
+            line-height: 1.05;
+            color: #0c1a2d;
+            margin-bottom: 24px
+        }
+
+        .hero-gold-rule {
+            width: 64px;
+            height: 3px;
+            background: var(--gold);
+            border-radius: 3px;
+            margin-bottom: 22px
+        }
+
+        .hero-sub {
+            font-size: clamp(17px, 2.5vw, 22px);
+            font-weight: 600;
+            color: #0c1a2d;
+            margin-bottom: 10px
+        }
+
+        .hero-desc {
+            font-size: clamp(16px, 2vw, 20px);
+            color: #0c1a2dab;
+            max-width: 460px;
+            line-height: 1.75
+        }
+
+        .cards-section {
+            max-width: 1586px;
+            margin: 0 auto;
+            padding: 60px 52px;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+            margin-top: -78px
+        }
+
+        .card {
+            background: var(--white);
+            border: 1px solid rgba(11, 17, 32, 0.1);
+            border-radius: var(--radius);
+            padding: 36px 28px 28px;
+            position: relative;
+            overflow: hidden;
+            transition: transform .35s cubic-bezier(.22, .68, 0, 1.4), box-shadow .3s, border-color .3s
+        }
+
+        .card::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: var(--gold);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform .35s ease
+        }
+
+        .card:hover::after {
+            transform: scaleX(1)
+        }
+
+        .card:hover {
+            transform: translateY(-8px) scale(1.012);
+            box-shadow: 0 20px 60px rgba(11, 17, 32, 0.1);
+            border-color: rgba(201, 150, 42, 0.25)
+        }
+
+        .card-icon-wrap {
+            width: 64px;
+            height: 64px;
+            border-radius: 50%;
+            background: var(--navy);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px
+        }
+
+        .card-icon-wrap svg {
+            width: 28px;
+            height: 28px;
+            stroke: var(--gold);
+            fill: none;
+            stroke-width: 1.8;
+            stroke-linecap: round;
+            stroke-linejoin: round
+        }
+
+        .card-title-row {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            margin-bottom: 20px
+        }
+
+        .card h2 {
+            font-family: 'Sora', sans-serif;
+            font-size: 25px;
+            font-weight: 700;
+            color: var(--navy)
+        }
+
+        .card-gold-rule {
+            width: 36px;
+            height: 2px;
+            background: var(--gold);
+            border-radius: 2px
+        }
+
+        .card ul {
+            list-style: none;
+            margin-bottom: 30px
+        }
+
+        .card ul li {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            padding: 9px 0;
+            font-size: 18px;
+            color: #444;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+            cursor: pointer;
+            transition: color .2s, padding-left .2s, background .2s;
+            border-radius: 6px;
+            padding-left: 8px;
+            padding-right: 8px
+        }
+
+        .card ul li:last-child {
+            border-bottom: none
+        }
+
+        .card ul li::before {
+            content: '';
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--gold);
+            flex-shrink: 0
+        }
+
+        .card ul li:hover {
+            color: var(--navy);
+            padding-left: 12px;
+            background: rgba(246, 148, 30, 0.06)
+        }
+
+        .card ul li .li-arrow {
+            margin-left: auto;
+            font-size: 13px;
+            color: var(--gold);
+            opacity: 0;
+            transition: opacity .2s, transform .2s;
+            transform: translateX(-4px)
+        }
+
+        .card ul li:hover .li-arrow {
+            opacity: 1;
+            transform: translateX(0)
+        }
+
+        /* SUPPORT BANNER */
+        .support-banner {
+            max-width: 1579px;
+            margin: 0 auto 80px;
+            padding: 0 52px
+        }
+
+        .support-inner {
+            background: var(--white);
+            border: 1px solid rgba(11, 17, 32, 0.1);
+            border-radius: var(--radius);
+            padding: 28px 32px;
+            display: flex;
+            align-items: center;
+            gap: 24px;
+            position: relative;
+            overflow: hidden;
+            transition: border-color .3s, box-shadow .3s;
+            width: 100%;
+            max-width: 1500px;
+            margin: 0 auto;
+            flex-wrap: wrap
+        }
+
+        .support-inner:hover {
+            border-color: rgba(201, 150, 42, 0.3);
+            box-shadow: 0 8px 40px rgba(11, 17, 32, 0.07)
+        }
+
+        .support-icon {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            background: var(--navy);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0
+        }
+
+        .support-icon svg {
+            width: 30px;
+            height: 30px;
+            stroke: var(--gold);
+            fill: none;
+            stroke-width: 1.8;
+            stroke-linecap: round;
+            stroke-linejoin: round
+        }
+
+        .support-text {
+            flex: 1;
+            min-width: 180px
+        }
+
+        .support-text h3 {
+            font-family: 'Sora', sans-serif;
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--navy);
+            margin-bottom: 6px
+        }
+
+        .support-text p {
+            font-size: 16px;
+            color: var(--muted);
+            line-height: 1.6
+        }
+
+        .support-contacts {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+            align-items: center;
+            margin-left: auto
+        }
+
+        .support-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 13px 22px;
+            border-radius: 10px;
+            font-family: 'Sora', sans-serif;
+            font-size: 14px;
+            font-weight: 700;
+            text-decoration: none;
+            cursor: pointer;
+            transition: transform .2s, box-shadow .2s;
+            white-space: nowrap;
+            border: none
+        }
+
+        .support-btn-phone {
+            background: var(--navy);
+            color: var(--gold);
+            border: 1.5px solid var(--gold)
+        }
+
+        .support-btn-phone:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(246, 148, 30, 0.25)
+        }
+
+        .support-btn-email {
+            background: var(--gold);
+            color: var(--navy)
+        }
+
+        .support-btn-email:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(246, 148, 30, 0.35)
+        }
+
+        .support-btn svg {
+            width: 18px;
+            height: 18px;
+            flex-shrink: 0
+        }
+
+        /* IMAGE MODAL */
+        .img-modal-overlay {
+            position: fixed;
+            inset: 0;
+            z-index: 1000;
+            background: rgba(11, 17, 32, 0.85);
+            backdrop-filter: blur(12px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity .3s;
+            padding: 20px
+        }
+
+        .img-modal-overlay.open {
+            opacity: 1;
+            pointer-events: all
+        }
+
+        .img-modal {
+            background: var(--white);
+            border: 1px solid rgba(201, 150, 42, 0.25);
+            border-radius: 20px;
+            width: min(96vw, 1200px);
+            max-height: 90vh;
+            overflow: hidden;
+            transform: translateY(30px) scale(.96);
+            transition: transform .35s cubic-bezier(.22, .68, 0, 1.2);
+            position: relative
+        }
+
+        .img-modal-overlay.open .img-modal {
+            transform: translateY(0) scale(1)
+        }
+
+        .img-modal-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 20px 24px 0
+        }
+
+        .img-modal-title {
+            font-family: 'Sora', sans-serif;
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--navy)
+        }
+
+        .img-modal-close {
+            background: none;
+            border: none;
+            color: var(--muted);
+            font-size: 22px;
+            cursor: pointer;
+            padding: 4px 8px;
+            border-radius: 6px;
+            transition: color .2s, background .2s;
+            line-height: 1
+        }
+
+        .img-modal-close:hover {
+            color: var(--navy);
+            background: rgba(0, 0, 0, 0.06)
+        }
+
+        .img-modal-img-wrap {
+            padding: 16px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 320px;
+            background: #f8f9fb
+        }
+
+        .img-modal-img-wrap img {
+            max-width: 100%;
+            max-height: calc(90vh - 220px);
+            object-fit: contain;
+            border-radius: 8px;
+            display: block
+        }
+
+        .img-modal-img-wrap .img-placeholder {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 16px;
+            color: var(--muted);
+            width: 100%;
+            min-height: 300px
+        }
+
+        .img-placeholder-icon {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: var(--navy);
+            display: flex;
+            align-items: center;
+            justify-content: center
+        }
+
+        .img-placeholder-icon svg {
+            width: 36px;
+            height: 36px;
+            stroke: var(--gold);
+            fill: none;
+            stroke-width: 1.6;
+            stroke-linecap: round;
+            stroke-linejoin: round
+        }
+
+        .img-modal-desc {
+            padding: 0 24px 24px;
+            font-size: 14px;
+            color: var(--muted);
+            line-height: 1.6
+        }
+
+        .img-modal-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: rgba(201, 150, 42, 0.1);
+            border: 1px solid rgba(201, 150, 42, 0.25);
+            border-radius: 100px;
+            padding: 4px 12px;
+            font-size: 11px;
+            font-weight: 700;
+            color: var(--gold);
+            letter-spacing: .08em;
+            text-transform: uppercase;
+            margin-bottom: 10px
+        }
+
+        /* LOGIN MODAL */
+        .modal-overlay {
+            position: fixed;
+            inset: 0;
+            z-index: 999;
+            background: rgba(11, 17, 32, 0.7);
+            backdrop-filter: blur(10px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity .3s
+        }
+
+        .modal-overlay.open {
+            opacity: 1;
+            pointer-events: all
+        }
+
+        .modal {
+            background: var(--white);
+            border: 1px solid rgba(201, 150, 42, 0.2);
+            border-radius: 20px;
+            padding: 48px 44px;
+            width: 420px;
+            max-width: 94vw;
+            transform: translateY(30px) scale(.96);
+            transition: transform .35s cubic-bezier(.22, .68, 0, 1.2);
+            position: relative
+        }
+
+        .modal-overlay.open .modal {
+            transform: translateY(0) scale(1)
+        }
+
+        .modal-logo {
+            width: 48px;
+            height: 48px;
+            border-radius: 10px;
+            background: var(--navy);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px
+        }
+
+        .modal-logo svg {
+            width: 26px;
+            height: 26px;
+            fill: var(--gold)
+        }
+
+        .modal h2 {
+            font-family: 'Sora', sans-serif;
+            font-size: 24px;
+            font-weight: 800;
+            color: var(--navy);
+            margin-bottom: 28px
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 18px;
+            right: 20px;
+            background: none;
+            border: none;
+            color: var(--muted);
+            font-size: 22px;
+            cursor: pointer;
+            transition: color .2s
+        }
+
+        .modal-close:hover {
+            color: var(--navy)
+        }
+
+        .field {
+            margin-bottom: 18px
+        }
+
+        .field label {
+            display: block;
+            font-size: 11px;
+            font-weight: 700;
+            color: var(--muted);
+            margin-bottom: 7px;
+            letter-spacing: .08em;
+            text-transform: uppercase
+        }
+
+        .field input {
+            width: 100%;
+            padding: 12px 16px;
+            background: #f8f9fb;
+            border: 1px solid rgba(11, 17, 32, 0.12);
+            border-radius: 9px;
+            color: var(--navy);
+            font-size: 14px;
+            font-family: 'DM Sans', sans-serif;
+            outline: none;
+            transition: border-color .25s, box-shadow .25s
+        }
+
+        .field input:focus {
+            border-color: var(--gold);
+            box-shadow: 0 0 0 3px rgba(201, 150, 42, 0.12)
+        }
+
+        .btn-modal-submit {
+            width: 100%;
+            padding: 14px;
+            background: var(--navy);
+            color: var(--gold);
+            font-family: 'Sora', sans-serif;
+            font-size: 15px;
+            font-weight: 700;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            margin-top: 8px;
+            transition: background .2s, transform .2s;
+            letter-spacing: .04em
+        }
+
+        .btn-modal-submit:hover {
+            background: var(--gold);
+            color: var(--navy);
+            transform: translateY(-2px)
+        }
+
+        .toast {
+            position: fixed;
+            bottom: 32px;
+            right: 32px;
+            z-index: 2000;
+            background: var(--navy);
+            border: 1px solid var(--gold);
+            color: var(--gold);
+            font-family: 'Sora', sans-serif;
+            font-size: 13px;
+            font-weight: 700;
+            padding: 14px 24px;
+            border-radius: 10px;
+            transform: translateY(80px);
+            opacity: 0;
+            transition: transform .4s cubic-bezier(.22, .68, 0, 1.2), opacity .4s
+        }
+
+        .toast.show {
+            transform: translateY(0);
+            opacity: 1
+        }
+
+        .menu-backdrop {
+            display: none;
+            position: fixed;
+            inset: 0;
+            top: var(--nav-height);
+            z-index: 98;
+            background: rgba(0, 0, 0, 0.4)
+        }
+
+        .menu-backdrop.visible {
+            display: block
+        }
+
+        @media(max-width:900px) {
+            nav {
+                padding: 0 24px
+            }
+
+            .nav-links,
+            .btn-login {
+                display: none
+            }
+
+            .hamburger {
+                display: flex
+            }
+
+            .mobile-menu {
+                display: block
+            }
+
+            .hero {
+                padding: 52px 24px 64px
+            }
+
+            .cards-section {
+                grid-template-columns: 1fr;
+                padding: 40px 24px;
+                margin-top: -40px
+            }
+
+            .support-banner {
+                padding: 0 24px;
+                margin-bottom: 60px
+            }
+
+            .support-inner {
+                padding: 24px
+            }
+
+            .support-contacts {
+                width: 100%;
+                margin-left: 0;
+                justify-content: stretch
+            }
+
+            .support-btn {
+                flex: 1;
+                justify-content: center
+            }
+        }
+
+        @media(min-width:540px) and (max-width:900px) {
+            .cards-section {
+                grid-template-columns: repeat(2, 1fr)
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav>
+        <a class="logo" href="#">
+            <div class="logo-text">FINANCIAL<span>CORP</span></div>
+        </a>
+        <ul class="nav-links">
+            <li><a href="#" class="active">Home</a></li>
+            <li><a href="#sales">Sales Materials</a></li>
+            <li><a href="#support">Support</a></li>
+        </ul>
+        <div class="nav-right">
+            <button class="btn-login" onclick="openModal()">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="8" r="4" />
+                    <path d="M4 20c0-4 3.6-7 8-7s8 3 8 7" />
+                </svg>
+                Partner Login
+            </button>
+            <button class="hamburger" id="hamburger" onclick="toggleMenu()" aria-label="Toggle navigation menu"
+                aria-expanded="false">
+                <span class="bar"></span><span class="bar"></span><span class="bar"></span>
+            </button>
+        </div>
+    </nav>
+
+    <div class="mobile-menu" id="mobileMenu">
+        <ul>
+            <li><a href="#" class="active" onclick="closeMenu()">Home</a></li>
+            <li><a href="#education" onclick="closeMenu()">Education</a></li>
+            <li><a href="#sales" onclick="closeMenu()">Sales Materials</a></li>
+            <li><a href="#support" onclick="closeMenu()">Support</a></li>
+        </ul>
+        <div class="mobile-menu-footer">
+            <button class="btn-login-mobile" onclick="closeMenu();openModal();">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="8" r="4" />
+                    <path d="M4 20c0-4 3.6-7 8-7s8 3 8 7" />
+                </svg>
+                Partner Login
+            </button>
+        </div>
+    </div>
+    <div class="menu-backdrop" id="menuBackdrop" onclick="closeMenu()"></div>
+
+    <section class="hero">
+        <div class="hero-content">
+            <h1>FinancialCorp<br><span style="color:#0c1a2d">Partner Portal</span></h1>
+            <div class="hero-gold-rule"></div>
+            <p class="hero-sub">Everything our referral partners need to get started, learn, and grow.</p>
+            <p class="hero-desc">Streamlined onboarding, education, and sales resources — all in one place to help you
+                succeed.</p>
+        </div>
+    </section>
+
+    <section class="cards-section">
+
+        <div class="card">
+            <div class="card-icon-wrap">
+                <svg viewBox="0 0 24 24">
+                    <circle cx="9" cy="8" r="3" />
+                    <path d="M15 11a3 3 0 1 1 0-6 3 3 0 0 1 0 6z" />
+                    <path d="M2 20c0-3.3 3.1-6 7-6s7 2.7 7 6" />
+                    <path d="M16 14c2.7.5 5 2.5 5 6" />
+                </svg>
+            </div>
+            <div class="card-title-row">
+                <h2>Welcome Aboard</h2>
+                <div class="card-gold-rule"></div>
+            </div>
+            <ul>
+                <li
+                    onclick="openImgModal('Program Overview','welcome','A complete walkthrough of the FinancialCorp partner program — structure, commission tiers, and what to expect as a referral partner.')">
+                    Program Overview<span class="li-arrow">→</span></li>
+                <li
+                    onclick="openImgModal('First Steps','welcome','Your quick-start checklist for getting up and running: account setup, portal access, and submitting your first referral.')">
+                    First Steps<span class="li-arrow">→</span></li>
+                <li
+                    onclick="openImgModal('Referral Process','welcome','Step-by-step guide to submitting, tracking, and following up on referrals through the partner portal.')">
+                    Referral Process<span class="li-arrow">→</span></li>
+                <li
+                    onclick="openImgModal('Partner Agreement','welcome','Review the terms of the FinancialCorp partner agreement, including commission structure, compliance requirements, and exclusivity clauses.')">
+                    Partner Agreement<span class="li-arrow">→</span></li>
+            </ul>
+        </div>
+
+        <div class="card" id="education">
+            <div class="card-icon-wrap">
+                <svg viewBox="0 0 24 24">
+                    <path d="M22 10v6M2 10l10-5 10 5-10 5z" />
+                    <path d="M6 12v5c3 3 9 3 12 0v-5" />
+                </svg>
+            </div>
+            <div class="card-title-row">
+                <h2>Education Center</h2>
+                <div class="card-gold-rule"></div>
+            </div>
+            <ul>
+                <li
+                    onclick="openImgModal('Interchange Optimization','education','')">
+                    Interchange Optimization<span class="li-arrow">→</span></li>
+                <li
+                    onclick="openImgModal('Cash Discount Pricing','education','Understand how cash discount programs work, their compliance requirements, and how to present them to prospective merchants.')">
+                    Cash Discount Pricing<span class="li-arrow">→</span></li>
+                <li
+                    onclick="openImgModal('Clover POS','education','Overview of the Clover point-of-sale ecosystem, hardware options, and how to recommend the right setup for different merchant types.')">
+                    Clover POS<span class="li-arrow">→</span></li>
+                <li
+                    onclick="openImgModal('Industry Training','education','Access role-specific training modules covering payments industry fundamentals, compliance, and advanced sales techniques.')">
+                    Industry Training<span class="li-arrow">→</span></li>
+            </ul>
+        </div>
+
+        <div class="card" id="sales">
+            <div class="card-icon-wrap">
+                <svg viewBox="0 0 24 24">
+                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+                    <polyline points="14 2 14 8 20 8" />
+                    <line x1="16" y1="13" x2="8" y2="13" />
+                    <line x1="16" y1="17" x2="8" y2="17" />
+                    <line x1="10" y1="9" x2="8" y2="9" />
+                </svg>
+            </div>
+            <div class="card-title-row">
+                <h2>Sales Materials</h2>
+                <div class="card-gold-rule"></div>
+            </div>
+            <ul>
+                <li
+                    onclick="openImgModal('Partner Guide','sales','The comprehensive partner sales guide — product positioning, objection handling, competitor comparisons, and closing strategies.')">
+                    Partner Guide<span class="li-arrow">→</span></li>
+                <li
+                    onclick="openImgModal('Email Templates','sales','Ready-to-send email templates for cold outreach, follow-ups, proposal delivery, and post-close onboarding communication.')">
+                    Email Templates<span class="li-arrow">→</span></li>
+                <li
+                    onclick="openImgModal('One-Page Flyers','sales','Professionally designed one-page flyers for each product line — downloadable and print-ready for in-person meetings.')">
+                    One-Page Flyers<span class="li-arrow">→</span></li>
+                <li
+                    onclick="openImgModal('Scripts &amp; Talking Points','sales','Proven call scripts and conversation frameworks to help you pitch confidently and handle common merchant objections.')">
+                    Scripts &amp; Talking Points<span class="li-arrow">→</span></li>
+            </ul>
+        </div>
+
+    </section>
+
+    <!-- SUPPORT BANNER -->
+    <section class="support-banner" id="support">
+        <div class="support-inner">
+            <div class="support-icon">
+                <svg viewBox="0 0 24 24">
+                    <path d="M3 18v-6a9 9 0 0 1 18 0v6" />
+                    <path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3z" />
+                    <path d="M3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z" />
+                </svg>
+            </div>
+            <div class="support-text">
+                <h3>Need Help?</h3>
+                <p>Contact the FinancialCorp team for partner support, training questions, or referral help.</p>
+            </div>
+            <div class="support-contacts">
+                <!-- PHONE: replace +11234567890 with your real number (digits only, no spaces/dashes) -->
+                <a href="tel:+11234567890" class="support-btn support-btn-phone">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path
+                            d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.62 1.27h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.91a16 16 0 0 0 6 6l.91-.91a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21.73 16z" />
+                    </svg>
+                    +1 (123) 456-7890
+                </a>
+                <!-- EMAIL: replace support@financialcorp.com with your real email -->
+                <a href="mailto:support@financialcorp.com" class="support-btn support-btn-email">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
+                        <polyline points="22,6 12,13 2,6" />
+                    </svg>
+                    support@financialcorp.com
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- IMAGE MODAL -->
+    <div class="img-modal-overlay" id="imgModalOverlay" onclick="handleImgOverlayClick(event)">
+        <div class="img-modal">
+            <div class="img-modal-header">
+                <div>
+                    <div class="img-modal-tag" id="imgModalTag">Welcome Aboard</div>
+                    <div class="img-modal-title" id="imgModalTitle">Program Overview</div>
+                </div>
+                <button class="img-modal-close" onclick="closeImgModal()">✕</button>
+            </div>
+            <div class="img-modal-img-wrap">
+                <img id="imgModalImage" src="" alt="" />
+                <div id="imgModalPlaceholder"></div>
+            </div>
+            <div class="img-modal-desc" id="imgModalDesc"></div>
+        </div>
+    </div>
+
+    <!-- LOGIN MODAL -->
+    <div class="modal-overlay" id="modalOverlay" onclick="handleOverlayClick(event)">
+        <div class="modal">
+            <button class="modal-close" onclick="closeModal()">✕</button>
+            <div class="modal-logo">
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <text x="12" y="17" text-anchor="middle" font-size="11" font-weight="900"
+                        font-family="Sora,sans-serif" fill="#f6941e">FC</text>
+                </svg>
+            </div>
+            <h2>Partner Login</h2>
+            <div class="field"><label>Email Address</label><input type="email" placeholder="you@company.com" /></div>
+            <div class="field"><label>Password</label><input type="password" placeholder="••••••••" /></div>
+            <button class="btn-modal-submit" onclick="handleLogin()">Sign In →</button>
+        </div>
+    </div>
+
+    <div class="toast" id="toast"></div>
+
+    <script>
+        const sectionLabels = {
+            welcome: 'Welcome Aboard',
+            education: 'Education Center',
+            sales: 'Sales Materials'
+        };
+
+        /*
+          ============================================================
+          ADD YOUR IMAGES HERE
+          Key   = item title (must match exactly)
+          Value = direct image URL (https://... or relative path)
+
+          Example:
+            'Program Overview': 'https://yourdomain.com/images/program-overview.jpg',
+            'First Steps':      '/images/first-steps.png',
+
+          Leave value as '' to show the placeholder instead.
+          ============================================================
+        */
+        const itemImages = {
+            'Program Overview': 'FinancialCorp_01_Program_Overview.png',
+            'First Steps': 'FinancialCorp_02_First_Steps.png',
+            'Referral Process': 'FinancialCorp_03_Referral_Process.png',
+            'Partner Agreement': 'FinancialCorp_04_Partner_Agreement.png',
+            'Interchange Optimization': 'Interchange%20Optimization%20and%20Cash%20Discount%20Pricing.png',
+            'Cash Discount Pricing': 'Interchange%20Optimization%20and%20Cash%20Discount%20Pricing.png',
+            'Clover POS': 'CLOVER%20POS.png',
+            'Industry Training': 'Image20260530011507.png',
+            'Partner Guide': 'FinancialCorp_Sales_01_Partner_Guide.png.png',
+            'Email Templates': 'FinancialCorp_Sales_02_Email_Templates.png',
+            'One-Page Flyers': 'FinancialCorp_Sales_03_One_Page_Flyers.png',
+            'Scripts & Talking Points': 'inancialCorp_Sales_04_Scripts_Talking_Points.png'
+        };
+
+        function openImgModal(title, section, desc) {
+            document.getElementById('imgModalTitle').textContent = title;
+            document.getElementById('imgModalTag').textContent = sectionLabels[section] || section;
+            document.getElementById('imgModalDesc').textContent = desc;
+
+            const img = document.getElementById('imgModalImage');
+            const placeholder = document.getElementById('imgModalPlaceholder');
+            const imgSrc = itemImages[title] || '';
+
+            img.alt = title;
+            img.src = imgSrc;
+            placeholder.innerHTML = '';
+
+            if (imgSrc.trim() !== '') {
+                img.style.display = 'block';
+                img.onerror = function () {
+                    img.style.display = 'none';
+                    placeholder.innerHTML = buildPlaceholder(title, 'Image could not be loaded. Check the URL in the itemImages map.');
+                };
+            } else {
+                img.style.display = 'none';
+                placeholder.innerHTML = buildPlaceholder(title, null);
+            }
+
+            document.getElementById('imgModalOverlay').classList.add('open');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function buildPlaceholder(title, customMsg) {
+            const msg = customMsg ||
+                'Add an image URL to the <code style="background:#f0f0f0;padding:2px 5px;border-radius:4px;font-size:12px">itemImages</code> map in the script';
+            return `<div class="img-placeholder">
+                <div class="img-placeholder-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="#f6941e" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" width="36" height="36">
+                        <rect x="3" y="3" width="18" height="18" rx="2"/>
+                        <circle cx="8.5" cy="8.5" r="1.5"/>
+                        <path d="M21 15l-5-5L5 21"/>
+                    </svg>
+                </div>
+                <p style="font-size:14px;text-align:center;max-width:280px;line-height:1.6;color:#8a94aa">
+                    Image for <strong style="color:#0c1a2d">${title}</strong><br>${msg}
+                </p>
+            </div>`;
+        }
+
+        function closeImgModal() {
+            document.getElementById('imgModalOverlay').classList.remove('open');
+            document.body.style.overflow = '';
+        }
+
+        function handleImgOverlayClick(e) {
+            if (e.target === document.getElementById('imgModalOverlay')) closeImgModal();
+        }
+
+        function openModal() {
+            document.getElementById('modalOverlay').classList.add('open');
+            document.body.style.overflow = 'hidden';
+        }
+        function closeModal() {
+            document.getElementById('modalOverlay').classList.remove('open');
+            document.body.style.overflow = '';
+        }
+        function handleOverlayClick(e) {
+            if (e.target === document.getElementById('modalOverlay')) closeModal();
+        }
+        function handleLogin() {
+            closeModal();
+            showToast('Welcome back! Logging you in…');
+        }
+
+        let menuOpen = false;
+        function toggleMenu() { menuOpen ? closeMenu() : openMenuFn(); }
+        function openMenuFn() {
+            menuOpen = true;
+            document.getElementById('hamburger').classList.add('open');
+            document.getElementById('hamburger').setAttribute('aria-expanded', 'true');
+            document.getElementById('mobileMenu').classList.add('open');
+            document.getElementById('menuBackdrop').classList.add('visible');
+            document.body.style.overflow = 'hidden';
+        }
+        function closeMenu() {
+            menuOpen = false;
+            document.getElementById('hamburger').classList.remove('open');
+            document.getElementById('hamburger').setAttribute('aria-expanded', 'false');
+            document.getElementById('mobileMenu').classList.remove('open');
+            document.getElementById('menuBackdrop').classList.remove('visible');
+            document.body.style.overflow = '';
+        }
+
+        let toastTimer;
+        function showToast(msg) {
+            const t = document.getElementById('toast');
+            clearTimeout(toastTimer);
+            t.textContent = msg;
+            t.classList.add('show');
+            toastTimer = setTimeout(() => t.classList.remove('show'), 3200);
+        }
+
+        document.addEventListener('keydown', e => {
+            if (e.key === 'Escape') { closeImgModal(); closeModal(); closeMenu(); }
+        });
+        window.addEventListener('resize', () => { if (window.innerWidth > 900) closeMenu(); });
+    </script>
+</body>
+
+</html>
