@@ -252,6 +252,15 @@
             background: var(--gold);
             flex-shrink: 0;
             opacity: 0.5;
+        /* Improve logo rendering: prefer vector or @2x raster if available and reduce smoothing */
+        .logo-image {
+            image-rendering: -webkit-optimize-contrast;
+            image-rendering: crisp-edges;
+            image-rendering: pixelated;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            backface-visibility: hidden;
+        }
             transition: opacity .2s
         }
 
@@ -1097,7 +1106,7 @@
 
     <nav>
         <a class="logo" href="#" aria-label="Go to homepage">
-            <img class="logo-image" src="logo.png" alt="FinancialCorp logo" />
+            <img class="logo-image" src="logo.png" srcset="logo@2x.png 2x, logo.svg 1x" sizes="40px" width="40" height="40" alt="FinancialCorp logo" />
             <div class="logo-text">FINANCIAL<span>CORP</span></div>
         </a>
         <ul class="nav-links">
