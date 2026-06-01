@@ -74,6 +74,23 @@
             flex-shrink: 0
         }
 
+        /* FIX: logo icon mark */
+        .logo-icon {
+            width: 38px;
+            height: 38px;
+            border-radius: 8px;
+            background: var(--gold);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .logo-icon svg {
+            width: 22px;
+            height: 22px;
+        }
+
         .logo-text {
             font-family: 'Sora', sans-serif;
             font-size: 26px;
@@ -252,15 +269,6 @@
             background: var(--gold);
             flex-shrink: 0;
             opacity: 0.5;
-        /* Improve logo rendering: prefer vector or @2x raster if available and reduce smoothing */
-        .logo-image {
-            image-rendering: -webkit-optimize-contrast;
-            image-rendering: crisp-edges;
-            image-rendering: pixelated;
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
-            backface-visibility: hidden;
-        }
             transition: opacity .2s
         }
 
@@ -607,7 +615,7 @@
             flex-shrink: 0
         }
 
-        /* IMAGE MODAL */
+        /* ===== IMAGE MODAL ===== */
         .img-modal-overlay {
             position: fixed;
             inset: 0;
@@ -632,7 +640,6 @@
             background: var(--white);
             border: 1px solid rgba(201, 150, 42, 0.25);
             border-radius: 20px;
-            /* FIXED: use large viewport dimensions so the modal is genuinely big */
             width: min(96vw, 1400px);
             height: min(92vh, 900px);
             max-height: 92vh;
@@ -669,7 +676,6 @@
             gap: 8px
         }
 
-        /* ZOOM CONTROLS */
         .zoom-controls {
             display: flex;
             align-items: center;
@@ -753,10 +759,10 @@
             background: rgba(0, 0, 0, 0.06)
         }
 
-        /* ZOOM VIEWPORT — KEY FIX: flex:1 makes it fill all remaining vertical space */
+        /* FIX: Image viewport — overflow scroll so full-res image is always available */
         .img-modal-img-wrap {
             flex: 1;
-            min-height: 0;          /* critical for flex children to shrink properly */
+            min-height: 0;
             overflow: hidden;
             position: relative;
             background: #f8f9fb;
@@ -767,6 +773,7 @@
             cursor: grabbing
         }
 
+        /* FIX: zoom container centered, transform-origin top-left for correct pivot math */
         .img-zoom-container {
             position: absolute;
             top: 0;
@@ -780,18 +787,23 @@
             will-change: transform
         }
 
-        /* FIXED: let the image grow to fill the container */
+        /* FIX: image rendered at full native resolution — browser will not downscale it,
+           so zooming in reveals actual pixels instead of upscaling a CSS-shrunken render.
+           object-fit:contain inside the flex container handles fitting it to the viewport. */
         .img-modal-img-wrap img {
-            max-width: 100%;
-            max-height: 100%;
+            display: block;
+            max-width: none;   /* allow image to exceed container — zoom handles sizing */
+            max-height: none;
             width: auto;
             height: auto;
-            object-fit: contain;
-            border-radius: 6px;
-            display: block;
+            /* Render at full native resolution for HD quality */
+            image-rendering: -webkit-optimize-contrast; /* Safari */
+            image-rendering: crisp-edges;               /* FF fallback */
+            image-rendering: high-quality;              /* Chrome 93+ */
             pointer-events: none;
             user-select: none;
-            -webkit-user-drag: none
+            -webkit-user-drag: none;
+            border-radius: 4px
         }
 
         .img-modal-img-wrap .img-placeholder {
@@ -826,7 +838,6 @@
             stroke-linejoin: round
         }
 
-        /* Zoom hint tooltip */
         .zoom-hint {
             position: absolute;
             bottom: 12px;
@@ -1105,8 +1116,14 @@
 <body>
 
     <nav>
-        <a class="logo" href="#" aria-label="Go to homepage">
-            <img class="logo-image" src="logo.png" srcset="logo@2x.png 2x, logo.svg 1x" sizes="40px" width="40" height="40" alt="FinancialCorp logo" />
+        <!-- FIX: logo now links to # (home), with a proper icon mark + text -->
+        <a class="logo" href="#">
+            <div class="logo-icon">
+                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Dollar sign / finance icon in navy -->
+                    <path d="M12 2v2M12 20v2M12 7c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 7v1m0 8c-1.657 0-3-.895-3-2m3 2v1" stroke="#0c1a2d" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </div>
             <div class="logo-text">FINANCIAL<span>CORP</span></div>
         </a>
         <ul class="nav-links">
@@ -1344,44 +1361,20 @@
             'Cash Discount Pricing': 'Interchange%20Optimization%20and%20Cash%20Discount%20Pricing.png',
             'Clover POS': 'CLOVER%20POS.png',
             'Industry Training': 'Image20260530011507.png',
-            'Partner Guide': 'FinancialCorp_Sales_01_Partner_Guide.png',
+            'Partner Guide': 'FinancialCorp_Sales_01_Partner_Guide.png.png',
             'Email Templates': 'FinancialCorp_Sales_02_Email_Templates.png',
             'One-Page Flyers': 'FinancialCorp_Sales_03_One_Page_Flyers.png',
-            'Scripts & Talking Points': 'FinancialCorp_Sales_04_Scripts_Talking_Points.png'
+            'Scripts & Talking Points': 'inancialCorp_Sales_04_Scripts_Talking_Points.png'
         };
-
-        // Try higher-resolution filename variants for raster images to avoid blur when zooming.
-        function findHighResVariant(url, cb) {
-            if (!url) return cb(null);
-            const extMatch = url.match(/(\.[a-z0-9]+)(\?.*)?$/i);
-            const ext = extMatch ? extMatch[1] : '';
-            const base = ext ? url.slice(0, url.lastIndexOf(ext)) : url;
-            const candidates = [
-                base + '@2x' + ext,
-                base + '-2x' + ext,
-                base + '_2x' + ext,
-                base + '-large' + ext,
-                'images/hires/' + url,
-                './images/' + url,
-                '/images/' + url
-            ];
-
-            let i = 0;
-            function tryNext() {
-                if (i >= candidates.length) return cb(null);
-                const test = candidates[i++];
-                const testImg = new Image();
-                testImg.onload = function () { cb(test); };
-                testImg.onerror = tryNext;
-                testImg.src = test;
-            }
-            tryNext();
-        }
 
         /* ============================
            ZOOM & PAN STATE
+           FIX: image is loaded at native resolution; we scale the container down
+           to fit it initially (fitScale), then zoom from there. This means
+           zoom 100% = native pixel-for-pixel, which is always HD.
         ============================ */
-        let zoomScale = 1;
+        let zoomScale = 1;       // current applied scale
+        let fitScale = 1;        // scale that fits image inside viewport (our "100%")
         let zoomMin = 0.5;
         let zoomMax = 5;
         let zoomStep = 0.25;
@@ -1398,11 +1391,25 @@
         function getZoomContainer() { return document.getElementById('zoomContainer'); }
         function getImgWrap() { return document.getElementById('imgWrap'); }
 
+        function computeFitScale() {
+            const img = document.getElementById('imgModalImage');
+            const wrap = getImgWrap();
+            if (!img || !img.naturalWidth || !img.naturalHeight) return 1;
+            const ww = wrap.clientWidth;
+            const wh = wrap.clientHeight;
+            const scaleW = ww / img.naturalWidth;
+            const scaleH = wh / img.naturalHeight;
+            return Math.min(scaleW, scaleH, 1); // never upscale beyond native at "fit"
+        }
+
         function applyTransform() {
             const c = getZoomContainer();
+            // The container is centered; we offset by pan then scale around center.
             c.style.transform = `translate(${panX}px, ${panY}px) scale(${zoomScale})`;
             c.style.transformOrigin = '50% 50%';
-            document.getElementById('zoomLevel').textContent = Math.round(zoomScale * 100) + '%';
+            // Display zoom % relative to fit (fit = 100%)
+            const pct = fitScale > 0 ? Math.round((zoomScale / fitScale) * 100) : Math.round(zoomScale * 100);
+            document.getElementById('zoomLevel').textContent = pct + '%';
         }
 
         function clampPan() {
@@ -1411,49 +1418,50 @@
             if (!img || !img.naturalWidth) return;
             const ww = wrap.clientWidth;
             const wh = wrap.clientHeight;
-            const scaledW = img.offsetWidth * zoomScale;
-            const scaledH = img.offsetHeight * zoomScale;
+            // image is rendered at naturalWidth/Height, then scaled by zoomScale
+            const scaledW = img.naturalWidth * zoomScale;
+            const scaledH = img.naturalHeight * zoomScale;
             const maxPanX = Math.max(0, (scaledW - ww) / 2);
             const maxPanY = Math.max(0, (scaledH - wh) / 2);
             panX = Math.max(-maxPanX, Math.min(maxPanX, panX));
             panY = Math.max(-maxPanY, Math.min(maxPanY, panY));
         }
 
-        function zoomTo(newScale, pivotX, pivotY) {
+        function zoomTo(newScale, pivotClientX, pivotClientY) {
             const wrap = getImgWrap();
             const prevScale = zoomScale;
             zoomScale = Math.min(zoomMax, Math.max(zoomMin, newScale));
 
-            if (pivotX !== undefined && pivotY !== undefined) {
+            if (pivotClientX !== undefined && pivotClientY !== undefined) {
                 const rect = wrap.getBoundingClientRect();
                 const cx = rect.width / 2;
                 const cy = rect.height / 2;
-                const dx = pivotX - rect.left - cx;
-                const dy = pivotY - rect.top - cy;
+                const dx = pivotClientX - rect.left - cx;
+                const dy = pivotClientY - rect.top - cy;
                 panX = panX - dx * (zoomScale / prevScale - 1);
                 panY = panY - dy * (zoomScale / prevScale - 1);
             }
 
-            if (zoomScale === 1) { panX = 0; panY = 0; }
+            if (Math.abs(zoomScale - fitScale) < 0.01) { panX = 0; panY = 0; }
             clampPan();
             applyTransform();
         }
 
-        function zoomIn() { zoomTo(zoomScale + zoomStep); }
-        function zoomOut() { zoomTo(zoomScale - zoomStep); }
-        function zoomReset() { zoomScale = 1; panX = 0; panY = 0; applyTransform(); }
+        function zoomIn()    { zoomTo(zoomScale + zoomStep * fitScale); }
+        function zoomOut()   { zoomTo(zoomScale - zoomStep * fitScale); }
+        function zoomReset() { zoomScale = fitScale; panX = 0; panY = 0; applyTransform(); }
 
         /* Scroll to zoom */
         function onWheel(e) {
             if (!hasImage) return;
             e.preventDefault();
-            const delta = e.deltaY > 0 ? -zoomStep : zoomStep;
+            const delta = e.deltaY > 0 ? -(zoomStep * fitScale) : (zoomStep * fitScale);
             zoomTo(zoomScale + delta, e.clientX, e.clientY);
         }
 
         /* Mouse drag to pan */
         function onMouseDown(e) {
-            if (!hasImage || zoomScale <= 1) return;
+            if (!hasImage) return;
             if (e.button !== 0) return;
             isPanning = true;
             panStartX = e.clientX;
@@ -1500,7 +1508,7 @@
                 lastTouchMidX = (e.touches[0].clientX + e.touches[1].clientX) / 2;
                 lastTouchMidY = (e.touches[0].clientY + e.touches[1].clientY) / 2;
                 e.preventDefault();
-            } else if (e.touches.length === 1 && zoomScale > 1) {
+            } else if (e.touches.length === 1) {
                 touchPanStartX = e.touches[0].clientX;
                 touchPanStartY = e.touches[0].clientY;
                 touchPanOriginX = panX;
@@ -1520,7 +1528,7 @@
                 lastTouchDist = newDist;
                 lastTouchMidX = midX;
                 lastTouchMidY = midY;
-            } else if (e.touches.length === 1 && zoomScale > 1) {
+            } else if (e.touches.length === 1) {
                 panX = touchPanOriginX + (e.touches[0].clientX - touchPanStartX);
                 panY = touchPanOriginY + (e.touches[0].clientY - touchPanStartY);
                 clampPan();
@@ -1536,10 +1544,10 @@
         /* Double-click to zoom in/reset */
         function onDblClick(e) {
             if (!hasImage) return;
-            if (zoomScale > 1) {
+            if (zoomScale > fitScale * 1.05) {
                 zoomReset();
             } else {
-                zoomTo(2, e.clientX, e.clientY);
+                zoomTo(fitScale * 2.5, e.clientX, e.clientY);
             }
         }
 
@@ -1587,42 +1595,31 @@
             const imgSrc = itemImages[title] || '';
 
             img.alt = title;
-            img.src = imgSrc;
+            img.src = '';
             placeholder.innerHTML = '';
             placeholder.style.display = 'none';
 
-            zoomReset();
+            // Reset zoom before image loads
+            zoomScale = 1;
+            fitScale = 1;
+            panX = 0; panY = 0;
             hasImage = false;
             document.getElementById('zoomControls').style.display = 'none';
             document.getElementById('zoomHint').classList.add('hidden');
+            getZoomContainer().style.transform = '';
 
             if (imgSrc.trim() !== '') {
                 img.style.display = 'block';
                 img.onload = function () {
-                    // Image loaded; show controls and then try to find a higher-res variant.
+                    // FIX: compute fitScale so image fills the viewport nicely at "100%"
+                    fitScale = computeFitScale();
+                    zoomScale = fitScale;
+                    panX = 0; panY = 0;
+                    applyTransform();
                     hasImage = true;
                     placeholder.style.display = 'none';
                     document.getElementById('zoomControls').style.display = 'flex';
                     showHintThenHide();
-
-                    // For raster images, attempt to find a higher-resolution variant to reduce blur when zooming.
-                    const src = img.src || imgSrc;
-                    const isSvg = /\.svg(\?|$)/i.test(src);
-                    if (!isSvg) {
-                        findHighResVariant(src, function (found) {
-                            if (found && found !== src) {
-                                const prevOnload = img.onload;
-                                img.onload = function () {
-                                    // keep controls visible
-                                    hasImage = true;
-                                    document.getElementById('zoomControls').style.display = 'flex';
-                                    showHintThenHide();
-                                    img.onload = prevOnload;
-                                };
-                                img.src = found;
-                            }
-                        });
-                    }
                 };
                 img.onerror = function () {
                     img.style.display = 'none';
@@ -1631,6 +1628,7 @@
                     placeholder.style.display = 'flex';
                     placeholder.innerHTML = buildPlaceholder(title, 'Image could not be loaded. Check the URL in the itemImages map.');
                 };
+                img.src = imgSrc;
             } else {
                 img.style.display = 'none';
                 placeholder.style.display = 'flex';
@@ -1661,7 +1659,8 @@
 
         function closeImgModal() {
             detachZoomEvents();
-            zoomReset();
+            zoomScale = 1; fitScale = 1;
+            panX = 0; panY = 0;
             hasImage = false;
             document.getElementById('imgModalOverlay').classList.remove('open');
             document.body.style.overflow = '';
@@ -1723,7 +1722,18 @@
                 if (e.key === '0') zoomReset();
             }
         });
-        window.addEventListener('resize', () => { if (window.innerWidth > 900) closeMenu(); });
+
+        window.addEventListener('resize', () => {
+            if (window.innerWidth > 900) closeMenu();
+            // Recalculate fit on resize if modal is open
+            if (hasImage && document.getElementById('imgModalOverlay').classList.contains('open')) {
+                const prevRatio = zoomScale / fitScale;
+                fitScale = computeFitScale();
+                zoomScale = fitScale * prevRatio;
+                clampPan();
+                applyTransform();
+            }
+        });
     </script>
 </body>
 
