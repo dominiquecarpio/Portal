@@ -1096,7 +1096,8 @@
 <body>
 
     <nav>
-        <a class="logo" href="logo.png">
+        <a class="logo" href="#" aria-label="Go to homepage">
+            <img class="logo-image" src="logo.png" alt="FinancialCorp logo" />
             <div class="logo-text">FINANCIAL<span>CORP</span></div>
         </a>
         <ul class="nav-links">
@@ -1334,11 +1335,39 @@
             'Cash Discount Pricing': 'Interchange%20Optimization%20and%20Cash%20Discount%20Pricing.png',
             'Clover POS': 'CLOVER%20POS.png',
             'Industry Training': 'Image20260530011507.png',
-            'Partner Guide': 'FinancialCorp_Sales_01_Partner_Guide.png.png',
+            'Partner Guide': 'FinancialCorp_Sales_01_Partner_Guide.png',
             'Email Templates': 'FinancialCorp_Sales_02_Email_Templates.png',
             'One-Page Flyers': 'FinancialCorp_Sales_03_One_Page_Flyers.png',
-            'Scripts & Talking Points': 'inancialCorp_Sales_04_Scripts_Talking_Points.png'
+            'Scripts & Talking Points': 'FinancialCorp_Sales_04_Scripts_Talking_Points.png'
         };
+
+        // Try higher-resolution filename variants for raster images to avoid blur when zooming.
+        function findHighResVariant(url, cb) {
+            if (!url) return cb(null);
+            const extMatch = url.match(/(\.[a-z0-9]+)(\?.*)?$/i);
+            const ext = extMatch ? extMatch[1] : '';
+            const base = ext ? url.slice(0, url.lastIndexOf(ext)) : url;
+            const candidates = [
+                base + '@2x' + ext,
+                base + '-2x' + ext,
+                base + '_2x' + ext,
+                base + '-large' + ext,
+                'images/hires/' + url,
+                './images/' + url,
+                '/images/' + url
+            ];
+
+            let i = 0;
+            function tryNext() {
+                if (i >= candidates.length) return cb(null);
+                const test = candidates[i++];
+                const testImg = new Image();
+                testImg.onload = function () { cb(test); };
+                testImg.onerror = tryNext;
+                testImg.src = test;
+            }
+            tryNext();
+        }
 
         /* ============================
            ZOOM & PAN STATE
@@ -1561,10 +1590,30 @@
             if (imgSrc.trim() !== '') {
                 img.style.display = 'block';
                 img.onload = function () {
+                    // Image loaded; show controls and then try to find a higher-res variant.
                     hasImage = true;
                     placeholder.style.display = 'none';
                     document.getElementById('zoomControls').style.display = 'flex';
                     showHintThenHide();
+
+                    // For raster images, attempt to find a higher-resolution variant to reduce blur when zooming.
+                    const src = img.src || imgSrc;
+                    const isSvg = /\.svg(\?|$)/i.test(src);
+                    if (!isSvg) {
+                        findHighResVariant(src, function (found) {
+                            if (found && found !== src) {
+                                const prevOnload = img.onload;
+                                img.onload = function () {
+                                    // keep controls visible
+                                    hasImage = true;
+                                    document.getElementById('zoomControls').style.display = 'flex';
+                                    showHintThenHide();
+                                    img.onload = prevOnload;
+                                };
+                                img.src = found;
+                            }
+                        });
+                    }
                 };
                 img.onerror = function () {
                     img.style.display = 'none';
