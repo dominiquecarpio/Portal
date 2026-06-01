@@ -799,6 +799,15 @@
             -webkit-user-drag: none
         }
 
+        /* Try to preserve visual crispness when scaling images
+           (SVG will remain crisp; raster images may still blur when scaled beyond natural size). */
+        .img-modal-img-wrap img {
+            image-rendering: optimizeQuality;
+            image-rendering: -webkit-optimize-contrast;
+            image-rendering: crisp-edges;
+            image-rendering: pixelated;
+        }
+
         .img-modal-img-wrap .img-placeholder {
             display: flex;
             flex-direction: column;
@@ -1571,7 +1580,58 @@
             const imgSrc = itemImages[title] || '';
 
             img.alt = title;
-            img.src = imgSrc;
+            // Try several candidate paths for the image before falling back to a placeholder SVG.
+            const candidates = [];
+            if (imgSrc && imgSrc.trim() !== '') {
+                candidates.push(imgSrc);
+                candidates.push('./' + imgSrc);
+                candidates.push('/' + imgSrc);
+                candidates.push('/images/' + imgSrc);
+                candidates.push('./images/' + imgSrc);
+                // try decoded variant (spaces)
+                try { candidates.push(decodeURIComponent(imgSrc)); } catch (e) {}
+            }
+
+            function setFallback() {
+                img.style.display = 'none';
+                placeholder.innerHTML = buildPlaceholder(title, 'Image could not be loaded from any path. Showing vector fallback so zoom remains crisp.');
+                document.getElementById('zoomControls').style.display = 'none';
+                hasImage = false;
+            }
+
+            function tryLoad(idx) {
+                if (idx >= candidates.length) { setFallback(); return; }
+                const url = candidates[idx];
+                img.onload = function () {
+                    // Loaded successfully
+                    img.style.display = 'block';
+                    img.style.maxWidth = '100%';
+                    img.style.height = 'auto';
+                    hasImage = true;
+                    document.getElementById('zoomControls').style.display = 'flex';
+                    // If the loaded image is an SVG (filename ends with .svg), keep it scalable (no blurring).
+                    const isSvg = /\.svg(\?|$)/i.test(url);
+                    if (isSvg) {
+                        img.style.width = '100%';
+                        img.style.height = '100%';
+                    } else {
+                        // For raster images, ensure natural size is respected so zoom behaves predictably.
+                        img.style.width = img.naturalWidth + 'px';
+                        img.style.height = 'auto';
+                    }
+                    showHintThenHide();
+                };
+                img.onerror = function () { tryLoad(idx + 1); };
+                img.src = url;
+            }
+
+            // Start trying to load images
+            if (candidates.length > 0) {
+                tryLoad(0);
+            } else {
+                // no src provided — use placeholder SVG fallback
+                setFallback();
+            }
             placeholder.innerHTML = '';
 
             zoomReset();
@@ -1579,23 +1639,7 @@
             document.getElementById('zoomControls').style.display = 'none';
             document.getElementById('zoomHint').classList.add('hidden');
 
-            if (imgSrc.trim() !== '') {
-                img.style.display = 'block';
-                img.onload = function () {
-                    hasImage = true;
-                    document.getElementById('zoomControls').style.display = 'flex';
-                    showHintThenHide();
-                };
-                img.onerror = function () {
-                    img.style.display = 'none';
-                    hasImage = false;
-                    document.getElementById('zoomControls').style.display = 'none';
-                    placeholder.innerHTML = buildPlaceholder(title, 'Image could not be loaded. Check the URL in the itemImages map.');
-                };
-            } else {
-                img.style.display = 'none';
-                placeholder.innerHTML = buildPlaceholder(title, null);
-            }
+            // previous loading logic replaced by tryLoad above
 
             attachZoomEvents();
             document.getElementById('imgModalOverlay').classList.add('open');
