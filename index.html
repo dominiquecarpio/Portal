@@ -366,7 +366,7 @@
             margin: 0 auto;
             padding: 60px 52px;
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 24px;
             margin-top: -78px
         }
@@ -1127,6 +1127,7 @@
         </a>
         <ul class="nav-links">
             <li><a href="#" class="active">Home</a></li>
+            <li><a href="#foundation">Foundation</a></li>
             <li><a href="#sales">Sales Materials</a></li>
             <li><a href="#support">Support</a></li>
         </ul>
@@ -1149,6 +1150,7 @@
     <div class="mobile-menu" id="mobileMenu">
         <ul>
             <li><a href="#" class="active" onclick="closeMenu()">Home</a></li>
+            <li><a href="#foundation" onclick="closeMenu()">Foundation</a></li>
             <li><a href="#education" onclick="closeMenu()">Education</a></li>
             <li><a href="#sales" onclick="closeMenu()">Sales Materials</a></li>
             <li><a href="#support" onclick="closeMenu()">Support</a></li>
@@ -1217,12 +1219,46 @@
             <ul>
                 <li onclick="openImgModal('Interchange Optimization','education','')">
                     Interchange Optimization<span class="li-arrow">→</span></li>
-                <li onclick="openImgModal('Cash Discount Pricing','education','Understand how cash discount programs work, their compliance requirements, and how to present them to prospective merchants.')">
-                    Cash Discount Pricing<span class="li-arrow">→</span></li>
-                <li onclick="openImgModal('Clover POS','education','Overview of the Clover point-of-sale ecosystem, hardware options, and how to recommend the right setup for different merchant types.')">
-                    Clover POS<span class="li-arrow">→</span></li>
                 <li onclick="openImgModal('Industry Training','education','Access role-specific training modules covering payments industry fundamentals, compliance, and advanced sales techniques.')">
                     Industry Training<span class="li-arrow">→</span></li>
+                <li onclick="openImgModal('Clover POS','education','Overview of the Clover point-of-sale ecosystem, hardware options, and how to recommend the right setup for different merchant types.')">
+                    Clover POS<span class="li-arrow">→</span></li>
+                <li onclick="openImgModal('Union POS','education','Overview of the Union POS platform, merchant use cases, and recommended implementation guidelines.')">
+                    Union POS<span class="li-arrow">→</span></li>
+                <li onclick="openImgModal('Proprietary POS','education','Overview of proprietary POS solutions and how to position them alongside merchant hardware alternatives.')">
+                    Proprietary POS<span class="li-arrow">→</span></li>
+            </ul>
+        </div>
+
+        <div class="card" id="foundation">
+            <div class="card-icon-wrap">
+                <svg viewBox="0 0 24 24">
+                    <path d="M4 5h16M4 12h16M4 19h16" />
+                </svg>
+            </div>
+            <div class="card-title-row">
+                <h2>Foundation</h2>
+                <div class="card-gold-rule"></div>
+            </div>
+            <ul>
+                <li onclick="openImgModal('Payment vs Gateway and POS vs Terminal','foundation','Understand the differences between payment gateways, POS systems, and terminals to position solutions correctly.')">
+                    Payment vs Gateway and POS vs Terminal<span class="li-arrow">→</span></li>
+                <li onclick="openImgModal('Interchange','foundation','What interchange is, how it impacts merchant costs, and where savings opportunities are created.')">
+                    Interchange<span class="li-arrow">→</span></li>
+                <li onclick="openImgModal('How Financial Corp Lowers Costs','foundation','A breakdown of FinancialCorp strategies for reducing merchant processing costs through optimization and pricing.')">
+                    How Financial Corp Lowers Costs<span class="li-arrow">→</span></li>
+                <li onclick="openImgModal('What is Cash Discount','foundation','Learn how cash discount programs work, the benefits for merchants, and how to explain them to prospects.')">
+                    What is Cash Discount<span class="li-arrow">→</span></li>
+                <li onclick="openImgModal('Processing Statement','foundation','How to read a processing statement, identify key charges, and spot savings opportunities for merchants.')">
+                    Processing Statement<span class="li-arrow">→</span></li>
+                <li onclick="openImgModal('Types of POS Devices','foundation','A guide to the major POS device categories and the best fit for different merchant workflows.')">
+                    Types of POS Devices<span class="li-arrow">→</span></li>
+                <li onclick="openImgModal('Major POS Companies','foundation','Review of the top POS providers and how to differentiate their offerings during merchant conversations.')">
+                    Major POS Companies<span class="li-arrow">→</span></li>
+                <li onclick="openImgModal('Proprietary POS Companies','foundation','Overview of proprietary POS manufacturers and how FinancialCorp partners with exclusive hardware providers.')">
+                    Proprietary POS Companies<span class="li-arrow">→</span></li>
+                <li onclick="openImgModal('E-Commerce Payment Processing','foundation','The fundamentals of e-commerce payments, gateway integration, and selling online payment solutions.')">
+                    E-Commerce Payment Processing<span class="li-arrow">→</span></li>
             </ul>
         </div>
 
@@ -1347,6 +1383,7 @@
     <script>
         const sectionLabels = {
             welcome: 'Welcome Aboard',
+            foundation: 'Foundation',
             education: 'Education Center',
             sales: 'Sales Materials'
         };
@@ -1359,7 +1396,18 @@
             'Interchange Optimization': 'Interchange%20Optimization%20and%20Cash%20Discount%20Pricing.png',
             'Cash Discount Pricing': 'Interchange%20Optimization%20and%20Cash%20Discount%20Pricing.png',
             'Clover POS': 'CLOVER%20POS.png',
+            'Union POS': '',
+            'Proprietary POS': '',
             'Industry Training': 'Image20260530011507.png',
+            'Payment vs Gateway and POS vs Terminal': '',
+            'Interchange': 'Interchange%20Optimization%20and%20Cash%20Discount%20Pricing.png',
+            'How Financial Corp Lowers Costs': '',
+            'What is Cash Discount': '',
+            'Processing Statement': '',
+            'Types of POS Devices': '',
+            'Major POS Companies': '',
+            'Proprietary POS Companies': '',
+            'E-Commerce Payment Processing': '',
             'Partner Guide': 'FinancialCorp_Sales_01_Partner_Guide.png.png',
             'Email Templates': 'FinancialCorp_Sales_02_Email_Templates.png',
             'One-Page Flyers': 'FinancialCorp_Sales_03_One_Page_Flyers.png',
