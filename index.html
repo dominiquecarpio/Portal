@@ -278,16 +278,15 @@
             color: var(--navy)
         }
 
-         .hero {
-      position: relative;
-      overflow: hidden;
-      padding: 80px 52px 90px;
-      background-image: url('background.jpg');
-      background-size: cover;
-      background-position: center;
-      background-repeat: no-repeat;
-    }
-
+        .hero {
+            position: relative;
+            overflow: hidden;
+            padding: 80px 52px 90px;
+            background-image: url('background.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
 
         .hero-content {
             position: relative;
@@ -465,7 +464,6 @@
             transform: translateX(0)
         }
 
-        /* SUPPORT BANNER */
         .support-banner {
             max-width: 1579px;
             margin: 0 auto 80px;
@@ -615,7 +613,9 @@
             overflow: hidden;
             transform: translateY(30px) scale(.96);
             transition: transform .35s cubic-bezier(.22, .68, 0, 1.2);
-            position: relative
+            position: relative;
+            display: flex;
+            flex-direction: column
         }
 
         .img-modal-overlay.open .img-modal {
@@ -626,7 +626,8 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 20px 24px 0
+            padding: 20px 24px 0;
+            flex-shrink: 0
         }
 
         .img-modal-title {
@@ -634,6 +635,79 @@
             font-size: 18px;
             font-weight: 700;
             color: var(--navy)
+        }
+
+        .img-modal-header-right {
+            display: flex;
+            align-items: center;
+            gap: 8px
+        }
+
+        /* ZOOM CONTROLS */
+        .zoom-controls {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            background: #f0f2f5;
+            border-radius: 10px;
+            padding: 4px 8px
+        }
+
+        .zoom-btn {
+            background: none;
+            border: none;
+            width: 30px;
+            height: 30px;
+            border-radius: 7px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--navy);
+            font-size: 18px;
+            font-weight: 700;
+            line-height: 1;
+            transition: background .15s, color .15s;
+            flex-shrink: 0
+        }
+
+        .zoom-btn:hover {
+            background: var(--navy);
+            color: var(--gold)
+        }
+
+        .zoom-btn:active {
+            transform: scale(0.92)
+        }
+
+        .zoom-level {
+            font-family: 'Sora', sans-serif;
+            font-size: 12px;
+            font-weight: 700;
+            color: var(--muted);
+            min-width: 38px;
+            text-align: center;
+            user-select: none
+        }
+
+        .zoom-reset-btn {
+            background: none;
+            border: none;
+            width: 30px;
+            height: 30px;
+            border-radius: 7px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--muted);
+            transition: background .15s, color .15s;
+            flex-shrink: 0
+        }
+
+        .zoom-reset-btn:hover {
+            background: var(--navy);
+            color: var(--gold)
         }
 
         .img-modal-close {
@@ -653,21 +727,42 @@
             background: rgba(0, 0, 0, 0.06)
         }
 
+        /* ZOOM VIEWPORT */
         .img-modal-img-wrap {
-            padding: 16px 20px;
+            flex: 1;
+            overflow: hidden;
+            position: relative;
+            background: #f8f9fb;
+            min-height: 300px;
+            cursor: grab
+        }
+
+        .img-modal-img-wrap.grabbing {
+            cursor: grabbing
+        }
+
+        .img-zoom-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
             display: flex;
             align-items: center;
             justify-content: center;
-            min-height: 320px;
-            background: #f8f9fb
+            transform-origin: 0 0;
+            will-change: transform
         }
 
         .img-modal-img-wrap img {
             max-width: 100%;
-            max-height: calc(90vh - 220px);
+            max-height: 100%;
             object-fit: contain;
-            border-radius: 8px;
-            display: block
+            border-radius: 6px;
+            display: block;
+            pointer-events: none;
+            user-select: none;
+            -webkit-user-drag: none
         }
 
         .img-modal-img-wrap .img-placeholder {
@@ -701,11 +796,35 @@
             stroke-linejoin: round
         }
 
+        /* Zoom hint tooltip */
+        .zoom-hint {
+            position: absolute;
+            bottom: 12px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(12, 26, 45, 0.75);
+            color: rgba(255,255,255,0.85);
+            font-size: 11px;
+            font-family: 'DM Sans', sans-serif;
+            padding: 5px 12px;
+            border-radius: 20px;
+            pointer-events: none;
+            opacity: 1;
+            transition: opacity .5s;
+            white-space: nowrap;
+            z-index: 5
+        }
+
+        .zoom-hint.hidden {
+            opacity: 0
+        }
+
         .img-modal-desc {
-            padding: 0 24px 24px;
+            padding: 12px 24px 20px;
             font-size: 14px;
             color: var(--muted);
-            line-height: 1.6
+            line-height: 1.6;
+            flex-shrink: 0
         }
 
         .img-modal-tag {
@@ -951,7 +1070,7 @@
 <body>
 
     <nav>
-        <a class="logo" href="#">
+        <a class="logo" href="logo.png">
             <div class="logo-text">FINANCIAL<span>CORP</span></div>
         </a>
         <ul class="nav-links">
@@ -1021,17 +1140,13 @@
                 <div class="card-gold-rule"></div>
             </div>
             <ul>
-                <li
-                    onclick="openImgModal('Program Overview','welcome','A complete walkthrough of the FinancialCorp partner program — structure, commission tiers, and what to expect as a referral partner.')">
+                <li onclick="openImgModal('Program Overview','welcome','A complete walkthrough of the FinancialCorp partner program — structure, commission tiers, and what to expect as a referral partner.')">
                     Program Overview<span class="li-arrow">→</span></li>
-                <li
-                    onclick="openImgModal('First Steps','welcome','Your quick-start checklist for getting up and running: account setup, portal access, and submitting your first referral.')">
+                <li onclick="openImgModal('First Steps','welcome','Your quick-start checklist for getting up and running: account setup, portal access, and submitting your first referral.')">
                     First Steps<span class="li-arrow">→</span></li>
-                <li
-                    onclick="openImgModal('Referral Process','welcome','Step-by-step guide to submitting, tracking, and following up on referrals through the partner portal.')">
+                <li onclick="openImgModal('Referral Process','welcome','Step-by-step guide to submitting, tracking, and following up on referrals through the partner portal.')">
                     Referral Process<span class="li-arrow">→</span></li>
-                <li
-                    onclick="openImgModal('Partner Agreement','welcome','Review the terms of the FinancialCorp partner agreement, including commission structure, compliance requirements, and exclusivity clauses.')">
+                <li onclick="openImgModal('Partner Agreement','welcome','Review the terms of the FinancialCorp partner agreement, including commission structure, compliance requirements, and exclusivity clauses.')">
                     Partner Agreement<span class="li-arrow">→</span></li>
             </ul>
         </div>
@@ -1048,17 +1163,13 @@
                 <div class="card-gold-rule"></div>
             </div>
             <ul>
-                <li
-                    onclick="openImgModal('Interchange Optimization','education','')">
+                <li onclick="openImgModal('Interchange Optimization','education','')">
                     Interchange Optimization<span class="li-arrow">→</span></li>
-                <li
-                    onclick="openImgModal('Cash Discount Pricing','education','Understand how cash discount programs work, their compliance requirements, and how to present them to prospective merchants.')">
+                <li onclick="openImgModal('Cash Discount Pricing','education','Understand how cash discount programs work, their compliance requirements, and how to present them to prospective merchants.')">
                     Cash Discount Pricing<span class="li-arrow">→</span></li>
-                <li
-                    onclick="openImgModal('Clover POS','education','Overview of the Clover point-of-sale ecosystem, hardware options, and how to recommend the right setup for different merchant types.')">
+                <li onclick="openImgModal('Clover POS','education','Overview of the Clover point-of-sale ecosystem, hardware options, and how to recommend the right setup for different merchant types.')">
                     Clover POS<span class="li-arrow">→</span></li>
-                <li
-                    onclick="openImgModal('Industry Training','education','Access role-specific training modules covering payments industry fundamentals, compliance, and advanced sales techniques.')">
+                <li onclick="openImgModal('Industry Training','education','Access role-specific training modules covering payments industry fundamentals, compliance, and advanced sales techniques.')">
                     Industry Training<span class="li-arrow">→</span></li>
             </ul>
         </div>
@@ -1078,17 +1189,13 @@
                 <div class="card-gold-rule"></div>
             </div>
             <ul>
-                <li
-                    onclick="openImgModal('Partner Guide','sales','The comprehensive partner sales guide — product positioning, objection handling, competitor comparisons, and closing strategies.')">
+                <li onclick="openImgModal('Partner Guide','sales','The comprehensive partner sales guide — product positioning, objection handling, competitor comparisons, and closing strategies.')">
                     Partner Guide<span class="li-arrow">→</span></li>
-                <li
-                    onclick="openImgModal('Email Templates','sales','Ready-to-send email templates for cold outreach, follow-ups, proposal delivery, and post-close onboarding communication.')">
+                <li onclick="openImgModal('Email Templates','sales','Ready-to-send email templates for cold outreach, follow-ups, proposal delivery, and post-close onboarding communication.')">
                     Email Templates<span class="li-arrow">→</span></li>
-                <li
-                    onclick="openImgModal('One-Page Flyers','sales','Professionally designed one-page flyers for each product line — downloadable and print-ready for in-person meetings.')">
+                <li onclick="openImgModal('One-Page Flyers','sales','Professionally designed one-page flyers for each product line — downloadable and print-ready for in-person meetings.')">
                     One-Page Flyers<span class="li-arrow">→</span></li>
-                <li
-                    onclick="openImgModal('Scripts &amp; Talking Points','sales','Proven call scripts and conversation frameworks to help you pitch confidently and handle common merchant objections.')">
+                <li onclick="openImgModal('Scripts &amp; Talking Points','sales','Proven call scripts and conversation frameworks to help you pitch confidently and handle common merchant objections.')">
                     Scripts &amp; Talking Points<span class="li-arrow">→</span></li>
             </ul>
         </div>
@@ -1110,16 +1217,13 @@
                 <p>Contact the FinancialCorp team for partner support, training questions, or referral help.</p>
             </div>
             <div class="support-contacts">
-                <!-- PHONE: replace +11234567890 with your real number (digits only, no spaces/dashes) -->
                 <a href="tel:+11234567890" class="support-btn support-btn-phone">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                         stroke-linejoin="round">
-                        <path
-                            d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.62 1.27h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.91a16 16 0 0 0 6 6l.91-.91a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21.73 16z" />
+                        <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.62 1.27h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.91a16 16 0 0 0 6 6l.91-.91a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21.73 16z" />
                     </svg>
                     +1 (123) 456-7890
                 </a>
-                <!-- EMAIL: replace support@financialcorp.com with your real email -->
                 <a href="mailto:support@financialcorp.com" class="support-btn support-btn-email">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                         stroke-linejoin="round">
@@ -1140,11 +1244,28 @@
                     <div class="img-modal-tag" id="imgModalTag">Welcome Aboard</div>
                     <div class="img-modal-title" id="imgModalTitle">Program Overview</div>
                 </div>
-                <button class="img-modal-close" onclick="closeImgModal()">✕</button>
+                <div class="img-modal-header-right">
+                    <!-- ZOOM CONTROLS -->
+                    <div class="zoom-controls" id="zoomControls" style="display:none">
+                        <button class="zoom-btn" onclick="zoomOut()" title="Zoom out" aria-label="Zoom out">−</button>
+                        <span class="zoom-level" id="zoomLevel">100%</span>
+                        <button class="zoom-btn" onclick="zoomIn()" title="Zoom in" aria-label="Zoom in">+</button>
+                        <button class="zoom-reset-btn" onclick="zoomReset()" title="Reset zoom" aria-label="Reset zoom">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/>
+                                <path d="M3 3v5h5"/>
+                            </svg>
+                        </button>
+                    </div>
+                    <button class="img-modal-close" onclick="closeImgModal()">✕</button>
+                </div>
             </div>
-            <div class="img-modal-img-wrap">
-                <img id="imgModalImage" src="" alt="" />
-                <div id="imgModalPlaceholder"></div>
+            <div class="img-modal-img-wrap" id="imgWrap">
+                <div class="img-zoom-container" id="zoomContainer">
+                    <img id="imgModalImage" src="" alt="" />
+                </div>
+                <div id="imgModalPlaceholder" style="position:relative;z-index:2;width:100%;height:100%;display:flex;align-items:center;justify-content:center"></div>
+                <div class="zoom-hint" id="zoomHint">Scroll to zoom · Drag to pan</div>
             </div>
             <div class="img-modal-desc" id="imgModalDesc"></div>
         </div>
@@ -1176,19 +1297,6 @@
             sales: 'Sales Materials'
         };
 
-        /*
-          ============================================================
-          ADD YOUR IMAGES HERE
-          Key   = item title (must match exactly)
-          Value = direct image URL (https://... or relative path)
-
-          Example:
-            'Program Overview': 'https://yourdomain.com/images/program-overview.jpg',
-            'First Steps':      '/images/first-steps.png',
-
-          Leave value as '' to show the placeholder instead.
-          ============================================================
-        */
         const itemImages = {
             'Program Overview': 'FinancialCorp_01_Program_Overview.png',
             'First Steps': 'FinancialCorp_02_First_Steps.png',
@@ -1204,6 +1312,205 @@
             'Scripts & Talking Points': 'inancialCorp_Sales_04_Scripts_Talking_Points.png'
         };
 
+        /* ============================
+           ZOOM & PAN STATE
+        ============================ */
+        let zoomScale = 1;
+        let zoomMin = 0.5;
+        let zoomMax = 5;
+        let zoomStep = 0.25;
+        let panX = 0;
+        let panY = 0;
+        let isPanning = false;
+        let panStartX = 0;
+        let panStartY = 0;
+        let panOriginX = 0;
+        let panOriginY = 0;
+        let hintTimer = null;
+        let hasImage = false;
+
+        function getZoomContainer() { return document.getElementById('zoomContainer'); }
+        function getImgWrap() { return document.getElementById('imgWrap'); }
+
+        function applyTransform() {
+            const c = getZoomContainer();
+            c.style.transform = `translate(${panX}px, ${panY}px) scale(${zoomScale})`;
+            c.style.transformOrigin = '50% 50%';
+            document.getElementById('zoomLevel').textContent = Math.round(zoomScale * 100) + '%';
+        }
+
+        function clampPan() {
+            const wrap = getImgWrap();
+            const img = document.getElementById('imgModalImage');
+            if (!img || !img.naturalWidth) return;
+            const ww = wrap.clientWidth;
+            const wh = wrap.clientHeight;
+            const scaledW = img.offsetWidth * zoomScale;
+            const scaledH = img.offsetHeight * zoomScale;
+            const maxPanX = Math.max(0, (scaledW - ww) / 2);
+            const maxPanY = Math.max(0, (scaledH - wh) / 2);
+            panX = Math.max(-maxPanX, Math.min(maxPanX, panX));
+            panY = Math.max(-maxPanY, Math.min(maxPanY, panY));
+        }
+
+        function zoomTo(newScale, pivotX, pivotY) {
+            const wrap = getImgWrap();
+            const prevScale = zoomScale;
+            zoomScale = Math.min(zoomMax, Math.max(zoomMin, newScale));
+
+            if (pivotX !== undefined && pivotY !== undefined) {
+                const rect = wrap.getBoundingClientRect();
+                const cx = rect.width / 2;
+                const cy = rect.height / 2;
+                const dx = pivotX - rect.left - cx;
+                const dy = pivotY - rect.top - cy;
+                panX = panX - dx * (zoomScale / prevScale - 1);
+                panY = panY - dy * (zoomScale / prevScale - 1);
+            }
+
+            if (zoomScale === 1) { panX = 0; panY = 0; }
+            clampPan();
+            applyTransform();
+        }
+
+        function zoomIn() { zoomTo(zoomScale + zoomStep); }
+        function zoomOut() { zoomTo(zoomScale - zoomStep); }
+        function zoomReset() { zoomScale = 1; panX = 0; panY = 0; applyTransform(); }
+
+        /* Scroll to zoom */
+        function onWheel(e) {
+            if (!hasImage) return;
+            e.preventDefault();
+            const delta = e.deltaY > 0 ? -zoomStep : zoomStep;
+            zoomTo(zoomScale + delta, e.clientX, e.clientY);
+        }
+
+        /* Mouse drag to pan */
+        function onMouseDown(e) {
+            if (!hasImage || zoomScale <= 1) return;
+            if (e.button !== 0) return;
+            isPanning = true;
+            panStartX = e.clientX;
+            panStartY = e.clientY;
+            panOriginX = panX;
+            panOriginY = panY;
+            getImgWrap().classList.add('grabbing');
+            e.preventDefault();
+        }
+
+        function onMouseMove(e) {
+            if (!isPanning) return;
+            panX = panOriginX + (e.clientX - panStartX);
+            panY = panOriginY + (e.clientY - panStartY);
+            clampPan();
+            applyTransform();
+        }
+
+        function onMouseUp() {
+            if (!isPanning) return;
+            isPanning = false;
+            getImgWrap().classList.remove('grabbing');
+        }
+
+        /* Touch pinch-to-zoom + drag */
+        let lastTouchDist = null;
+        let lastTouchMidX = null;
+        let lastTouchMidY = null;
+        let touchPanStartX = 0;
+        let touchPanStartY = 0;
+        let touchPanOriginX = 0;
+        let touchPanOriginY = 0;
+
+        function getTouchDist(touches) {
+            const dx = touches[0].clientX - touches[1].clientX;
+            const dy = touches[0].clientY - touches[1].clientY;
+            return Math.sqrt(dx * dx + dy * dy);
+        }
+
+        function onTouchStart(e) {
+            if (!hasImage) return;
+            if (e.touches.length === 2) {
+                lastTouchDist = getTouchDist(e.touches);
+                lastTouchMidX = (e.touches[0].clientX + e.touches[1].clientX) / 2;
+                lastTouchMidY = (e.touches[0].clientY + e.touches[1].clientY) / 2;
+                e.preventDefault();
+            } else if (e.touches.length === 1 && zoomScale > 1) {
+                touchPanStartX = e.touches[0].clientX;
+                touchPanStartY = e.touches[0].clientY;
+                touchPanOriginX = panX;
+                touchPanOriginY = panY;
+            }
+        }
+
+        function onTouchMove(e) {
+            if (!hasImage) return;
+            if (e.touches.length === 2 && lastTouchDist !== null) {
+                e.preventDefault();
+                const newDist = getTouchDist(e.touches);
+                const ratio = newDist / lastTouchDist;
+                const midX = (e.touches[0].clientX + e.touches[1].clientX) / 2;
+                const midY = (e.touches[0].clientY + e.touches[1].clientY) / 2;
+                zoomTo(zoomScale * ratio, midX, midY);
+                lastTouchDist = newDist;
+                lastTouchMidX = midX;
+                lastTouchMidY = midY;
+            } else if (e.touches.length === 1 && zoomScale > 1) {
+                panX = touchPanOriginX + (e.touches[0].clientX - touchPanStartX);
+                panY = touchPanOriginY + (e.touches[0].clientY - touchPanStartY);
+                clampPan();
+                applyTransform();
+                e.preventDefault();
+            }
+        }
+
+        function onTouchEnd(e) {
+            if (e.touches.length < 2) lastTouchDist = null;
+        }
+
+        /* Double-click to zoom in/reset */
+        function onDblClick(e) {
+            if (!hasImage) return;
+            if (zoomScale > 1) {
+                zoomReset();
+            } else {
+                zoomTo(2, e.clientX, e.clientY);
+            }
+        }
+
+        function attachZoomEvents() {
+            const wrap = getImgWrap();
+            wrap.addEventListener('wheel', onWheel, { passive: false });
+            wrap.addEventListener('mousedown', onMouseDown);
+            document.addEventListener('mousemove', onMouseMove);
+            document.addEventListener('mouseup', onMouseUp);
+            wrap.addEventListener('touchstart', onTouchStart, { passive: false });
+            wrap.addEventListener('touchmove', onTouchMove, { passive: false });
+            wrap.addEventListener('touchend', onTouchEnd);
+            wrap.addEventListener('dblclick', onDblClick);
+        }
+
+        function detachZoomEvents() {
+            const wrap = getImgWrap();
+            wrap.removeEventListener('wheel', onWheel);
+            wrap.removeEventListener('mousedown', onMouseDown);
+            document.removeEventListener('mousemove', onMouseMove);
+            document.removeEventListener('mouseup', onMouseUp);
+            wrap.removeEventListener('touchstart', onTouchStart);
+            wrap.removeEventListener('touchmove', onTouchMove);
+            wrap.removeEventListener('touchend', onTouchEnd);
+            wrap.removeEventListener('dblclick', onDblClick);
+        }
+
+        function showHintThenHide() {
+            const hint = document.getElementById('zoomHint');
+            hint.classList.remove('hidden');
+            clearTimeout(hintTimer);
+            hintTimer = setTimeout(() => hint.classList.add('hidden'), 2800);
+        }
+
+        /* ============================
+           MODAL OPEN / CLOSE
+        ============================ */
         function openImgModal(title, section, desc) {
             document.getElementById('imgModalTitle').textContent = title;
             document.getElementById('imgModalTag').textContent = sectionLabels[section] || section;
@@ -1217,10 +1524,22 @@
             img.src = imgSrc;
             placeholder.innerHTML = '';
 
+            zoomReset();
+            hasImage = false;
+            document.getElementById('zoomControls').style.display = 'none';
+            document.getElementById('zoomHint').classList.add('hidden');
+
             if (imgSrc.trim() !== '') {
                 img.style.display = 'block';
+                img.onload = function () {
+                    hasImage = true;
+                    document.getElementById('zoomControls').style.display = 'flex';
+                    showHintThenHide();
+                };
                 img.onerror = function () {
                     img.style.display = 'none';
+                    hasImage = false;
+                    document.getElementById('zoomControls').style.display = 'none';
                     placeholder.innerHTML = buildPlaceholder(title, 'Image could not be loaded. Check the URL in the itemImages map.');
                 };
             } else {
@@ -1228,6 +1547,7 @@
                 placeholder.innerHTML = buildPlaceholder(title, null);
             }
 
+            attachZoomEvents();
             document.getElementById('imgModalOverlay').classList.add('open');
             document.body.style.overflow = 'hidden';
         }
@@ -1250,6 +1570,9 @@
         }
 
         function closeImgModal() {
+            detachZoomEvents();
+            zoomReset();
+            hasImage = false;
             document.getElementById('imgModalOverlay').classList.remove('open');
             document.body.style.overflow = '';
         }
@@ -1293,17 +1616,22 @@
             document.body.style.overflow = '';
         }
 
-        let toastTimer;
+        let toastTimer2;
         function showToast(msg) {
             const t = document.getElementById('toast');
-            clearTimeout(toastTimer);
+            clearTimeout(toastTimer2);
             t.textContent = msg;
             t.classList.add('show');
-            toastTimer = setTimeout(() => t.classList.remove('show'), 3200);
+            toastTimer2 = setTimeout(() => t.classList.remove('show'), 3200);
         }
 
         document.addEventListener('keydown', e => {
             if (e.key === 'Escape') { closeImgModal(); closeModal(); closeMenu(); }
+            if (document.getElementById('imgModalOverlay').classList.contains('open')) {
+                if (e.key === '+' || e.key === '=') zoomIn();
+                if (e.key === '-') zoomOut();
+                if (e.key === '0') zoomReset();
+            }
         });
         window.addEventListener('resize', () => { if (window.innerWidth > 900) closeMenu(); });
     </script>
