@@ -4,18 +4,14 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
     <title>FinancialCorp</title>
-
     <link rel="icon" type="image/png" href="/logo.png" />
     <link rel="apple-touch-icon" href="/logo.png" />
-
     <meta property="og:title" content="FinancialCorp" />
     <meta property="og:description" content="Financial solutions and services." />
     <meta property="og:image" content="https://yourdomain.com/logo.png" />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://yourdomain.com" />
-
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="FinancialCorp" />
     <meta name="twitter:description" content="Financial solutions and services." />
@@ -23,6 +19,7 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800;900&family=DM+Sans:wght@400;500;600&display=swap"
         rel="stylesheet" />
+    <link rel="stylesheet" href="style.css" />
     <style>
         *,
         *::before,
@@ -53,6 +50,9 @@
             overflow-x: hidden
         }
 
+        /* =====================
+           NAV ANIMATIONS
+        ===================== */
         nav {
             position: sticky;
             top: 0;
@@ -63,7 +63,20 @@
             padding: 0 52px;
             height: var(--nav-height);
             background: var(--navy);
-            border-bottom: 1px solid rgba(201, 150, 42, 0.15)
+            border-bottom: 1px solid rgba(201, 150, 42, .15);
+            animation: navSlideDown .55s cubic-bezier(.22, .68, 0, 1) both;
+        }
+
+        @keyframes navSlideDown {
+            from {
+                transform: translateY(-100%);
+                opacity: 0
+            }
+
+            to {
+                transform: translateY(0);
+                opacity: 1
+            }
         }
 
         .logo {
@@ -71,10 +84,22 @@
             align-items: center;
             gap: 12px;
             text-decoration: none;
-            flex-shrink: 0
+            flex-shrink: 0;
+            animation: fadeInLeft .6s .15s cubic-bezier(.22, .68, 0, 1) both;
         }
 
-        /* FIX: logo icon mark */
+        @keyframes fadeInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-18px)
+            }
+
+            to {
+                opacity: 1;
+                transform: translateX(0)
+            }
+        }
+
         .logo-icon {
             width: 50px;
             height: 50px;
@@ -85,13 +110,18 @@
             align-items: center;
             justify-content: center;
             flex-shrink: 0;
+            transition: transform .35s cubic-bezier(.22, .68, 0, 1.4);
+        }
+
+        .logo:hover .logo-icon {
+            transform:  scale(1.1)
         }
 
         .logo-icon img {
             width: 100%;
             height: 100%;
             object-fit: contain;
-            display: block;
+            display: block
         }
 
         .logo-text {
@@ -99,7 +129,12 @@
             font-size: 26px;
             font-weight: 800;
             color: var(--white);
-            letter-spacing: .04em
+            letter-spacing: .04em;
+            transition: letter-spacing .3s ease;
+        }
+
+        .logo:hover .logo-text {
+            letter-spacing: .07em
         }
 
         .logo-text span {
@@ -110,17 +145,49 @@
             display: flex;
             align-items: center;
             gap: 36px;
-            list-style: none
+            list-style: none;
+        }
+
+        .nav-links li {
+            animation: fadeInDown .5s both;
+        }
+
+        .nav-links li:nth-child(1) {
+            animation-delay: .18s
+        }
+
+        .nav-links li:nth-child(2) {
+            animation-delay: .24s
+        }
+
+        .nav-links li:nth-child(3) {
+            animation-delay: .30s
+        }
+
+        .nav-links li:nth-child(4) {
+            animation-delay: .36s
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-10px)
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0)
+            }
         }
 
         .nav-links a {
             text-decoration: none;
-            color: rgba(255, 255, 255, 0.6);
+            color: rgba(255, 255, 255, .6);
             font-size: 17px;
             font-weight: 500;
             position: relative;
             padding-bottom: 4px;
-            transition: color .2s
+            transition: color .2s;
         }
 
         .nav-links a::after {
@@ -131,8 +198,8 @@
             width: 0;
             height: 2px;
             background: var(--gold);
-            transition: width .25s;
-            border-radius: 2px
+            transition: width .3s cubic-bezier(.22, .68, 0, 1);
+            border-radius: 2px;
         }
 
         .nav-links a:hover,
@@ -148,7 +215,20 @@
         .nav-right {
             display: flex;
             align-items: center;
-            gap: 16px
+            gap: 16px;
+            animation: fadeInRight .6s .2s cubic-bezier(.22, .68, 0, 1) both;
+        }
+
+        @keyframes fadeInRight {
+            from {
+                opacity: 0;
+                transform: translateX(18px)
+            }
+
+            to {
+                opacity: 1;
+                transform: translateX(0)
+            }
         }
 
         .btn-login {
@@ -164,15 +244,20 @@
             cursor: pointer;
             background: transparent;
             text-decoration: none;
-            transition: background .2s, color .2s, transform .2s;
+            transition: background .22s, color .22s, transform .22s, box-shadow .22s;
             font-family: 'DM Sans', sans-serif;
-            white-space: nowrap
+            white-space: nowrap;
         }
 
         .btn-login:hover {
             background: var(--gold);
             color: var(--navy);
-            transform: translateY(-2px)
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(246, 148, 30, .3);
+        }
+
+        .btn-login:active {
+            transform: translateY(0) scale(.97)
         }
 
         .hamburger {
@@ -184,16 +269,17 @@
             width: 40px;
             height: 40px;
             background: transparent;
-            border: 1.5px solid rgba(255, 255, 255, 0.2);
+            border: 1.5px solid rgba(255, 255, 255, .2);
             border-radius: 8px;
             cursor: pointer;
             padding: 8px;
-            transition: border-color .2s, background .2s
+            transition: border-color .2s, background .2s, transform .2s;
         }
 
         .hamburger:hover {
             border-color: var(--gold);
-            background: rgba(246, 148, 30, 0.08)
+            background: rgba(246, 148, 30, .08);
+            transform: scale(1.05);
         }
 
         .hamburger .bar {
@@ -202,7 +288,7 @@
             background: var(--white);
             border-radius: 2px;
             transition: transform .3s ease, opacity .3s ease, width .3s ease;
-            transform-origin: center
+            transform-origin: center;
         }
 
         .hamburger.open .bar:nth-child(1) {
@@ -226,11 +312,11 @@
             right: 0;
             z-index: 99;
             background: var(--navy);
-            border-bottom: 2px solid rgba(246, 148, 30, 0.3);
+            border-bottom: 2px solid rgba(246, 148, 30, .3);
             padding: 0;
             max-height: 0;
             overflow: hidden;
-            transition: max-height .35s cubic-bezier(.22, .68, 0, 1), padding .35s ease
+            transition: max-height .38s cubic-bezier(.22, .68, 0, 1), padding .35s ease;
         }
 
         .mobile-menu.open {
@@ -245,7 +331,7 @@
         }
 
         .mobile-menu ul li {
-            border-bottom: 1px solid rgba(255, 255, 255, 0.06)
+            border-bottom: 1px solid rgba(255, 255, 255, .06)
         }
 
         .mobile-menu ul li:last-child {
@@ -258,10 +344,10 @@
             gap: 12px;
             padding: 14px 4px;
             text-decoration: none;
-            color: rgba(255, 255, 255, 0.7);
+            color: rgba(255, 255, 255, .7);
             font-size: 16px;
             font-weight: 500;
-            transition: color .2s, padding-left .2s
+            transition: color .2s, padding-left .25s cubic-bezier(.22, .68, 0, 1);
         }
 
         .mobile-menu ul a::before {
@@ -271,8 +357,8 @@
             border-radius: 50%;
             background: var(--gold);
             flex-shrink: 0;
-            opacity: 0.5;
-            transition: opacity .2s
+            opacity: .5;
+            transition: opacity .2s, transform .3s;
         }
 
         .mobile-menu ul a:hover,
@@ -283,7 +369,8 @@
 
         .mobile-menu ul a:hover::before,
         .mobile-menu ul a.active::before {
-            opacity: 1
+            opacity: 1;
+            transform: scale(1.4)
         }
 
         .mobile-menu-footer {
@@ -305,7 +392,7 @@
             cursor: pointer;
             background: transparent;
             font-family: 'DM Sans', sans-serif;
-            transition: background .2s, color .2s
+            transition: background .2s, color .2s;
         }
 
         .btn-login-mobile:hover {
@@ -313,21 +400,45 @@
             color: var(--navy)
         }
 
+        /* =====================
+           HERO ANIMATIONS
+        ===================== */
         .hero {
             position: relative;
             overflow: hidden;
             padding: 80px 52px 90px;
-            background-image: url('background.jpg');
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
+            background: #0c1a2d;
+        }
+
+        .hero-img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+            z-index: 0;
+            animation: heroImageReveal 1.4s cubic-bezier(.22, .68, 0, 1) both;
+        }
+
+        @keyframes heroImageReveal {
+            from {
+                opacity: 0;
+                transform: scale(1.06)
+            }
+
+            to {
+                opacity: 1;
+                transform: scale(1)
+            }
         }
 
         .hero-content {
             position: relative;
             z-index: 2;
             max-width: 1500px;
-            margin: 0 auto
+            margin: 0 auto;
         }
 
         .hero h1 {
@@ -336,7 +447,20 @@
             font-weight: 900;
             line-height: 1.05;
             color: #0c1a2d;
-            margin-bottom: 24px
+            margin-bottom: 24px;
+            animation: heroHeadline .85s .25s cubic-bezier(.22, .68, 0, 1) both;
+        }
+
+        @keyframes heroHeadline {
+            from {
+                opacity: 0;
+                transform: translateY(30px)
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0)
+            }
         }
 
         .hero-gold-rule {
@@ -344,23 +468,54 @@
             height: 3px;
             background: var(--gold);
             border-radius: 3px;
-            margin-bottom: 22px
+            margin-bottom: 22px;
+            animation: ruleExpand .7s .55s cubic-bezier(.22, .68, 0, 1) both;
+            transform-origin: left;
+        }
+
+        @keyframes ruleExpand {
+            from {
+                transform: scaleX(0);
+                opacity: 0
+            }
+
+            to {
+                transform: scaleX(1);
+                opacity: 1
+            }
         }
 
         .hero-sub {
             font-size: clamp(17px, 2.5vw, 22px);
             font-weight: 600;
             color: #0c1a2d;
-            margin-bottom: 10px
+            margin-bottom: 10px;
+            animation: heroFadeUp .7s .65s cubic-bezier(.22, .68, 0, 1) both;
         }
 
         .hero-desc {
             font-size: clamp(16px, 2vw, 20px);
             color: #0c1a2dab;
             max-width: 460px;
-            line-height: 1.75
+            line-height: 1.75;
+            animation: heroFadeUp .7s .8s cubic-bezier(.22, .68, 0, 1) both;
         }
 
+        @keyframes heroFadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(18px)
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0)
+            }
+        }
+
+        /* =====================
+           CARDS SECTION
+        ===================== */
         .cards-section {
             max-width: 1586px;
             margin: 0 auto;
@@ -368,17 +523,45 @@
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 24px;
-            margin-top: -78px
+            margin-top: -78px;
         }
 
+        /* Scroll-reveal cards */
         .card {
             background: var(--white);
-            border: 1px solid rgba(11, 17, 32, 0.1);
+            border: 1px solid rgba(11, 17, 32, .1);
             border-radius: var(--radius);
             padding: 36px 28px 28px;
             position: relative;
             overflow: hidden;
-            transition: transform .35s cubic-bezier(.22, .68, 0, 1.4), box-shadow .3s, border-color .3s
+            opacity: 0;
+            transform: translateY(40px);
+            transition:
+                opacity .6s cubic-bezier(.22, .68, 0, 1),
+                transform .6s cubic-bezier(.22, .68, 0, 1),
+                box-shadow .3s,
+                border-color .3s;
+        }
+
+        .card.revealed {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .card:nth-child(1) {
+            transition-delay: .05s
+        }
+
+        .card:nth-child(2) {
+            transition-delay: .15s
+        }
+
+        .card:nth-child(3) {
+            transition-delay: .25s
+        }
+
+        .card:nth-child(4) {
+            transition-delay: .35s
         }
 
         .card::after {
@@ -391,7 +574,7 @@
             background: var(--gold);
             transform: scaleX(0);
             transform-origin: left;
-            transition: transform .35s ease
+            transition: transform .38s cubic-bezier(.22, .68, 0, 1);
         }
 
         .card:hover::after {
@@ -399,9 +582,26 @@
         }
 
         .card:hover {
-            transform: translateY(-8px) scale(1.012);
-            box-shadow: 0 20px 60px rgba(11, 17, 32, 0.1);
-            border-color: rgba(201, 150, 42, 0.25)
+            transform: translateY(-10px) scale(1.013) !important;
+            box-shadow: 0 24px 64px rgba(11, 17, 32, .12);
+            border-color: rgba(201, 150, 42, .28);
+        }
+
+        /* Shimmer sweep on hover */
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 60%;
+            height: 100%;
+            background: transparent;
+            transition: left .55s ease;
+            z-index: 0;
+        }
+
+        .card:hover::before {
+            left: 150%
         }
 
         .card-icon-wrap {
@@ -412,7 +612,14 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            margin-bottom: 20px
+            margin-bottom: 20px;
+            transition: transform .4s cubic-bezier(.22, .68, 0, 1.4), background .3s;
+            position: relative;
+            z-index: 1;
+        }
+
+        .card:hover .card-icon-wrap {
+            background: linear-gradient(135deg, var(--navy), #1a3a5c);
         }
 
         .card-icon-wrap svg {
@@ -422,48 +629,65 @@
             fill: none;
             stroke-width: 1.8;
             stroke-linecap: round;
-            stroke-linejoin: round
+            stroke-linejoin: round;
+            transition: stroke-width .3s;
+        }
+
+        .card:hover .card-icon-wrap svg {
+            stroke-width: 2.2
         }
 
         .card-title-row {
             display: flex;
             flex-direction: column;
             gap: 8px;
-            margin-bottom: 20px
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 1;
         }
 
         .card h2 {
             font-family: 'Sora', sans-serif;
             font-size: 25px;
             font-weight: 700;
-            color: var(--navy)
+            color: var(--navy);
+            transition: color .25s;
+        }
+
+        .card:hover h2 {
+            color: #1a3a5c
         }
 
         .card-gold-rule {
             width: 36px;
             height: 2px;
             background: var(--gold);
-            border-radius: 2px
+            border-radius: 2px;
+            transition: width .4s cubic-bezier(.22, .68, 0, 1);
+        }
+
+        .card:hover .card-gold-rule {
+            width: 60px
         }
 
         .card ul {
             list-style: none;
-            margin-bottom: 30px
+            margin-bottom: 30px;
+            position: relative;
+            z-index: 1
         }
 
         .card ul li {
             display: flex;
             align-items: center;
             gap: 16px;
-            padding: 9px 0;
+            padding: 9px 8px;
             font-size: 18px;
             color: #444;
-            border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+            border-bottom: 1px solid rgba(0, 0, 0, .06);
             cursor: pointer;
-            transition: color .2s, padding-left .2s, background .2s;
+            transition: color .22s, padding-left .25s cubic-bezier(.22, .68, 0, 1), background .22s, transform .22s;
             border-radius: 6px;
-            padding-left: 8px;
-            padding-right: 8px
         }
 
         .card ul li:last-child {
@@ -476,13 +700,20 @@
             height: 8px;
             border-radius: 50%;
             background: var(--gold);
-            flex-shrink: 0
+            flex-shrink: 0;
+            transition: transform .3s cubic-bezier(.22, .68, 0, 1.5), box-shadow .3s;
         }
 
         .card ul li:hover {
             color: var(--navy);
-            padding-left: 12px;
-            background: rgba(246, 148, 30, 0.06)
+            padding-left: 14px;
+            background: rgba(246, 148, 30, .06);
+            transform: translateX(2px);
+        }
+
+        .card ul li:hover::before {
+            transform: scale(1.5);
+            box-shadow: 0 0 0 4px rgba(246, 148, 30, .18);
         }
 
         .card ul li .li-arrow {
@@ -490,8 +721,8 @@
             font-size: 13px;
             color: var(--gold);
             opacity: 0;
-            transition: opacity .2s, transform .2s;
-            transform: translateX(-4px)
+            transition: opacity .22s, transform .28s cubic-bezier(.22, .68, 0, 1.4);
+            transform: translateX(-8px);
         }
 
         .card ul li:hover .li-arrow {
@@ -499,15 +730,26 @@
             transform: translateX(0)
         }
 
+        /* =====================
+           SUPPORT BANNER
+        ===================== */
         .support-banner {
             max-width: 1579px;
             margin: 0 auto 80px;
-            padding: 0 52px
+            padding: 0 52px;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity .7s cubic-bezier(.22, .68, 0, 1), transform .7s cubic-bezier(.22, .68, 0, 1);
+        }
+
+        .support-banner.revealed {
+            opacity: 1;
+            transform: translateY(0)
         }
 
         .support-inner {
             background: var(--white);
-            border: 1px solid rgba(11, 17, 32, 0.1);
+            border: 1px solid rgba(11, 17, 32, .1);
             border-radius: var(--radius);
             padding: 28px 32px;
             display: flex;
@@ -519,12 +761,27 @@
             width: 100%;
             max-width: 1500px;
             margin: 0 auto;
-            flex-wrap: wrap
+            flex-wrap: wrap;
+        }
+
+        .support-inner::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 60%;
+            height: 100%;
+            background: linear-gradient(105deg, transparent 40%, rgba(246, 148, 30, .04) 50%, transparent 60%);
+            transition: left .7s ease;
+        }
+
+        .support-inner:hover::before {
+            left: 150%
         }
 
         .support-inner:hover {
-            border-color: rgba(201, 150, 42, 0.3);
-            box-shadow: 0 8px 40px rgba(11, 17, 32, 0.07)
+            border-color: rgba(201, 150, 42, .3);
+            box-shadow: 0 8px 40px rgba(11, 17, 32, .07);
         }
 
         .support-icon {
@@ -535,7 +792,13 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            flex-shrink: 0
+            flex-shrink: 0;
+            transition: transform .4s cubic-bezier(.22, .68, 0, 1.4), box-shadow .3s;
+        }
+
+        .support-inner:hover .support-icon {
+            transform: scale(1.1) rotate(-8deg);
+            box-shadow: 0 8px 24px rgba(11, 17, 32, .2);
         }
 
         .support-icon svg {
@@ -545,7 +808,7 @@
             fill: none;
             stroke-width: 1.8;
             stroke-linecap: round;
-            stroke-linejoin: round
+            stroke-linejoin: round;
         }
 
         .support-text {
@@ -558,7 +821,7 @@
             font-size: 20px;
             font-weight: 700;
             color: var(--navy);
-            margin-bottom: 6px
+            margin-bottom: 6px;
         }
 
         .support-text p {
@@ -572,7 +835,7 @@
             gap: 16px;
             flex-wrap: wrap;
             align-items: center;
-            margin-left: auto
+            margin-left: auto;
         }
 
         .support-btn {
@@ -586,20 +849,24 @@
             font-weight: 700;
             text-decoration: none;
             cursor: pointer;
-            transition: transform .2s, box-shadow .2s;
+            transition: transform .25s cubic-bezier(.22, .68, 0, 1.4), box-shadow .25s, background .2s;
             white-space: nowrap;
-            border: none
+            border: none;
         }
 
         .support-btn-phone {
             background: var(--navy);
             color: var(--gold);
-            border: 1.5px solid var(--gold)
+            border: 1.5px solid var(--gold);
         }
 
         .support-btn-phone:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 24px rgba(246, 148, 30, 0.25)
+            transform: translateY(-3px);
+            box-shadow: 0 10px 28px rgba(246, 148, 30, .28);
+        }
+
+        .support-btn-phone:active {
+            transform: translateY(-1px) scale(.97)
         }
 
         .support-btn-email {
@@ -608,8 +875,12 @@
         }
 
         .support-btn-email:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 24px rgba(246, 148, 30, 0.35)
+            transform: translateY(-3px);
+            box-shadow: 0 10px 28px rgba(246, 148, 30, .4);
+        }
+
+        .support-btn-email:active {
+            transform: translateY(-1px) scale(.97)
         }
 
         .support-btn svg {
@@ -618,20 +889,22 @@
             flex-shrink: 0
         }
 
-        /* ===== IMAGE MODAL ===== */
+        /* =====================
+           IMAGE MODAL (enhanced)
+        ===================== */
         .img-modal-overlay {
             position: fixed;
             inset: 0;
             z-index: 1000;
-            background: rgba(11, 17, 32, 0.85);
-            backdrop-filter: blur(12px);
+            background: rgba(11, 17, 32, .88);
+            backdrop-filter: blur(14px);
             display: flex;
             align-items: center;
             justify-content: center;
             opacity: 0;
             pointer-events: none;
-            transition: opacity .3s;
-            padding: 20px
+            transition: opacity .35s cubic-bezier(.22, .68, 0, 1);
+            padding: 20px;
         }
 
         .img-modal-overlay.open {
@@ -641,17 +914,18 @@
 
         .img-modal {
             background: var(--white);
-            border: 1px solid rgba(201, 150, 42, 0.25);
+            border: 1px solid rgba(201, 150, 42, .25);
             border-radius: 20px;
             width: min(96vw, 1400px);
             height: min(92vh, 900px);
             max-height: 92vh;
             overflow: hidden;
-            transform: translateY(30px) scale(.96);
-            transition: transform .35s cubic-bezier(.22, .68, 0, 1.2);
+            transform: translateY(40px) scale(.93);
+            transition: transform .45s cubic-bezier(.22, .68, 0, 1.15);
             position: relative;
             display: flex;
-            flex-direction: column
+            flex-direction: column;
+            box-shadow: 0 40px 100px rgba(0, 0, 0, .3);
         }
 
         .img-modal-overlay.open .img-modal {
@@ -663,14 +937,14 @@
             align-items: center;
             justify-content: space-between;
             padding: 20px 24px 0;
-            flex-shrink: 0
+            flex-shrink: 0;
         }
 
         .img-modal-title {
             font-family: 'Sora', sans-serif;
             font-size: 18px;
             font-weight: 700;
-            color: var(--navy)
+            color: var(--navy);
         }
 
         .img-modal-header-right {
@@ -685,7 +959,7 @@
             gap: 6px;
             background: #f0f2f5;
             border-radius: 10px;
-            padding: 4px 8px
+            padding: 4px 8px;
         }
 
         .zoom-btn {
@@ -702,8 +976,8 @@
             font-size: 18px;
             font-weight: 700;
             line-height: 1;
-            transition: background .15s, color .15s;
-            flex-shrink: 0
+            transition: background .18s, color .18s, transform .15s;
+            flex-shrink: 0;
         }
 
         .zoom-btn:hover {
@@ -712,7 +986,7 @@
         }
 
         .zoom-btn:active {
-            transform: scale(0.92)
+            transform: scale(.88)
         }
 
         .zoom-level {
@@ -722,7 +996,7 @@
             color: var(--muted);
             min-width: 38px;
             text-align: center;
-            user-select: none
+            user-select: none;
         }
 
         .zoom-reset-btn {
@@ -736,13 +1010,17 @@
             align-items: center;
             justify-content: center;
             color: var(--muted);
-            transition: background .15s, color .15s;
-            flex-shrink: 0
+            transition: background .18s, color .18s, transform .2s;
+            flex-shrink: 0;
         }
 
         .zoom-reset-btn:hover {
             background: var(--navy);
             color: var(--gold)
+        }
+
+        .zoom-reset-btn:active {
+            transform: rotate(360deg)
         }
 
         .img-modal-close {
@@ -753,30 +1031,32 @@
             cursor: pointer;
             padding: 4px 8px;
             border-radius: 6px;
-            transition: color .2s, background .2s;
-            line-height: 1
+            transition: color .2s, background .2s, transform .2s;
+            line-height: 1;
         }
 
         .img-modal-close:hover {
             color: var(--navy);
-            background: rgba(0, 0, 0, 0.06)
+            background: rgba(0, 0, 0, .06)
         }
 
-        /* FIX: Image viewport — overflow scroll so full-res image is always available */
+        .img-modal-close:active {
+            transform: scale(.88)
+        }
+
         .img-modal-img-wrap {
             flex: 1;
             min-height: 0;
             overflow: hidden;
             position: relative;
             background: #f8f9fb;
-            cursor: grab
+            cursor: grab;
         }
 
         .img-modal-img-wrap.grabbing {
             cursor: grabbing
         }
 
-        /* FIX: zoom container centered, transform-origin top-left for correct pivot math */
         .img-zoom-container {
             position: absolute;
             top: 0;
@@ -787,26 +1067,22 @@
             align-items: center;
             justify-content: center;
             transform-origin: 0 0;
-            will-change: transform
+            will-change: transform;
         }
 
-        /* FIX: image rendered at full native resolution — browser will not downscale it,
-           so zooming in reveals actual pixels instead of upscaling a CSS-shrunken render.
-           object-fit:contain inside the flex container handles fitting it to the viewport. */
         .img-modal-img-wrap img {
             display: block;
-            max-width: none;   /* allow image to exceed container — zoom handles sizing */
+            max-width: none;
             max-height: none;
             width: auto;
             height: auto;
-            /* Render at full native resolution for HD quality */
-            image-rendering: -webkit-optimize-contrast; /* Safari */
-            image-rendering: crisp-edges;               /* FF fallback */
-            image-rendering: high-quality;              /* Chrome 93+ */
+            image-rendering: -webkit-optimize-contrast;
+            image-rendering: crisp-edges;
+            image-rendering: high-quality;
             pointer-events: none;
             user-select: none;
             -webkit-user-drag: none;
-            border-radius: 4px
+            border-radius: 4px;
         }
 
         .img-modal-img-wrap .img-placeholder {
@@ -818,7 +1094,7 @@
             color: var(--muted);
             width: 100%;
             height: 100%;
-            min-height: 300px
+            min-height: 300px;
         }
 
         .img-placeholder-icon {
@@ -828,7 +1104,7 @@
             background: var(--navy);
             display: flex;
             align-items: center;
-            justify-content: center
+            justify-content: center;
         }
 
         .img-placeholder-icon svg {
@@ -846,8 +1122,8 @@
             bottom: 12px;
             left: 50%;
             transform: translateX(-50%);
-            background: rgba(12, 26, 45, 0.75);
-            color: rgba(255, 255, 255, 0.85);
+            background: rgba(12, 26, 45, .75);
+            color: rgba(255, 255, 255, .85);
             font-size: 11px;
             font-family: 'DM Sans', sans-serif;
             padding: 5px 12px;
@@ -856,7 +1132,7 @@
             opacity: 1;
             transition: opacity .5s;
             white-space: nowrap;
-            z-index: 5
+            z-index: 5;
         }
 
         .zoom-hint.hidden {
@@ -868,15 +1144,15 @@
             font-size: 14px;
             color: var(--muted);
             line-height: 1.6;
-            flex-shrink: 0
+            flex-shrink: 0;
         }
 
         .img-modal-tag {
             display: inline-flex;
             align-items: center;
             gap: 6px;
-            background: rgba(201, 150, 42, 0.1);
-            border: 1px solid rgba(201, 150, 42, 0.25);
+            background: rgba(201, 150, 42, .1);
+            border: 1px solid rgba(201, 150, 42, .25);
             border-radius: 100px;
             padding: 4px 12px;
             font-size: 11px;
@@ -884,22 +1160,24 @@
             color: var(--gold);
             letter-spacing: .08em;
             text-transform: uppercase;
-            margin-bottom: 10px
+            margin-bottom: 10px;
         }
 
-        /* LOGIN MODAL */
+        /* =====================
+           LOGIN MODAL (enhanced)
+        ===================== */
         .modal-overlay {
             position: fixed;
             inset: 0;
             z-index: 999;
-            background: rgba(11, 17, 32, 0.7);
-            backdrop-filter: blur(10px);
+            background: rgba(11, 17, 32, .72);
+            backdrop-filter: blur(12px);
             display: flex;
             align-items: center;
             justify-content: center;
             opacity: 0;
             pointer-events: none;
-            transition: opacity .3s
+            transition: opacity .3s;
         }
 
         .modal-overlay.open {
@@ -909,14 +1187,15 @@
 
         .modal {
             background: var(--white);
-            border: 1px solid rgba(201, 150, 42, 0.2);
+            border: 1px solid rgba(201, 150, 42, .2);
             border-radius: 20px;
             padding: 48px 44px;
             width: 420px;
             max-width: 94vw;
-            transform: translateY(30px) scale(.96);
-            transition: transform .35s cubic-bezier(.22, .68, 0, 1.2);
-            position: relative
+            transform: translateY(36px) scale(.94);
+            transition: transform .45s cubic-bezier(.22, .68, 0, 1.2);
+            position: relative;
+            box-shadow: 0 30px 80px rgba(0, 0, 0, .2);
         }
 
         .modal-overlay.open .modal {
@@ -931,7 +1210,12 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            margin-bottom: 20px
+            margin-bottom: 20px;
+            transition: transform .4s cubic-bezier(.22, .68, 0, 1.4);
+        }
+
+        .modal:hover .modal-logo {
+            transform: rotate(-8deg) scale(1.08)
         }
 
         .modal-logo svg {
@@ -945,7 +1229,7 @@
             font-size: 24px;
             font-weight: 800;
             color: var(--navy);
-            margin-bottom: 28px
+            margin-bottom: 28px;
         }
 
         .modal-close {
@@ -957,11 +1241,12 @@
             color: var(--muted);
             font-size: 22px;
             cursor: pointer;
-            transition: color .2s
+            transition: color .2s, transform .2s;
         }
 
         .modal-close:hover {
-            color: var(--navy)
+            color: var(--navy);
+            transform: rotate(90deg)
         }
 
         .field {
@@ -975,25 +1260,26 @@
             color: var(--muted);
             margin-bottom: 7px;
             letter-spacing: .08em;
-            text-transform: uppercase
+            text-transform: uppercase;
         }
 
         .field input {
             width: 100%;
             padding: 12px 16px;
             background: #f8f9fb;
-            border: 1px solid rgba(11, 17, 32, 0.12);
+            border: 1px solid rgba(11, 17, 32, .12);
             border-radius: 9px;
             color: var(--navy);
             font-size: 14px;
             font-family: 'DM Sans', sans-serif;
             outline: none;
-            transition: border-color .25s, box-shadow .25s
+            transition: border-color .25s, box-shadow .25s, transform .2s;
         }
 
         .field input:focus {
             border-color: var(--gold);
-            box-shadow: 0 0 0 3px rgba(201, 150, 42, 0.12)
+            box-shadow: 0 0 0 3px rgba(201, 150, 42, .12);
+            transform: translateY(-1px);
         }
 
         .btn-modal-submit {
@@ -1008,16 +1294,39 @@
             border-radius: 10px;
             cursor: pointer;
             margin-top: 8px;
-            transition: background .2s, transform .2s;
-            letter-spacing: .04em
+            transition: background .22s, transform .22s, box-shadow .22s;
+            letter-spacing: .04em;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-modal-submit::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(105deg, transparent 40%, rgba(255, 255, 255, .08) 50%, transparent 60%);
+            transform: translateX(-100%);
+            transition: transform .5s ease;
         }
 
         .btn-modal-submit:hover {
             background: var(--gold);
             color: var(--navy);
-            transform: translateY(-2px)
+            transform: translateY(-2px);
+            box-shadow: 0 10px 28px rgba(246, 148, 30, .35)
         }
 
+        .btn-modal-submit:hover::after {
+            transform: translateX(200%)
+        }
+
+        .btn-modal-submit:active {
+            transform: translateY(0) scale(.98)
+        }
+
+        /* =====================
+           TOAST (enhanced)
+        ===================== */
         .toast {
             position: fixed;
             bottom: 32px;
@@ -1031,13 +1340,14 @@
             font-weight: 700;
             padding: 14px 24px;
             border-radius: 10px;
-            transform: translateY(80px);
+            transform: translateY(90px) scale(.9);
             opacity: 0;
-            transition: transform .4s cubic-bezier(.22, .68, 0, 1.2), opacity .4s
+            transition: transform .45s cubic-bezier(.22, .68, 0, 1.2), opacity .4s;
+            box-shadow: 0 16px 40px rgba(0, 0, 0, .2);
         }
 
         .toast.show {
-            transform: translateY(0);
+            transform: translateY(0) scale(1);
             opacity: 1
         }
 
@@ -1047,13 +1357,50 @@
             inset: 0;
             top: var(--nav-height);
             z-index: 98;
-            background: rgba(0, 0, 0, 0.4)
+            background: rgba(0, 0, 0, .42);
+            transition: opacity .3s;
         }
 
         .menu-backdrop.visible {
             display: block
         }
 
+        /* =====================
+           PULSE RING (support icon)
+        ===================== */
+        .support-icon {
+            position: relative;
+        }
+
+        .support-icon::after {
+            content: '';
+            position: absolute;
+            inset: -5px;
+            border-radius: 50%;
+            border: 2px solid rgba(246, 148, 30, .3);
+            animation: pulseRing 2.2s ease-out infinite;
+        }
+
+        @keyframes pulseRing {
+            0% {
+                transform: scale(1);
+                opacity: .6
+            }
+
+            70% {
+                transform: scale(1.25);
+                opacity: 0
+            }
+
+            100% {
+                transform: scale(1.25);
+                opacity: 0
+            }
+        }
+
+        /* =====================
+           RESPONSIVE
+        ===================== */
         @media(max-width:900px) {
             nav {
                 padding: 0 24px
@@ -1117,7 +1464,23 @@
 </head>
 
 <body>
-
+<div id="fc-loader">
+  <div class="fc-logo-ring">
+    <svg class="fc-ring-svg" viewBox="0 0 110 110">
+      <circle class="fc-ring-track" cx="55" cy="55" r="49"/>
+      <circle class="fc-ring-progress" cx="55" cy="55" r="49"/>
+    </svg>
+    <div class="fc-icon-wrap">
+      <img src="logo.png" alt="FinancialCorp logo" class="fc-logo-img" />
+    </div>
+  </div>
+  <div class="fc-wordmark">Financial<span>Corp</span></div>
+  <div class="fc-tagline">Partner Portal</div>
+  <div class="fc-bar-wrap">
+    <div class="fc-bar-track"><div class="fc-bar-fill"></div></div>
+    <div class="fc-bar-label" id="fcBarLabel">Loading…</div>
+  </div>
+</div>
     <nav>
         <a class="logo" href="/">
             <div class="logo-icon">
@@ -1169,6 +1532,7 @@
     <div class="menu-backdrop" id="menuBackdrop" onclick="closeMenu()"></div>
 
     <section class="hero">
+        <img class="hero-img" id="heroImage" src="background.jpg" alt="Hero background" />
         <div class="hero-content">
             <h1>FinancialCorp<br><span style="color:#0c1a2d">Partner Portal</span></h1>
             <div class="hero-gold-rule"></div>
@@ -1180,6 +1544,7 @@
 
     <section class="cards-section">
 
+        <!-- WELCOME ABOARD -->
         <div class="card">
             <div class="card-icon-wrap">
                 <svg viewBox="0 0 24 24">
@@ -1194,17 +1559,25 @@
                 <div class="card-gold-rule"></div>
             </div>
             <ul>
-                <li onclick="openImgModal('Program Overview','welcome','A complete walkthrough of the FinancialCorp partner program — structure, commission tiers, and what to expect as a referral partner.')">
+                <li
+                    onclick="openImgModal('Program Overview','welcome','A complete walkthrough of the FinancialCorp partner program — structure, commission tiers, and what to expect as a referral partner.')">
                     Program Overview<span class="li-arrow">→</span></li>
-                <li onclick="openImgModal('First Steps','welcome','Your quick-start checklist for getting up and running: account setup, portal access, and submitting your first referral.')">
+                <li
+                    onclick="openImgModal('First Steps','welcome','Your quick-start checklist for getting up and running: account setup, portal access, and submitting your first referral.')">
                     First Steps<span class="li-arrow">→</span></li>
-                <li onclick="openImgModal('Referral Process','welcome','Step-by-step guide to submitting, tracking, and following up on referrals through the partner portal.')">
+                <li
+                    onclick="openImgModal('Referral Process','welcome','Step-by-step guide to submitting, tracking, and following up on referrals through the partner portal.')">
                     Referral Process<span class="li-arrow">→</span></li>
-                <li onclick="openImgModal('Partner Agreement','welcome','Review the terms of the FinancialCorp partner agreement, including commission structure, compliance requirements, and exclusivity clauses.')">
+                <li
+                    onclick="openImgModal('Partner Agreement','welcome','Review the terms of the FinancialCorp partner agreement, including commission structure, compliance requirements, and exclusivity clauses.')">
                     Partner Agreement<span class="li-arrow">→</span></li>
+                <li
+                    onclick="openImgModal('How Financial Corp Lowers Costs','welcome','A breakdown of FinancialCorp strategies for reducing merchant processing costs through optimization and pricing.')">
+                    How Financial Corp Lowers Costs<span class="li-arrow">→</span></li>
             </ul>
         </div>
 
+        <!-- EDUCATION CENTER -->
         <div class="card" id="education">
             <div class="card-icon-wrap">
                 <svg viewBox="0 0 24 24">
@@ -1217,19 +1590,31 @@
                 <div class="card-gold-rule"></div>
             </div>
             <ul>
-                <li onclick="openImgModal('Interchange Optimization','education','')">
-                    Interchange Optimization<span class="li-arrow">→</span></li>
-                <li onclick="openImgModal('Industry Training','education','Access role-specific training modules covering payments industry fundamentals, compliance, and advanced sales techniques.')">
+                <li
+                    onclick="openImgModal('Interchange Optimization and Cash Discount Program','education','Understanding interchange optimization strategies and cash discount pricing programs to help merchants reduce processing costs.')">
+                    Interchange Optimization and Cash Discount Program<span class="li-arrow">→</span></li>
+                <li
+                    onclick="openImgModal('Industry Training','education','Access role-specific training modules covering payments industry fundamentals, compliance, and advanced sales techniques.')">
                     Industry Training<span class="li-arrow">→</span></li>
-                <li onclick="openImgModal('Clover POS','education','Overview of the Clover point-of-sale ecosystem, hardware options, and how to recommend the right setup for different merchant types.')">
+                <li
+                    onclick="openImgModal('Clover POS','education','Overview of the Clover point-of-sale ecosystem, hardware options, and how to recommend the right setup for different merchant types.')">
                     Clover POS<span class="li-arrow">→</span></li>
-                <li onclick="openImgModal('Union POS','education','Overview of the Union POS platform, merchant use cases, and recommended implementation guidelines.')">
+                <li
+                    onclick="openImgModal('Union POS','education','Overview of the Union POS platform, merchant use cases, and recommended implementation guidelines.')">
                     Union POS<span class="li-arrow">→</span></li>
-                <li onclick="openImgModal('Proprietary POS','education','Overview of proprietary POS solutions and how to position them alongside merchant hardware alternatives.')">
-                    Proprietary POS<span class="li-arrow">→</span></li>
+                <li
+                    onclick="openImgModal('POS Systems','education','A comprehensive guide to POS systems covering major companies, proprietary solutions, device types, and how they compare to payment gateways and terminals.')">
+                    POS Systems<span class="li-arrow">→</span></li>
+                <li
+                    onclick="openImgModal('Processing Statement','education','How to read a processing statement, identify key charges, and spot savings opportunities for merchants.')">
+                    Processing Statements<span class="li-arrow">→</span></li>
+                <li
+                    onclick="openImgModal('E-Commerce Payment Processing','education','The fundamentals of e-commerce payments, gateway integration, and selling online payment solutions.')">
+                    E-Commerce Payment Processing<span class="li-arrow">→</span></li>
             </ul>
         </div>
 
+        <!-- FOUNDATION -->
         <div class="card" id="foundation">
             <div class="card-icon-wrap">
                 <svg viewBox="0 0 24 24">
@@ -1241,27 +1626,25 @@
                 <div class="card-gold-rule"></div>
             </div>
             <ul>
-                <li onclick="openImgModal('Payment vs Gateway and POS vs Terminal','foundation','Understand the differences between payment gateways, POS systems, and terminals to position solutions correctly.')">
+                <li
+                    onclick="openImgModal('Payment vs Gateway and POS vs Terminal','foundation','Understand the differences between payment gateways, POS systems, and terminals to position solutions correctly.')">
                     Payment vs Gateway and POS vs Terminal<span class="li-arrow">→</span></li>
-                <li onclick="openImgModal('Interchange','foundation','What interchange is, how it impacts merchant costs, and where savings opportunities are created.')">
-                    Interchange<span class="li-arrow">→</span></li>
-                <li onclick="openImgModal('How Financial Corp Lowers Costs','foundation','A breakdown of FinancialCorp strategies for reducing merchant processing costs through optimization and pricing.')">
-                    How Financial Corp Lowers Costs<span class="li-arrow">→</span></li>
-                <li onclick="openImgModal('What is Cash Discount','foundation','Learn how cash discount programs work, the benefits for merchants, and how to explain them to prospects.')">
+                <li
+                    onclick="openImgModal('What is Cash Discount','foundation','Learn how cash discount programs work, the benefits for merchants, and how to explain them to prospects.')">
                     What is Cash Discount<span class="li-arrow">→</span></li>
-                <li onclick="openImgModal('Processing Statement','foundation','How to read a processing statement, identify key charges, and spot savings opportunities for merchants.')">
-                    Processing Statement<span class="li-arrow">→</span></li>
-                <li onclick="openImgModal('Types of POS Devices','foundation','A guide to the major POS device categories and the best fit for different merchant workflows.')">
+                <li
+                    onclick="openImgModal('Types of POS Devices','foundation','A guide to the major POS device categories and the best fit for different merchant workflows.')">
                     Types of POS Devices<span class="li-arrow">→</span></li>
-                <li onclick="openImgModal('Major POS Companies','foundation','Review of the top POS providers and how to differentiate their offerings during merchant conversations.')">
+                <li
+                    onclick="openImgModal('Major POS Companies','foundation','Review of the top POS providers and how to differentiate their offerings during merchant conversations.')">
                     Major POS Companies<span class="li-arrow">→</span></li>
-                <li onclick="openImgModal('Proprietary POS Companies','foundation','Overview of proprietary POS manufacturers and how FinancialCorp partners with exclusive hardware providers.')">
+                <li
+                    onclick="openImgModal('Proprietary POS Companies','foundation','Overview of proprietary POS manufacturers and how FinancialCorp partners with exclusive hardware providers.')">
                     Proprietary POS Companies<span class="li-arrow">→</span></li>
-                <li onclick="openImgModal('E-Commerce Payment Processing','foundation','The fundamentals of e-commerce payments, gateway integration, and selling online payment solutions.')">
-                    E-Commerce Payment Processing<span class="li-arrow">→</span></li>
             </ul>
         </div>
 
+        <!-- SALES MATERIALS -->
         <div class="card" id="sales">
             <div class="card-icon-wrap">
                 <svg viewBox="0 0 24 24">
@@ -1277,13 +1660,17 @@
                 <div class="card-gold-rule"></div>
             </div>
             <ul>
-                <li onclick="openImgModal('Partner Guide','sales','The comprehensive partner sales guide — product positioning, objection handling, competitor comparisons, and closing strategies.')">
+                <li
+                    onclick="openImgModal('Partner Guide','sales','The comprehensive partner sales guide — product positioning, objection handling, competitor comparisons, and closing strategies.')">
                     Partner Guide<span class="li-arrow">→</span></li>
-                <li onclick="openImgModal('Email Templates','sales','Ready-to-send email templates for cold outreach, follow-ups, proposal delivery, and post-close onboarding communication.')">
+                <li
+                    onclick="openImgModal('Email Templates','sales','Ready-to-send email templates for cold outreach, follow-ups, proposal delivery, and post-close onboarding communication.')">
                     Email Templates<span class="li-arrow">→</span></li>
-                <li onclick="openImgModal('One-Page Flyers','sales','Professionally designed one-page flyers for each product line — downloadable and print-ready for in-person meetings.')">
+                <li
+                    onclick="openImgModal('One-Page Flyers','sales','Professionally designed one-page flyers for each product line — downloadable and print-ready for in-person meetings.')">
                     One-Page Flyers<span class="li-arrow">→</span></li>
-                <li onclick="openImgModal('Scripts &amp; Talking Points','sales','Proven call scripts and conversation frameworks to help you pitch confidently and handle common merchant objections.')">
+                <li
+                    onclick="openImgModal('Scripts &amp; Talking Points','sales','Proven call scripts and conversation frameworks to help you pitch confidently and handle common merchant objections.')">
                     Scripts &amp; Talking Points<span class="li-arrow">→</span></li>
             </ul>
         </div>
@@ -1305,20 +1692,13 @@
                 <p>Contact the FinancialCorp team for partner support, training questions, or referral help.</p>
             </div>
             <div class="support-contacts">
-                <a href="tel:+11234567890" class="support-btn support-btn-phone">
+                <a href="tel:+(313) 387-9300" class="support-btn support-btn-phone">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                         stroke-linejoin="round">
-                        <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.62 1.27h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.91a16 16 0 0 0 6 6l.91-.91a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21.73 16z" />
+                        <path
+                            d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.62 1.27h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.91a16 16 0 0 0 6 6l.91-.91a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21.73 16z" />
                     </svg>
-                    +1 (123) 456-7890
-                </a>
-                <a href="mailto:support@financialcorp.com" class="support-btn support-btn-email">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                        stroke-linejoin="round">
-                        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
-                        <polyline points="22,6 12,13 2,6" />
-                    </svg>
-                    support@financialcorp.com
+                    +(313) 387-9300
                 </a>
             </div>
         </div>
@@ -1344,6 +1724,13 @@
                                 <path d="M3 3v5h5" />
                             </svg>
                         </button>
+                    </div>
+                    <div class="zoom-controls" id="slideControls" style="display:none;gap:4px;">
+                        <button class="zoom-btn" id="slidePrevBtn" onclick="slideNav(-1)" title="Previous"
+                            aria-label="Previous image">‹</button>
+                        <span class="zoom-level" id="slideLabel">1 / 1</span>
+                        <button class="zoom-btn" id="slideNextBtn" onclick="slideNav(1)" title="Next"
+                            aria-label="Next image">›</button>
                     </div>
                     <button class="img-modal-close" onclick="closeImgModal()">✕</button>
                 </div>
@@ -1379,8 +1766,25 @@
     </div>
 
     <div class="toast" id="toast"></div>
-
+    <script src="script.js"></script>
     <script>
+        /* =====================
+           SCROLL REVEAL
+        ===================== */
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(e => {
+                if (e.isIntersecting) {
+                    e.target.classList.add('revealed');
+                    revealObserver.unobserve(e.target);
+                }
+            });
+        }, { threshold: 0.12 });
+
+        document.querySelectorAll('.card, .support-banner').forEach(el => revealObserver.observe(el));
+
+        /* =====================
+           DATA MAPS
+        ===================== */
         const sectionLabels = {
             welcome: 'Welcome Aboard',
             foundation: 'Foundation',
@@ -1393,14 +1797,12 @@
             'First Steps': 'FinancialCorp_02_First_Steps.png',
             'Referral Process': 'FinancialCorp_03_Referral_Process.png',
             'Partner Agreement': 'FinancialCorp_04_Partner_Agreement.png',
-            'Interchange Optimization': 'Interchange%20Optimization%20and%20Cash%20Discount%20Pricing.png',
+            'Interchange Optimization and Cash Discount Program': 'Interchange%20Optimization%20and%20Cash%20Discount%20Pricing.png',
             'Cash Discount Pricing': 'Interchange%20Optimization%20and%20Cash%20Discount%20Pricing.png',
             'Clover POS': 'CLOVER%20POS.png',
             'Union POS': 'FinancialCorp_Foundation_01_Processor_vs_Gateway_vs_POS_vs_Terminal.png',
-            'Proprietary POS': 'FinancialCorp_Foundation_08_Proprietary_POS_Companies.png',
             'Industry Training': 'Image20260530011507.png',
             'Payment vs Gateway and POS vs Terminal': 'FinancialCorp_Foundation_01_Processor_vs_Gateway_vs_POS_vs_Terminal.png',
-            'Interchange': 'Interchange%20Optimization%20and%20Cash%20Discount%20Pricing.png',
             'How Financial Corp Lowers Costs': 'FinancialCorp_Foundation_03_How_FinancialCorp_Lowers_Costs.png',
             'What is Cash Discount': 'FinancialCorp_Foundation_04_What_Is_Cash_Discount.png',
             'Processing Statement': 'FinancialCorp_Foundation_05_How_To_Ask_For_Statement.png',
@@ -1414,47 +1816,39 @@
             'Scripts & Talking Points': 'FinancialCorp_Sales_04_Scripts_Talking_Points.png'
         };
 
-        /* ============================
-           ZOOM & PAN STATE
-           FIX: image is loaded at native resolution; we scale the container down
-           to fit it initially (fitScale), then zoom from there. This means
-           zoom 100% = native pixel-for-pixel, which is always HD.
-        ============================ */
-        let zoomScale = 1;       // current applied scale
-        let fitScale = 1;        // scale that fits image inside viewport (our "100%")
-        let zoomMin = 0.5;
-        let zoomMax = 5;
-        let zoomStep = 0.25;
-        let panX = 0;
-        let panY = 0;
-        let isPanning = false;
-        let panStartX = 0;
-        let panStartY = 0;
-        let panOriginX = 0;
-        let panOriginY = 0;
-        let hintTimer = null;
-        let hasImage = false;
+        const multiImages = {
+            'POS Systems': [
+                { src: 'FinancialCorp_Foundation_07_Major_POS_Companies.png', label: 'Major POS Companies' },
+                { src: 'FinancialCorp_Foundation_08_Proprietary_POS_Companies.png', label: 'Proprietary POS Companies' },
+                { src: 'FinancialCorp_Foundation_06_Types_Of_POS_Devices.png', label: 'Types of POS Devices' },
+                { src: 'FinancialCorp_Foundation_01_Processor_vs_Gateway_vs_POS_vs_Terminal.png', label: 'Payment vs Gateway vs POS vs Terminals' }
+            ],
+            'Interchange Optimization and Cash Discount Program': [
+                { src: 'Interchange%20Optimization%20and%20Cash%20Discount%20Pricing.png', label: 'Interchange Optimization' },
+                { src: 'FinancialCorp_Foundation_04_What_Is_Cash_Discount.png', label: 'What is Cash Discount' }
+            ]
+        };
 
-        function getZoomContainer() { return document.getElementById('zoomContainer'); }
-        function getImgWrap() { return document.getElementById('imgWrap'); }
+        let slideList = [], slideIndex = 0;
+        let zoomScale = 1, fitScale = 1, zoomMin = .5, zoomMax = 5, zoomStep = .25;
+        let panX = 0, panY = 0, isPanning = false;
+        let panStartX = 0, panStartY = 0, panOriginX = 0, panOriginY = 0;
+        let hintTimer = null, hasImage = false;
+
+        const getZoomContainer = () => document.getElementById('zoomContainer');
+        const getImgWrap = () => document.getElementById('imgWrap');
 
         function computeFitScale() {
             const img = document.getElementById('imgModalImage');
             const wrap = getImgWrap();
             if (!img || !img.naturalWidth || !img.naturalHeight) return 1;
-            const ww = wrap.clientWidth;
-            const wh = wrap.clientHeight;
-            const scaleW = ww / img.naturalWidth;
-            const scaleH = wh / img.naturalHeight;
-            return Math.min(scaleW, scaleH, 1); // never upscale beyond native at "fit"
+            return Math.min(wrap.clientWidth / img.naturalWidth, wrap.clientHeight / img.naturalHeight, 1);
         }
 
         function applyTransform() {
             const c = getZoomContainer();
-            // The container is centered; we offset by pan then scale around center.
-            c.style.transform = `translate(${panX}px, ${panY}px) scale(${zoomScale})`;
+            c.style.transform = `translate(${panX}px,${panY}px) scale(${zoomScale})`;
             c.style.transformOrigin = '50% 50%';
-            // Display zoom % relative to fit (fit = 100%)
             const pct = fitScale > 0 ? Math.round((zoomScale / fitScale) * 100) : Math.round(zoomScale * 100);
             document.getElementById('zoomLevel').textContent = pct + '%';
         }
@@ -1463,239 +1857,174 @@
             const wrap = getImgWrap();
             const img = document.getElementById('imgModalImage');
             if (!img || !img.naturalWidth) return;
-            const ww = wrap.clientWidth;
-            const wh = wrap.clientHeight;
-            // image is rendered at naturalWidth/Height, then scaled by zoomScale
-            const scaledW = img.naturalWidth * zoomScale;
-            const scaledH = img.naturalHeight * zoomScale;
-            const maxPanX = Math.max(0, (scaledW - ww) / 2);
-            const maxPanY = Math.max(0, (scaledH - wh) / 2);
+            const maxPanX = Math.max(0, (img.naturalWidth * zoomScale - wrap.clientWidth) / 2);
+            const maxPanY = Math.max(0, (img.naturalHeight * zoomScale - wrap.clientHeight) / 2);
             panX = Math.max(-maxPanX, Math.min(maxPanX, panX));
             panY = Math.max(-maxPanY, Math.min(maxPanY, panY));
         }
 
-        function zoomTo(newScale, pivotClientX, pivotClientY) {
-            const wrap = getImgWrap();
-            const prevScale = zoomScale;
+        function zoomTo(newScale, pvtX, pvtY) {
+            const wrap = getImgWrap(), prev = zoomScale;
             zoomScale = Math.min(zoomMax, Math.max(zoomMin, newScale));
-
-            if (pivotClientX !== undefined && pivotClientY !== undefined) {
-                const rect = wrap.getBoundingClientRect();
-                const cx = rect.width / 2;
-                const cy = rect.height / 2;
-                const dx = pivotClientX - rect.left - cx;
-                const dy = pivotClientY - rect.top - cy;
-                panX = panX - dx * (zoomScale / prevScale - 1);
-                panY = panY - dy * (zoomScale / prevScale - 1);
+            if (pvtX !== undefined) {
+                const r = wrap.getBoundingClientRect();
+                const cx = r.width / 2, cy = r.height / 2;
+                panX -= (pvtX - r.left - cx) * (zoomScale / prev - 1);
+                panY -= (pvtY - r.top - cy) * (zoomScale / prev - 1);
             }
-
-            if (Math.abs(zoomScale - fitScale) < 0.01) { panX = 0; panY = 0; }
-            clampPan();
-            applyTransform();
+            if (Math.abs(zoomScale - fitScale) < .01) { panX = 0; panY = 0; }
+            clampPan(); applyTransform();
         }
 
-        function zoomIn()    { zoomTo(zoomScale + zoomStep * fitScale); }
-        function zoomOut()   { zoomTo(zoomScale - zoomStep * fitScale); }
-        function zoomReset() { zoomScale = fitScale; panX = 0; panY = 0; applyTransform(); }
+        function zoomIn() { zoomTo(zoomScale + zoomStep * fitScale) }
+        function zoomOut() { zoomTo(zoomScale - zoomStep * fitScale) }
+        function zoomReset() { zoomScale = fitScale; panX = 0; panY = 0; applyTransform() }
 
-        /* Scroll to zoom */
-        function onWheel(e) {
-            if (!hasImage) return;
-            e.preventDefault();
-            const delta = e.deltaY > 0 ? -(zoomStep * fitScale) : (zoomStep * fitScale);
-            zoomTo(zoomScale + delta, e.clientX, e.clientY);
-        }
-
-        /* Mouse drag to pan */
+        function onWheel(e) { if (!hasImage) return; e.preventDefault(); zoomTo(zoomScale + (e.deltaY > 0 ? -1 : 1) * zoomStep * fitScale, e.clientX, e.clientY) }
         function onMouseDown(e) {
-            if (!hasImage) return;
-            if (e.button !== 0) return;
-            isPanning = true;
-            panStartX = e.clientX;
-            panStartY = e.clientY;
-            panOriginX = panX;
-            panOriginY = panY;
-            getImgWrap().classList.add('grabbing');
-            e.preventDefault();
+            if (!hasImage || e.button !== 0) return;
+            isPanning = true; panStartX = e.clientX; panStartY = e.clientY;
+            panOriginX = panX; panOriginY = panY;
+            getImgWrap().classList.add('grabbing'); e.preventDefault();
         }
-
         function onMouseMove(e) {
             if (!isPanning) return;
             panX = panOriginX + (e.clientX - panStartX);
             panY = panOriginY + (e.clientY - panStartY);
-            clampPan();
-            applyTransform();
+            clampPan(); applyTransform();
         }
+        function onMouseUp() { if (!isPanning) return; isPanning = false; getImgWrap().classList.remove('grabbing') }
 
-        function onMouseUp() {
-            if (!isPanning) return;
-            isPanning = false;
-            getImgWrap().classList.remove('grabbing');
-        }
-
-        /* Touch pinch-to-zoom + drag */
         let lastTouchDist = null;
-        let lastTouchMidX = null;
-        let lastTouchMidY = null;
-        let touchPanStartX = 0;
-        let touchPanStartY = 0;
-        let touchPanOriginX = 0;
-        let touchPanOriginY = 0;
+        let touchPanStartX = 0, touchPanStartY = 0, touchPanOriginX = 0, touchPanOriginY = 0;
 
-        function getTouchDist(touches) {
-            const dx = touches[0].clientX - touches[1].clientX;
-            const dy = touches[0].clientY - touches[1].clientY;
-            return Math.sqrt(dx * dx + dy * dy);
-        }
+        function getTouchDist(t) { const dx = t[0].clientX - t[1].clientX, dy = t[0].clientY - t[1].clientY; return Math.sqrt(dx * dx + dy * dy) }
 
         function onTouchStart(e) {
             if (!hasImage) return;
-            if (e.touches.length === 2) {
-                lastTouchDist = getTouchDist(e.touches);
-                lastTouchMidX = (e.touches[0].clientX + e.touches[1].clientX) / 2;
-                lastTouchMidY = (e.touches[0].clientY + e.touches[1].clientY) / 2;
-                e.preventDefault();
-            } else if (e.touches.length === 1) {
-                touchPanStartX = e.touches[0].clientX;
-                touchPanStartY = e.touches[0].clientY;
-                touchPanOriginX = panX;
-                touchPanOriginY = panY;
-            }
+            if (e.touches.length === 2) { lastTouchDist = getTouchDist(e.touches); e.preventDefault(); }
+            else { touchPanStartX = e.touches[0].clientX; touchPanStartY = e.touches[0].clientY; touchPanOriginX = panX; touchPanOriginY = panY; }
         }
-
         function onTouchMove(e) {
             if (!hasImage) return;
-            if (e.touches.length === 2 && lastTouchDist !== null) {
+            if (e.touches.length === 2 && lastTouchDist) {
                 e.preventDefault();
-                const newDist = getTouchDist(e.touches);
-                const ratio = newDist / lastTouchDist;
-                const midX = (e.touches[0].clientX + e.touches[1].clientX) / 2;
-                const midY = (e.touches[0].clientY + e.touches[1].clientY) / 2;
-                zoomTo(zoomScale * ratio, midX, midY);
-                lastTouchDist = newDist;
-                lastTouchMidX = midX;
-                lastTouchMidY = midY;
+                const d = getTouchDist(e.touches);
+                const mx = (e.touches[0].clientX + e.touches[1].clientX) / 2;
+                const my = (e.touches[0].clientY + e.touches[1].clientY) / 2;
+                zoomTo(zoomScale * (d / lastTouchDist), mx, my);
+                lastTouchDist = d;
             } else if (e.touches.length === 1) {
                 panX = touchPanOriginX + (e.touches[0].clientX - touchPanStartX);
                 panY = touchPanOriginY + (e.touches[0].clientY - touchPanStartY);
-                clampPan();
-                applyTransform();
-                e.preventDefault();
+                clampPan(); applyTransform(); e.preventDefault();
             }
         }
+        function onTouchEnd(e) { if (e.touches.length < 2) lastTouchDist = null }
 
-        function onTouchEnd(e) {
-            if (e.touches.length < 2) lastTouchDist = null;
-        }
-
-        /* Double-click to zoom in/reset */
         function onDblClick(e) {
             if (!hasImage) return;
-            if (zoomScale > fitScale * 1.05) {
-                zoomReset();
-            } else {
-                zoomTo(fitScale * 2.5, e.clientX, e.clientY);
-            }
+            zoomScale > fitScale * 1.05 ? zoomReset() : zoomTo(fitScale * 2.5, e.clientX, e.clientY);
         }
 
         function attachZoomEvents() {
-            const wrap = getImgWrap();
-            wrap.addEventListener('wheel', onWheel, { passive: false });
-            wrap.addEventListener('mousedown', onMouseDown);
+            const w = getImgWrap();
+            w.addEventListener('wheel', onWheel, { passive: false });
+            w.addEventListener('mousedown', onMouseDown);
             document.addEventListener('mousemove', onMouseMove);
             document.addEventListener('mouseup', onMouseUp);
-            wrap.addEventListener('touchstart', onTouchStart, { passive: false });
-            wrap.addEventListener('touchmove', onTouchMove, { passive: false });
-            wrap.addEventListener('touchend', onTouchEnd);
-            wrap.addEventListener('dblclick', onDblClick);
+            w.addEventListener('touchstart', onTouchStart, { passive: false });
+            w.addEventListener('touchmove', onTouchMove, { passive: false });
+            w.addEventListener('touchend', onTouchEnd);
+            w.addEventListener('dblclick', onDblClick);
         }
-
         function detachZoomEvents() {
-            const wrap = getImgWrap();
-            wrap.removeEventListener('wheel', onWheel);
-            wrap.removeEventListener('mousedown', onMouseDown);
+            const w = getImgWrap();
+            w.removeEventListener('wheel', onWheel);
+            w.removeEventListener('mousedown', onMouseDown);
             document.removeEventListener('mousemove', onMouseMove);
             document.removeEventListener('mouseup', onMouseUp);
-            wrap.removeEventListener('touchstart', onTouchStart);
-            wrap.removeEventListener('touchmove', onTouchMove);
-            wrap.removeEventListener('touchend', onTouchEnd);
-            wrap.removeEventListener('dblclick', onDblClick);
+            w.removeEventListener('touchstart', onTouchStart);
+            w.removeEventListener('touchmove', onTouchMove);
+            w.removeEventListener('touchend', onTouchEnd);
+            w.removeEventListener('dblclick', onDblClick);
         }
 
         function showHintThenHide() {
-            const hint = document.getElementById('zoomHint');
-            hint.classList.remove('hidden');
-            clearTimeout(hintTimer);
-            hintTimer = setTimeout(() => hint.classList.add('hidden'), 2800);
+            const h = document.getElementById('zoomHint');
+            h.classList.remove('hidden'); clearTimeout(hintTimer);
+            hintTimer = setTimeout(() => h.classList.add('hidden'), 2800);
         }
 
-        /* ============================
-           MODAL OPEN / CLOSE
-        ============================ */
-        function openImgModal(title, section, desc) {
-            document.getElementById('imgModalTitle').textContent = title;
-            document.getElementById('imgModalTag').textContent = sectionLabels[section] || section;
-            document.getElementById('imgModalDesc').textContent = desc;
+        function updateSlideUI() {
+            document.getElementById('slideLabel').textContent = `${slideIndex + 1} / ${slideList.length}`;
+            document.getElementById('slidePrevBtn').disabled = slideIndex === 0;
+            document.getElementById('slideNextBtn').disabled = slideIndex === slideList.length - 1;
+            document.getElementById('slidePrevBtn').style.opacity = slideIndex === 0 ? '.4' : '1';
+            document.getElementById('slideNextBtn').style.opacity = slideIndex === slideList.length - 1 ? '.4' : '1';
+            document.getElementById('imgModalTitle').textContent = slideList[slideIndex].label;
+        }
 
+        function loadSlideImage(src) {
             const img = document.getElementById('imgModalImage');
-            const placeholder = document.getElementById('imgModalPlaceholder');
-            const imgSrc = itemImages[title] || '';
-
-            img.alt = title;
-            img.src = '';
-            placeholder.innerHTML = '';
-            placeholder.style.display = 'none';
-
-            // Reset zoom before image loads
-            zoomScale = 1;
-            fitScale = 1;
-            panX = 0; panY = 0;
-            hasImage = false;
+            const ph = document.getElementById('imgModalPlaceholder');
+            hasImage = false; img.src = ''; ph.innerHTML = ''; ph.style.display = 'none';
+            zoomScale = 1; fitScale = 1; panX = 0; panY = 0;
+            getZoomContainer().style.transform = '';
             document.getElementById('zoomControls').style.display = 'none';
             document.getElementById('zoomHint').classList.add('hidden');
-            getZoomContainer().style.transform = '';
 
-            if (imgSrc.trim() !== '') {
+            if (src && src.trim() !== '') {
                 img.style.display = 'block';
-                img.onload = function () {
-                    // FIX: compute fitScale so image fills the viewport nicely at "100%"
-                    fitScale = computeFitScale();
-                    zoomScale = fitScale;
-                    panX = 0; panY = 0;
-                    applyTransform();
-                    hasImage = true;
-                    placeholder.style.display = 'none';
+                img.onload = () => {
+                    fitScale = computeFitScale(); zoomScale = fitScale; panX = 0; panY = 0;
+                    applyTransform(); hasImage = true;
+                    ph.style.display = 'none';
                     document.getElementById('zoomControls').style.display = 'flex';
                     showHintThenHide();
                 };
-                img.onerror = function () {
-                    img.style.display = 'none';
-                    hasImage = false;
+                img.onerror = () => {
+                    img.style.display = 'none'; hasImage = false;
                     document.getElementById('zoomControls').style.display = 'none';
-                    placeholder.style.display = 'flex';
-                    placeholder.innerHTML = buildPlaceholder(title, 'Image could not be loaded. Check the URL in the itemImages map.');
+                    ph.style.display = 'flex';
+                    ph.innerHTML = buildPlaceholder(document.getElementById('imgModalTitle').textContent, 'Image could not be loaded.');
                 };
-                img.src = imgSrc;
+                img.src = src;
             } else {
-                img.style.display = 'none';
-                placeholder.style.display = 'flex';
-                placeholder.innerHTML = buildPlaceholder(title, null);
+                img.style.display = 'none'; ph.style.display = 'flex';
+                ph.innerHTML = buildPlaceholder(document.getElementById('imgModalTitle').textContent, null);
             }
+        }
 
+        function slideNav(dir) {
+            const n = slideIndex + dir;
+            if (n < 0 || n >= slideList.length) return;
+            slideIndex = n; updateSlideUI(); loadSlideImage(slideList[slideIndex].src);
+        }
+
+        function openImgModal(title, section, desc) {
+            document.getElementById('imgModalTag').textContent = sectionLabels[section] || section;
+            document.getElementById('imgModalDesc').textContent = desc;
+            const sc = document.getElementById('slideControls');
+            if (multiImages[title]) {
+                slideList = multiImages[title]; slideIndex = 0;
+                sc.style.display = 'flex'; updateSlideUI(); loadSlideImage(slideList[0].src);
+            } else {
+                slideList = []; sc.style.display = 'none';
+                document.getElementById('imgModalTitle').textContent = title;
+                loadSlideImage(itemImages[title] || '');
+            }
             attachZoomEvents();
             document.getElementById('imgModalOverlay').classList.add('open');
             document.body.style.overflow = 'hidden';
         }
 
         function buildPlaceholder(title, customMsg) {
-            const msg = customMsg ||
-                'Add an image URL to the <code style="background:#f0f0f0;padding:2px 5px;border-radius:4px;font-size:12px">itemImages</code> map in the script';
+            const msg = customMsg || 'Add an image URL to the <code style="background:#f0f0f0;padding:2px 5px;border-radius:4px;font-size:12px">itemImages</code> map in the script';
             return `<div class="img-placeholder">
                 <div class="img-placeholder-icon">
                     <svg viewBox="0 0 24 24" fill="none" stroke="#f6941e" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" width="36" height="36">
-                        <rect x="3" y="3" width="18" height="18" rx="2"/>
-                        <circle cx="8.5" cy="8.5" r="1.5"/>
-                        <path d="M21 15l-5-5L5 21"/>
+                        <rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/>
                     </svg>
                 </div>
                 <p style="font-size:14px;text-align:center;max-width:280px;line-height:1.6;color:#8a94aa">
@@ -1706,35 +2035,20 @@
 
         function closeImgModal() {
             detachZoomEvents();
-            zoomScale = 1; fitScale = 1;
-            panX = 0; panY = 0;
-            hasImage = false;
+            zoomScale = 1; fitScale = 1; panX = 0; panY = 0;
+            hasImage = false; slideList = []; slideIndex = 0;
             document.getElementById('imgModalOverlay').classList.remove('open');
             document.body.style.overflow = '';
         }
+        function handleImgOverlayClick(e) { if (e.target === document.getElementById('imgModalOverlay')) closeImgModal() }
 
-        function handleImgOverlayClick(e) {
-            if (e.target === document.getElementById('imgModalOverlay')) closeImgModal();
-        }
-
-        function openModal() {
-            document.getElementById('modalOverlay').classList.add('open');
-            document.body.style.overflow = 'hidden';
-        }
-        function closeModal() {
-            document.getElementById('modalOverlay').classList.remove('open');
-            document.body.style.overflow = '';
-        }
-        function handleOverlayClick(e) {
-            if (e.target === document.getElementById('modalOverlay')) closeModal();
-        }
-        function handleLogin() {
-            closeModal();
-            showToast('Welcome back! Logging you in…');
-        }
+        function openModal() { document.getElementById('modalOverlay').classList.add('open'); document.body.style.overflow = 'hidden' }
+        function closeModal() { document.getElementById('modalOverlay').classList.remove('open'); document.body.style.overflow = '' }
+        function handleOverlayClick(e) { if (e.target === document.getElementById('modalOverlay')) closeModal() }
+        function handleLogin() { closeModal(); showToast('Welcome back! Logging you in…') }
 
         let menuOpen = false;
-        function toggleMenu() { menuOpen ? closeMenu() : openMenuFn(); }
+        function toggleMenu() { menuOpen ? closeMenu() : openMenuFn() }
         function openMenuFn() {
             menuOpen = true;
             document.getElementById('hamburger').classList.add('open');
@@ -1756,29 +2070,27 @@
         function showToast(msg) {
             const t = document.getElementById('toast');
             clearTimeout(toastTimer2);
-            t.textContent = msg;
-            t.classList.add('show');
+            t.textContent = msg; t.classList.add('show');
             toastTimer2 = setTimeout(() => t.classList.remove('show'), 3200);
         }
 
         document.addEventListener('keydown', e => {
-            if (e.key === 'Escape') { closeImgModal(); closeModal(); closeMenu(); }
+            if (e.key === 'Escape') { closeImgModal(); closeModal(); closeMenu() }
             if (document.getElementById('imgModalOverlay').classList.contains('open')) {
                 if (e.key === '+' || e.key === '=') zoomIn();
                 if (e.key === '-') zoomOut();
                 if (e.key === '0') zoomReset();
+                if (e.key === 'ArrowLeft') slideNav(-1);
+                if (e.key === 'ArrowRight') slideNav(1);
             }
         });
 
         window.addEventListener('resize', () => {
             if (window.innerWidth > 900) closeMenu();
-            // Recalculate fit on resize if modal is open
             if (hasImage && document.getElementById('imgModalOverlay').classList.contains('open')) {
-                const prevRatio = zoomScale / fitScale;
-                fitScale = computeFitScale();
-                zoomScale = fitScale * prevRatio;
-                clampPan();
-                applyTransform();
+                const prev = zoomScale / fitScale;
+                fitScale = computeFitScale(); zoomScale = fitScale * prev;
+                clampPan(); applyTransform();
             }
         });
     </script>
