@@ -49,61 +49,101 @@
             min-height: 100vh;
             overflow-x: hidden
         }
-/* Big side-arrow nav buttons */
-.slide-arrow {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    z-index: 10;
-    width: 52px;
-    height: 110px;
-    background: rgba(255, 255, 255, 0.92);
-    border: 2px solid rgba(246, 148, 30, 0.35);
-    border-radius: 10px;
-    display: none; /* hidden by default; shown only for multi-slide */
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    transition: background .2s, border-color .25s, transform .25s cubic-bezier(.22,.68,0,1.4), opacity .2s;
-    box-shadow: 0 4px 20px rgba(0,0,0,.12);
-    color: var(--navy);
-}
 
-.slide-arrow svg {
-    width: 24px;
-    height: 24px;
-    flex-shrink: 0;
-}
+        /* ── BIG SIDE-ARROW NAV (item navigation only) ── */
+        .slide-arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 10;
+            width: 52px;
+            height: 110px;
+            background: rgba(255, 255, 255, .92);
+            border: 2px solid rgba(246, 148, 30, .35);
+            border-radius: 10px;
+            display: none;
+            /* shown via JS when needed */
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: background .2s, border-color .25s, transform .25s cubic-bezier(.22, .68, 0, 1.4), opacity .2s;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, .12);
+            color: var(--navy);
+        }
 
-.slide-arrow-prev {
-    left: 0;
-    border-left: none;
-    border-radius: 0 10px 10px 0;
-}
+        .slide-arrow svg {
+            width: 24px;
+            height: 24px;
+            flex-shrink: 0
+        }
 
-.slide-arrow-next {
-    right: 0;
-    border-right: none;
-    border-radius: 10px 0 0 10px;
-}
+        .slide-arrow-prev {
+            left: 0;
+            border-left: none;
+            border-radius: 0 10px 10px 0
+        }
 
-.slide-arrow:hover {
-    background: var(--gold);
-    border-color: var(--gold);
-    color: var(--navy);
-    transform: translateY(-50%) scale(1.06);
-    box-shadow: 0 8px 28px rgba(246,148,30,.35);
-}
+        .slide-arrow-next {
+            right: 0;
+            border-right: none;
+            border-radius: 10px 0 0 10px
+        }
 
-.slide-arrow:active {
-    transform: translateY(-50%) scale(.96);
-}
+        .slide-arrow:hover {
+            background: var(--gold);
+            border-color: var(--gold);
+            color: var(--navy);
+            transform: translateY(-50%) scale(1.06);
+            box-shadow: 0 8px 28px rgba(246, 148, 30, .35);
+        }
 
-.slide-arrow:disabled {
-    opacity: 0.25;
-    cursor: default;
-    pointer-events: none;
-}
+        .slide-arrow:active {
+            transform: translateY(-50%) scale(.96)
+        }
+
+        .slide-arrow:disabled {
+            opacity: .25;
+            cursor: default;
+            pointer-events: none
+        }
+
+        /* ── HEADER IMAGE-COUNTER ARROWS (multi-image nav) ── */
+        .img-nav-btn {
+            background: none;
+            border: 1.5px solid rgba(246, 148, 30, .4);
+            border-radius: 7px;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            color: var(--navy);
+            transition: background .18s, border-color .18s, transform .15s;
+            flex-shrink: 0;
+        }
+
+        .img-nav-btn svg {
+            width: 14px;
+            height: 14px
+        }
+
+        .img-nav-btn:hover {
+            background: var(--gold);
+            border-color: var(--gold);
+            color: var(--navy)
+        }
+
+        .img-nav-btn:active {
+            transform: scale(.88)
+        }
+
+        .img-nav-btn:disabled {
+            opacity: .25;
+            cursor: default;
+            pointer-events: none
+        }
+
         nav {
             position: sticky;
             top: 0;
@@ -119,8 +159,15 @@
         }
 
         @keyframes navSlideDown {
-            from { transform: translateY(-100%); opacity: 0 }
-            to { transform: translateY(0); opacity: 1 }
+            from {
+                transform: translateY(-100%);
+                opacity: 0
+            }
+
+            to {
+                transform: translateY(0);
+                opacity: 1
+            }
         }
 
         .logo {
@@ -133,8 +180,15 @@
         }
 
         @keyframes fadeInLeft {
-            from { opacity: 0; transform: translateX(-18px) }
-            to { opacity: 1; transform: translateX(0) }
+            from {
+                opacity: 0;
+                transform: translateX(-18px)
+            }
+
+            to {
+                opacity: 1;
+                transform: translateX(0)
+            }
         }
 
         .logo-icon {
@@ -150,7 +204,9 @@
             transition: transform .35s cubic-bezier(.22, .68, 0, 1.4);
         }
 
-        .logo:hover .logo-icon { transform: scale(1.1) }
+        .logo:hover .logo-icon {
+            transform: scale(1.1)
+        }
 
         .logo-icon img {
             width: 100%;
@@ -168,25 +224,51 @@
             transition: letter-spacing .3s ease;
         }
 
-        .logo:hover .logo-text { letter-spacing: .07em }
-        .logo-text span { color: var(--gold) }
+        .logo:hover .logo-text {
+            letter-spacing: .07em
+        }
+
+        .logo-text span {
+            color: var(--gold)
+        }
 
         .nav-links {
             display: flex;
             align-items: center;
             gap: 36px;
-            list-style: none;
+            list-style: none
         }
 
-        .nav-links li { animation: fadeInDown .5s both }
-        .nav-links li:nth-child(1) { animation-delay: .18s }
-        .nav-links li:nth-child(2) { animation-delay: .24s }
-        .nav-links li:nth-child(3) { animation-delay: .30s }
-        .nav-links li:nth-child(4) { animation-delay: .36s }
+        .nav-links li {
+            animation: fadeInDown .5s both
+        }
+
+        .nav-links li:nth-child(1) {
+            animation-delay: .18s
+        }
+
+        .nav-links li:nth-child(2) {
+            animation-delay: .24s
+        }
+
+        .nav-links li:nth-child(3) {
+            animation-delay: .30s
+        }
+
+        .nav-links li:nth-child(4) {
+            animation-delay: .36s
+        }
 
         @keyframes fadeInDown {
-            from { opacity: 0; transform: translateY(-10px) }
-            to { opacity: 1; transform: translateY(0) }
+            from {
+                opacity: 0;
+                transform: translateY(-10px)
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0)
+            }
         }
 
         .nav-links a {
@@ -212,10 +294,14 @@
         }
 
         .nav-links a:hover,
-        .nav-links a.active { color: var(--white) }
+        .nav-links a.active {
+            color: var(--white)
+        }
 
         .nav-links a:hover::after,
-        .nav-links a.active::after { width: 100% }
+        .nav-links a.active::after {
+            width: 100%
+        }
 
         .nav-right {
             display: flex;
@@ -225,8 +311,15 @@
         }
 
         @keyframes fadeInRight {
-            from { opacity: 0; transform: translateX(18px) }
-            to { opacity: 1; transform: translateX(0) }
+            from {
+                opacity: 0;
+                transform: translateX(18px)
+            }
+
+            to {
+                opacity: 1;
+                transform: translateX(0)
+            }
         }
 
         .btn-login {
@@ -254,7 +347,9 @@
             box-shadow: 0 8px 24px rgba(246, 148, 30, .3);
         }
 
-        .btn-login:active { transform: translateY(0) scale(.97) }
+        .btn-login:active {
+            transform: translateY(0) scale(.97)
+        }
 
         .hamburger {
             display: none;
@@ -275,7 +370,7 @@
         .hamburger:hover {
             border-color: var(--gold);
             background: rgba(246, 148, 30, .08);
-            transform: scale(1.05);
+            transform: scale(1.05)
         }
 
         .hamburger .bar {
@@ -287,9 +382,18 @@
             transform-origin: center;
         }
 
-        .hamburger.open .bar:nth-child(1) { transform: translateY(7px) rotate(45deg) }
-        .hamburger.open .bar:nth-child(2) { opacity: 0; width: 0 }
-        .hamburger.open .bar:nth-child(3) { transform: translateY(-7px) rotate(-45deg) }
+        .hamburger.open .bar:nth-child(1) {
+            transform: translateY(7px) rotate(45deg)
+        }
+
+        .hamburger.open .bar:nth-child(2) {
+            opacity: 0;
+            width: 0
+        }
+
+        .hamburger.open .bar:nth-child(3) {
+            transform: translateY(-7px) rotate(-45deg)
+        }
 
         .mobile-menu {
             display: none;
@@ -306,7 +410,10 @@
             transition: max-height .38s cubic-bezier(.22, .68, 0, 1), padding .35s ease;
         }
 
-        .mobile-menu.open { max-height: 400px; padding: 16px 0 24px }
+        .mobile-menu.open {
+            max-height: 400px;
+            padding: 16px 0 24px
+        }
 
         .mobile-menu ul {
             list-style: none;
@@ -314,8 +421,13 @@
             margin-bottom: 20px
         }
 
-        .mobile-menu ul li { border-bottom: 1px solid rgba(255, 255, 255, .06) }
-        .mobile-menu ul li:last-child { border-bottom: none }
+        .mobile-menu ul li {
+            border-bottom: 1px solid rgba(255, 255, 255, .06)
+        }
+
+        .mobile-menu ul li:last-child {
+            border-bottom: none
+        }
 
         .mobile-menu ul a {
             display: flex;
@@ -341,12 +453,20 @@
         }
 
         .mobile-menu ul a:hover,
-        .mobile-menu ul a.active { color: var(--white); padding-left: 6px }
+        .mobile-menu ul a.active {
+            color: var(--white);
+            padding-left: 6px
+        }
 
         .mobile-menu ul a:hover::before,
-        .mobile-menu ul a.active::before { opacity: 1; transform: scale(1.4) }
+        .mobile-menu ul a.active::before {
+            opacity: 1;
+            transform: scale(1.4)
+        }
 
-        .mobile-menu-footer { padding: 0 24px }
+        .mobile-menu-footer {
+            padding: 0 24px
+        }
 
         .btn-login-mobile {
             display: flex;
@@ -366,7 +486,10 @@
             transition: background .2s, color .2s;
         }
 
-        .btn-login-mobile:hover { background: var(--gold); color: var(--navy) }
+        .btn-login-mobile:hover {
+            background: var(--gold);
+            color: var(--navy)
+        }
 
         .hero {
             position: relative;
@@ -388,15 +511,22 @@
         }
 
         @keyframes heroImageReveal {
-            from { opacity: 0; transform: scale(1.06) }
-            to { opacity: 1; transform: scale(1) }
+            from {
+                opacity: 0;
+                transform: scale(1.06)
+            }
+
+            to {
+                opacity: 1;
+                transform: scale(1)
+            }
         }
 
         .hero-content {
             position: relative;
             z-index: 2;
             max-width: 1500px;
-            margin: 0 auto;
+            margin: 0 auto
         }
 
         .hero h1 {
@@ -410,8 +540,15 @@
         }
 
         @keyframes heroHeadline {
-            from { opacity: 0; transform: translateY(30px) }
-            to { opacity: 1; transform: translateY(0) }
+            from {
+                opacity: 0;
+                transform: translateY(30px)
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0)
+            }
         }
 
         .hero-gold-rule {
@@ -425,8 +562,15 @@
         }
 
         @keyframes ruleExpand {
-            from { transform: scaleX(0); opacity: 0 }
-            to { transform: scaleX(1); opacity: 1 }
+            from {
+                transform: scaleX(0);
+                opacity: 0
+            }
+
+            to {
+                transform: scaleX(1);
+                opacity: 1
+            }
         }
 
         .hero-sub {
@@ -446,8 +590,15 @@
         }
 
         @keyframes heroFadeUp {
-            from { opacity: 0; transform: translateY(18px) }
-            to { opacity: 1; transform: translateY(0) }
+            from {
+                opacity: 0;
+                transform: translateY(18px)
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0)
+            }
         }
 
         .cards-section {
@@ -472,14 +623,25 @@
             transition:
                 opacity .6s cubic-bezier(.22, .68, 0, 1),
                 transform .6s cubic-bezier(.22, .68, 0, 1),
-                box-shadow .3s,
-                border-color .3s;
+                box-shadow .3s, border-color .3s;
         }
 
-        .card.revealed { opacity: 1; transform: translateY(0) }
-        .card:nth-child(1) { transition-delay: .05s }
-        .card:nth-child(2) { transition-delay: .15s }
-        .card:nth-child(3) { transition-delay: .25s }
+        .card.revealed {
+            opacity: 1;
+            transform: translateY(0)
+        }
+
+        .card:nth-child(1) {
+            transition-delay: .05s
+        }
+
+        .card:nth-child(2) {
+            transition-delay: .15s
+        }
+
+        .card:nth-child(3) {
+            transition-delay: .25s
+        }
 
         .card::after {
             content: '';
@@ -494,7 +656,9 @@
             transition: transform .38s cubic-bezier(.22, .68, 0, 1);
         }
 
-        .card:hover::after { transform: scaleX(1) }
+        .card:hover::after {
+            transform: scaleX(1)
+        }
 
         .card:hover {
             transform: translateY(-10px) scale(1.013) !important;
@@ -514,7 +678,9 @@
             z-index: 0;
         }
 
-        .card:hover::before { left: 150% }
+        .card:hover::before {
+            left: 150%
+        }
 
         .card-icon-wrap {
             width: 64px;
@@ -530,7 +696,9 @@
             z-index: 1;
         }
 
-        .card:hover .card-icon-wrap { background: linear-gradient(135deg, var(--navy), #1a3a5c) }
+        .card:hover .card-icon-wrap {
+            background: linear-gradient(135deg, var(--navy), #1a3a5c)
+        }
 
         .card-icon-wrap svg {
             width: 28px;
@@ -543,7 +711,9 @@
             transition: stroke-width .3s;
         }
 
-        .card:hover .card-icon-wrap svg { stroke-width: 2.2 }
+        .card:hover .card-icon-wrap svg {
+            stroke-width: 2.2
+        }
 
         .card-title-row {
             display: flex;
@@ -562,7 +732,9 @@
             transition: color .25s;
         }
 
-        .card:hover h2 { color: #1a3a5c }
+        .card:hover h2 {
+            color: #1a3a5c
+        }
 
         .card-gold-rule {
             width: 36px;
@@ -572,7 +744,9 @@
             transition: width .4s cubic-bezier(.22, .68, 0, 1);
         }
 
-        .card:hover .card-gold-rule { width: 60px }
+        .card:hover .card-gold-rule {
+            width: 60px
+        }
 
         .card ul {
             list-style: none;
@@ -594,7 +768,21 @@
             border-radius: 6px;
         }
 
-        .card ul li:last-child { border-bottom: none }
+        .card ul li.active-item {
+            color: var(--navy);
+            background: rgba(246, 148, 30, .10);
+            padding-left: 14px;
+            font-weight: 600;
+        }
+
+        .card ul li.active-item::before {
+            transform: scale(1.5);
+            box-shadow: 0 0 0 4px rgba(246, 148, 30, .22)
+        }
+
+        .card ul li:last-child {
+            border-bottom: none
+        }
 
         .card ul li::before {
             content: '';
@@ -615,7 +803,7 @@
 
         .card ul li:hover::before {
             transform: scale(1.5);
-            box-shadow: 0 0 0 4px rgba(246, 148, 30, .18);
+            box-shadow: 0 0 0 4px rgba(246, 148, 30, .18)
         }
 
         .card ul li .li-arrow {
@@ -627,7 +815,10 @@
             transform: translateX(-8px);
         }
 
-        .card ul li:hover .li-arrow { opacity: 1; transform: translateX(0) }
+        .card ul li:hover .li-arrow {
+            opacity: 1;
+            transform: translateX(0)
+        }
 
         .support-banner {
             max-width: 1579px;
@@ -638,7 +829,10 @@
             transition: opacity .7s cubic-bezier(.22, .68, 0, 1), transform .7s cubic-bezier(.22, .68, 0, 1);
         }
 
-        .support-banner.revealed { opacity: 1; transform: translateY(0) }
+        .support-banner.revealed {
+            opacity: 1;
+            transform: translateY(0)
+        }
 
         .support-inner {
             background: var(--white);
@@ -668,11 +862,13 @@
             transition: left .7s ease;
         }
 
-        .support-inner:hover::before { left: 150% }
+        .support-inner:hover::before {
+            left: 150%
+        }
 
         .support-inner:hover {
             border-color: rgba(201, 150, 42, .3);
-            box-shadow: 0 8px 40px rgba(11, 17, 32, .07);
+            box-shadow: 0 8px 40px rgba(11, 17, 32, .07)
         }
 
         .support-icon {
@@ -690,7 +886,7 @@
 
         .support-inner:hover .support-icon {
             transform: scale(1.1) rotate(-8deg);
-            box-shadow: 0 8px 24px rgba(11, 17, 32, .2);
+            box-shadow: 0 8px 24px rgba(11, 17, 32, .2)
         }
 
         .support-icon svg {
@@ -700,7 +896,7 @@
             fill: none;
             stroke-width: 1.8;
             stroke-linecap: round;
-            stroke-linejoin: round;
+            stroke-linejoin: round
         }
 
         .support-icon::after {
@@ -713,29 +909,47 @@
         }
 
         @keyframes pulseRing {
-            0% { transform: scale(1); opacity: .6 }
-            70% { transform: scale(1.25); opacity: 0 }
-            100% { transform: scale(1.25); opacity: 0 }
+            0% {
+                transform: scale(1);
+                opacity: .6
+            }
+
+            70% {
+                transform: scale(1.25);
+                opacity: 0
+            }
+
+            100% {
+                transform: scale(1.25);
+                opacity: 0
+            }
         }
 
-        .support-text { flex: 1; min-width: 180px }
+        .support-text {
+            flex: 1;
+            min-width: 180px
+        }
 
         .support-text h3 {
             font-family: 'Sora', sans-serif;
             font-size: 20px;
             font-weight: 700;
             color: var(--navy);
-            margin-bottom: 6px;
+            margin-bottom: 6px
         }
 
-        .support-text p { font-size: 16px; color: var(--muted); line-height: 1.6 }
+        .support-text p {
+            font-size: 16px;
+            color: var(--muted);
+            line-height: 1.6
+        }
 
         .support-contacts {
             display: flex;
             gap: 16px;
             flex-wrap: wrap;
             align-items: center;
-            margin-left: auto;
+            margin-left: auto
         }
 
         .support-btn {
@@ -757,26 +971,41 @@
         .support-btn-phone {
             background: var(--navy);
             color: var(--gold);
-            border: 1.5px solid var(--gold);
+            border: 1.5px solid var(--gold)
         }
 
         .support-btn-phone:hover {
             transform: translateY(-3px);
-            box-shadow: 0 10px 28px rgba(246, 148, 30, .28);
+            box-shadow: 0 10px 28px rgba(246, 148, 30, .28)
         }
 
-        .support-btn-phone:active { transform: translateY(-1px) scale(.97) }
+        .support-btn-phone:active {
+            transform: translateY(-1px) scale(.97)
+        }
 
-        .support-btn-email { background: var(--gold); color: var(--navy) }
+        .support-btn-email {
+            background: var(--gold);
+            color: var(--navy)
+        }
 
         .support-btn-email:hover {
             transform: translateY(-3px);
-            box-shadow: 0 10px 28px rgba(246, 148, 30, .4);
+            box-shadow: 0 10px 28px rgba(246, 148, 30, .4)
         }
 
-        .support-btn-email:active { transform: translateY(-1px) scale(.97) }
-        .support-btn svg { width: 18px; height: 18px; flex-shrink: 0 }
+        .support-btn-email:active {
+            transform: translateY(-1px) scale(.97)
+        }
 
+        .support-btn svg {
+            width: 18px;
+            height: 18px;
+            flex-shrink: 0
+        }
+
+        /* ══════════════════════════════════════
+           IMAGE MODAL
+        ══════════════════════════════════════ */
         .img-modal-overlay {
             position: fixed;
             inset: 0;
@@ -792,7 +1021,10 @@
             padding: 20px;
         }
 
-        .img-modal-overlay.open { opacity: 1; pointer-events: all }
+        .img-modal-overlay.open {
+            opacity: 1;
+            pointer-events: all
+        }
 
         .img-modal {
             background: var(--white);
@@ -810,7 +1042,9 @@
             box-shadow: 0 40px 100px rgba(0, 0, 0, .3);
         }
 
-        .img-modal-overlay.open .img-modal { transform: translateY(0) scale(1) }
+        .img-modal-overlay.open .img-modal {
+            transform: translateY(0) scale(1)
+        }
 
         .img-modal-header {
             display: flex;
@@ -824,10 +1058,14 @@
             font-family: 'Sora', sans-serif;
             font-size: 18px;
             font-weight: 700;
-            color: var(--navy);
+            color: var(--navy)
         }
 
-        .img-modal-header-right { display: flex; align-items: center; gap: 8px }
+        .img-modal-header-right {
+            display: flex;
+            align-items: center;
+            gap: 8px
+        }
 
         .zoom-controls {
             display: flex;
@@ -856,8 +1094,14 @@
             flex-shrink: 0;
         }
 
-        .zoom-btn:hover { background: var(--navy); color: var(--gold) }
-        .zoom-btn:active { transform: scale(.88) }
+        .zoom-btn:hover {
+            background: var(--navy);
+            color: var(--gold)
+        }
+
+        .zoom-btn:active {
+            transform: scale(.88)
+        }
 
         .zoom-level {
             font-family: 'Sora', sans-serif;
@@ -884,8 +1128,14 @@
             flex-shrink: 0;
         }
 
-        .zoom-reset-btn:hover { background: var(--navy); color: var(--gold) }
-        .zoom-reset-btn:active { transform: rotate(360deg) }
+        .zoom-reset-btn:hover {
+            background: var(--navy);
+            color: var(--gold)
+        }
+
+        .zoom-reset-btn:active {
+            transform: rotate(360deg)
+        }
 
         .img-modal-close {
             background: none;
@@ -899,8 +1149,14 @@
             line-height: 1;
         }
 
-        .img-modal-close:hover { color: var(--navy); background: rgba(0, 0, 0, .06) }
-        .img-modal-close:active { transform: scale(.88) }
+        .img-modal-close:hover {
+            color: var(--navy);
+            background: rgba(0, 0, 0, .06)
+        }
+
+        .img-modal-close:active {
+            transform: scale(.88)
+        }
 
         .img-modal-img-wrap {
             flex: 1;
@@ -911,7 +1167,9 @@
             cursor: grab;
         }
 
-        .img-modal-img-wrap.grabbing { cursor: grabbing }
+        .img-modal-img-wrap.grabbing {
+            cursor: grabbing
+        }
 
         .img-zoom-container {
             position: absolute;
@@ -933,7 +1191,6 @@
             width: auto;
             height: auto;
             image-rendering: -webkit-optimize-contrast;
-            image-rendering: crisp-edges;
             image-rendering: high-quality;
             pointer-events: none;
             user-select: none;
@@ -991,7 +1248,9 @@
             z-index: 5;
         }
 
-        .zoom-hint.hidden { opacity: 0 }
+        .zoom-hint.hidden {
+            opacity: 0
+        }
 
         .img-modal-desc {
             padding: 10px 24px 16px;
@@ -1017,6 +1276,63 @@
             margin-bottom: 10px;
         }
 
+        /* ── ITEM NAV (side arrows) ── */
+        .item-arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 10;
+            width: 52px;
+            height: 110px;
+            background: rgba(255, 255, 255, .92);
+            border: 2px solid rgba(246, 148, 30, .35);
+            display: none;
+            /* shown via JS */
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: background .2s, border-color .25s, transform .25s cubic-bezier(.22, .68, 0, 1.4), opacity .2s;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, .12);
+            color: var(--navy);
+        }
+
+        .item-arrow svg {
+            width: 24px;
+            height: 24px;
+            flex-shrink: 0
+        }
+
+        .item-arrow-prev {
+            left: 0;
+            border-left: none;
+            border-radius: 0 10px 10px 0
+        }
+
+        .item-arrow-next {
+            right: 0;
+            border-right: none;
+            border-radius: 10px 0 0 10px
+        }
+
+        .item-arrow:hover {
+            background: var(--gold);
+            border-color: var(--gold);
+            color: var(--navy);
+            transform: translateY(-50%) scale(1.06);
+            box-shadow: 0 8px 28px rgba(246, 148, 30, .35);
+        }
+
+        .item-arrow:active {
+            transform: translateY(-50%) scale(.96)
+        }
+
+        .item-arrow:disabled {
+            opacity: .25;
+            cursor: default;
+            pointer-events: none
+        }
+
+        /* LOGIN MODAL */
         .modal-overlay {
             position: fixed;
             inset: 0;
@@ -1031,7 +1347,10 @@
             transition: opacity .3s;
         }
 
-        .modal-overlay.open { opacity: 1; pointer-events: all }
+        .modal-overlay.open {
+            opacity: 1;
+            pointer-events: all
+        }
 
         .modal {
             background: var(--white);
@@ -1046,7 +1365,9 @@
             box-shadow: 0 30px 80px rgba(0, 0, 0, .2);
         }
 
-        .modal-overlay.open .modal { transform: translateY(0) scale(1) }
+        .modal-overlay.open .modal {
+            transform: translateY(0) scale(1)
+        }
 
         .modal-logo {
             width: 48px;
@@ -1060,15 +1381,22 @@
             transition: transform .4s cubic-bezier(.22, .68, 0, 1.4);
         }
 
-        .modal:hover .modal-logo { transform: rotate(-8deg) scale(1.08) }
-        .modal-logo svg { width: 26px; height: 26px; fill: var(--gold) }
+        .modal:hover .modal-logo {
+            transform: rotate(-8deg) scale(1.08)
+        }
+
+        .modal-logo svg {
+            width: 26px;
+            height: 26px;
+            fill: var(--gold)
+        }
 
         .modal h2 {
             font-family: 'Sora', sans-serif;
             font-size: 24px;
             font-weight: 800;
             color: var(--navy);
-            margin-bottom: 28px;
+            margin-bottom: 28px
         }
 
         .modal-close {
@@ -1083,9 +1411,14 @@
             transition: color .2s, transform .2s;
         }
 
-        .modal-close:hover { color: var(--navy); transform: rotate(90deg) }
+        .modal-close:hover {
+            color: var(--navy);
+            transform: rotate(90deg)
+        }
 
-        .field { margin-bottom: 18px }
+        .field {
+            margin-bottom: 18px
+        }
 
         .field label {
             display: block;
@@ -1113,7 +1446,7 @@
         .field input:focus {
             border-color: var(--gold);
             box-shadow: 0 0 0 3px rgba(201, 150, 42, .12);
-            transform: translateY(-1px);
+            transform: translateY(-1px)
         }
 
         .btn-modal-submit {
@@ -1150,8 +1483,13 @@
             box-shadow: 0 10px 28px rgba(246, 148, 30, .35)
         }
 
-        .btn-modal-submit:hover::after { transform: translateX(200%) }
-        .btn-modal-submit:active { transform: translateY(0) scale(.98) }
+        .btn-modal-submit:hover::after {
+            transform: translateX(200%)
+        }
+
+        .btn-modal-submit:active {
+            transform: translateY(0) scale(.98)
+        }
 
         .toast {
             position: fixed;
@@ -1172,7 +1510,10 @@
             box-shadow: 0 16px 40px rgba(0, 0, 0, .2);
         }
 
-        .toast.show { transform: translateY(0) scale(1); opacity: 1 }
+        .toast.show {
+            transform: translateY(0) scale(1);
+            opacity: 1
+        }
 
         .menu-backdrop {
             display: none;
@@ -1184,52 +1525,96 @@
             transition: opacity .3s;
         }
 
-        .menu-backdrop.visible { display: block }
+        .menu-backdrop.visible {
+            display: block
+        }
 
         @media(max-width:900px) {
-            nav { padding: 0 24px }
-            .nav-links, .btn-login { display: none }
-            .hamburger { display: flex }
-            .mobile-menu { display: block }
-            .hero { padding: 52px 24px 64px }
-            .cards-section { grid-template-columns: 1fr; padding: 40px 24px; margin-top: -40px }
-            .support-banner { padding: 0 24px; margin-bottom: 60px }
-            .support-inner { padding: 24px }
-            .support-contacts { width: 100%; margin-left: 0; justify-content: stretch }
-            .support-btn { flex: 1; justify-content: center }
-            .img-modal { width: 98vw; height: 90vh }
+            nav {
+                padding: 0 24px
+            }
+
+            .nav-links,
+            .btn-login {
+                display: none
+            }
+
+            .hamburger {
+                display: flex
+            }
+
+            .mobile-menu {
+                display: block
+            }
+
+            .hero {
+                padding: 52px 24px 64px
+            }
+
+            .cards-section {
+                grid-template-columns: 1fr;
+                padding: 40px 24px;
+                margin-top: -40px
+            }
+
+            .support-banner {
+                padding: 0 24px;
+                margin-bottom: 60px
+            }
+
+            .support-inner {
+                padding: 24px
+            }
+
+            .support-contacts {
+                width: 100%;
+                margin-left: 0;
+                justify-content: stretch
+            }
+
+            .support-btn {
+                flex: 1;
+                justify-content: center
+            }
+
+            .img-modal {
+                width: 98vw;
+                height: 90vh
+            }
         }
 
         @media(min-width:540px) and (max-width:900px) {
-            .cards-section { grid-template-columns: repeat(2, 1fr) }
+            .cards-section {
+                grid-template-columns: repeat(2, 1fr)
+            }
         }
     </style>
 </head>
 
 <body>
-<div id="fc-loader">
-  <div class="fc-logo-ring">
-    <svg class="fc-ring-svg" viewBox="0 0 110 110">
-      <circle class="fc-ring-track" cx="55" cy="55" r="49"/>
-      <circle class="fc-ring-progress" cx="55" cy="55" r="49"/>
-    </svg>
-    <div class="fc-icon-wrap">
-      <img src="logo.png" alt="FinancialCorp logo" class="fc-logo-img" />
+    <div id="fc-loader">
+        <div class="fc-logo-ring">
+            <svg class="fc-ring-svg" viewBox="0 0 110 110">
+                <circle class="fc-ring-track" cx="55" cy="55" r="49" />
+                <circle class="fc-ring-progress" cx="55" cy="55" r="49" />
+            </svg>
+            <div class="fc-icon-wrap">
+                <img src="logo.png" alt="FinancialCorp logo" class="fc-logo-img" />
+            </div>
+        </div>
+        <div class="fc-wordmark">Financial<span>Corp</span></div>
+        <div class="fc-tagline">Partner Portal</div>
+        <div class="fc-bar-wrap">
+            <div class="fc-bar-track">
+                <div class="fc-bar-fill"></div>
+            </div>
+            <div class="fc-bar-label" id="fcBarLabel">Loading…</div>
+        </div>
     </div>
-  </div>
-  <div class="fc-wordmark">Financial<span>Corp</span></div>
-  <div class="fc-tagline">Partner Portal</div>
-  <div class="fc-bar-wrap">
-    <div class="fc-bar-track"><div class="fc-bar-fill"></div></div>
-    <div class="fc-bar-label" id="fcBarLabel">Loading…</div>
-  </div>
-</div>
 
     <nav>
         <a class="logo" href="/">
-            <div class="logo-icon">
-                <img src="logo.png" alt="FinancialCorp logo" />
-            </div>
+            <div class="logo-icon"><img src="logo.png" alt="FinancialCorp logo" /></div>
             <div class="logo-text">FINANCIAL<span>CORP</span></div>
         </a>
         <div class="nav-right">
@@ -1296,18 +1681,24 @@
                 <div class="card-gold-rule"></div>
             </div>
             <ul>
-                <li onclick="openImgModal('Program Overview','welcome','A complete walkthrough of the FinancialCorp partner program — structure, commission tiers, and what to expect as a referral partner.')">
-                    Program Overview<span class="li-arrow">→</span></li>
-                <li onclick="openImgModal('First Steps','welcome','Your quick-start checklist for getting up and running: account setup, portal access, and submitting your first referral.')">
-                    First Steps<span class="li-arrow">→</span></li>
-                <li onclick="openImgModal('Referral Process','welcome','Step-by-step guide to submitting, tracking, and following up on referrals through the partner portal.')">
-                    Referral Process<span class="li-arrow">→</span></li>
-                <li onclick="openImgModal('How Payment Processing Works','welcome','An easy overview of how payment processing works, from merchant acceptance to settlement and partner payouts.')">
-                    How Payment Processing Works<span class="li-arrow">→</span></li>
-                <li onclick="openImgModal('Partner Agreement','welcome','Review the terms of the FinancialCorp partner agreement, including commission structure, compliance requirements, and exclusivity clauses.')">
-                    Partner Agreement<span class="li-arrow">→</span></li>
-                <li onclick="openImgModal('How Financial Corp Lowers Costs','welcome','A breakdown of FinancialCorp strategies for reducing merchant processing costs through optimization and pricing.')">
-                    How Financial Corp Lowers Costs<span class="li-arrow">→</span></li>
+                <li data-section="welcome" data-title="Program Overview"
+                    data-desc="A complete walkthrough of the FinancialCorp partner program — structure, commission tiers, and what to expect as a referral partner."
+                    onclick="openImgModal(this)">Program Overview<span class="li-arrow">→</span></li>
+                <li data-section="welcome" data-title="First Steps"
+                    data-desc="Your quick-start checklist for getting up and running: account setup, portal access, and submitting your first referral."
+                    onclick="openImgModal(this)">First Steps<span class="li-arrow">→</span></li>
+                <li data-section="welcome" data-title="Referral Process"
+                    data-desc="Step-by-step guide to submitting, tracking, and following up on referrals through the partner portal."
+                    onclick="openImgModal(this)">Referral Process<span class="li-arrow">→</span></li>
+                <li data-section="welcome" data-title="How Payment Processing Works"
+                    data-desc="An easy overview of how payment processing works, from merchant acceptance to settlement and partner payouts."
+                    onclick="openImgModal(this)">How Payment Processing Works<span class="li-arrow">→</span></li>
+                <li data-section="welcome" data-title="Partner Agreement"
+                    data-desc="Review the terms of the FinancialCorp partner agreement, including commission structure, compliance requirements, and exclusivity clauses."
+                    onclick="openImgModal(this)">Partner Agreement<span class="li-arrow">→</span></li>
+                <li data-section="welcome" data-title="How Financial Corp Lowers Costs"
+                    data-desc="A breakdown of FinancialCorp strategies for reducing merchant processing costs through optimization and pricing."
+                    onclick="openImgModal(this)">How Financial Corp Lowers Costs<span class="li-arrow">→</span></li>
             </ul>
         </div>
 
@@ -1324,20 +1715,28 @@
                 <div class="card-gold-rule"></div>
             </div>
             <ul>
-                <li onclick="openImgModal('Interchange Optimization and Cash Discount Program','education','Understanding interchange optimization strategies and cash discount pricing programs to help merchants reduce processing costs.')">
-                    Interchange Optimization and Cash Discount Program<span class="li-arrow">→</span></li>
-                <li onclick="openImgModal('Clover POS','education','Overview of the Clover point-of-sale ecosystem, hardware options, and how to recommend the right setup for different merchant types.')">
-                    Clover POS<span class="li-arrow">→</span></li>
-                <li onclick="openImgModal('Union POS','education','Overview of the Union POS platform, merchant use cases, and recommended implementation guidelines.')">
-                    Union POS<span class="li-arrow">→</span></li>
-                <li onclick="openImgModal('POS Systems','education','A comprehensive guide to POS systems covering major companies, proprietary solutions, device types, and how they compare to payment gateways and terminals.')">
-                    POS Systems<span class="li-arrow">→</span></li>
-                <li onclick="openImgModal('What is ACH?','education','Learn what ACH is, how bank-to-bank payments work, and how this method differs from credit card processing.')">
-                    What is ACH?<span class="li-arrow">→</span></li>
-                <li onclick="openImgModal('Processing Statement','education','How to read a processing statement, identify key charges, and spot savings opportunities for merchants.')">
-                    Processing Statements<span class="li-arrow">→</span></li>
-                <li onclick="openImgModal('E-Commerce Payment Processing','education','The fundamentals of e-commerce payments, gateway integration, and selling online payment solutions.')">
-                    E-Commerce Payment Processing<span class="li-arrow">→</span></li>
+                <li data-section="education" data-title="Interchange Optimization and Cash Discount Program"
+                    data-desc="Understanding interchange optimization strategies and cash discount pricing programs to help merchants reduce processing costs."
+                    onclick="openImgModal(this)">Interchange Optimization and Cash Discount Program<span
+                        class="li-arrow">→</span></li>
+                <li data-section="education" data-title="Clover POS"
+                    data-desc="Overview of the Clover point-of-sale ecosystem, hardware options, and how to recommend the right setup for different merchant types."
+                    onclick="openImgModal(this)">Clover POS<span class="li-arrow">→</span></li>
+                <li data-section="education" data-title="Union POS"
+                    data-desc="Overview of the Union POS platform, merchant use cases, and recommended implementation guidelines."
+                    onclick="openImgModal(this)">Union POS<span class="li-arrow">→</span></li>
+                <li data-section="education" data-title="POS Systems"
+                    data-desc="A comprehensive guide to POS systems covering major companies, proprietary solutions, device types, and how they compare to payment gateways and terminals."
+                    onclick="openImgModal(this)">POS Systems<span class="li-arrow">→</span></li>
+                <li data-section="education" data-title="What is ACH?"
+                    data-desc="Learn what ACH is, how bank-to-bank payments work, and how this method differs from credit card processing."
+                    onclick="openImgModal(this)">What is ACH?<span class="li-arrow">→</span></li>
+                <li data-section="education" data-title="Processing Statement"
+                    data-desc="How to read a processing statement, identify key charges, and spot savings opportunities for merchants."
+                    onclick="openImgModal(this)">Processing Statements<span class="li-arrow">→</span></li>
+                <li data-section="education" data-title="E-Commerce Payment Processing"
+                    data-desc="The fundamentals of e-commerce payments, gateway integration, and selling online payment solutions."
+                    onclick="openImgModal(this)">E-Commerce Payment Processing<span class="li-arrow">→</span></li>
             </ul>
         </div>
 
@@ -1357,16 +1756,21 @@
                 <div class="card-gold-rule"></div>
             </div>
             <ul>
-                <li onclick="openImgModal('Partner Guide','sales','The comprehensive partner sales guide — product positioning, objection handling, competitor comparisons, and closing strategies.')">
-                    Partner Guide<span class="li-arrow">→</span></li>
-                <li onclick="openImgModal('Email Templates','sales','Ready-to-send email templates for cold outreach, follow-ups, proposal delivery, and post-close onboarding communication.')">
-                    Email Templates<span class="li-arrow">→</span></li>
-                <li onclick="openImgModal('One-Page Flyers','sales','Professionally designed one-page flyers for each product line — downloadable and print-ready for in-person meetings.')">
-                    One-Page Flyers<span class="li-arrow">→</span></li>
-                <li onclick="openImgModal('Scripts &amp; Talking Points','sales','Proven call scripts and conversation frameworks to help you pitch confidently and handle common merchant objections.')">
-                    Scripts &amp; Talking Points<span class="li-arrow">→</span></li>
-                <li onclick="openImgModal('Industry Training','sales','Access role-specific training modules covering payments industry fundamentals, compliance, and advanced sales techniques.')">
-                     Industry Training<span class="li-arrow">→</span></li>
+                <li data-section="sales" data-title="Partner Guide"
+                    data-desc="The comprehensive partner sales guide — product positioning, objection handling, competitor comparisons, and closing strategies."
+                    onclick="openImgModal(this)">Partner Guide<span class="li-arrow">→</span></li>
+                <li data-section="sales" data-title="Email Templates"
+                    data-desc="Ready-to-send email templates for cold outreach, follow-ups, proposal delivery, and post-close onboarding communication."
+                    onclick="openImgModal(this)">Email Templates<span class="li-arrow">→</span></li>
+                <li data-section="sales" data-title="One-Page Flyers"
+                    data-desc="Professionally designed one-page flyers for each product line — downloadable and print-ready for in-person meetings."
+                    onclick="openImgModal(this)">One-Page Flyers<span class="li-arrow">→</span></li>
+                <li data-section="sales" data-title="Scripts &amp; Talking Points"
+                    data-desc="Proven call scripts and conversation frameworks to help you pitch confidently and handle common merchant objections."
+                    onclick="openImgModal(this)">Scripts &amp; Talking Points<span class="li-arrow">→</span></li>
+                <li data-section="sales" data-title="Industry Training"
+                    data-desc="Access role-specific training modules covering payments industry fundamentals, compliance, and advanced sales techniques."
+                    onclick="openImgModal(this)">Industry Training<span class="li-arrow">→</span></li>
             </ul>
         </div>
 
@@ -1387,78 +1791,102 @@
                 <p>Contact the FinancialCorp team for partner support, training questions, or referral help.</p>
             </div>
             <div class="support-contacts">
-    <a href="tel:+(313) 387-9300" class="support-btn support-btn-phone">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-            stroke-linejoin="round">
-            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.62 1.27h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.91a16 16 0 0 0 6 6l.91-.91a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21.73 16z" />
-        </svg>
-        +(313) 387-9300
-    </a>
-    <a href="mailto:support@financialcorp.com" class="support-btn support-btn-email">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-            stroke-linejoin="round">
-            <rect x="2" y="4" width="20" height="16" rx="2"/>
-            <path d="M2 7l10 7 10-7"/>
-        </svg>
-        support@financialcorp.com
-    </a>
-</div>
+                <a href="tel:+(313) 387-9300" class="support-btn support-btn-phone">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path
+                            d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.62 1.27h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.91a16 16 0 0 0 6 6l.91-.91a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21.73 16z" />
+                    </svg>
+                    +(313) 387-9300
+                </a>
+                <a href="mailto:support@financialcorp.com" class="support-btn support-btn-email">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <rect x="2" y="4" width="20" height="16" rx="2" />
+                        <path d="M2 7l10 7 10-7" />
+                    </svg>
+                    support@financialcorp.com
+                </a>
+            </div>
         </div>
     </section>
 
-   <!-- IMAGE MODAL -->
-<div class="img-modal-overlay" id="imgModalOverlay" onclick="handleImgOverlayClick(event)">
-    <div class="img-modal">
-        <div class="img-modal-header">
-            <div>
-                <div class="img-modal-tag" id="imgModalTag">Welcome Aboard</div>
-                <div class="img-modal-title" id="imgModalTitle">Program Overview</div>
-            </div>
-            <div class="img-modal-header-right">
-                <div class="zoom-controls" id="zoomControls" style="display:none">
-                    <button class="zoom-btn" onclick="zoomOut()" title="Zoom out" aria-label="Zoom out">−</button>
-                    <span class="zoom-level" id="zoomLevel">100%</span>
-                    <button class="zoom-btn" onclick="zoomIn()" title="Zoom in" aria-label="Zoom in">+</button>
-                    <button class="zoom-reset-btn" onclick="zoomReset()" title="Reset zoom" aria-label="Reset zoom">
-                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                            stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8" />
-                            <path d="M3 3v5h5" />
-                        </svg>
-                    </button>
-                </div>
-                <!-- slide counter in header (no nav buttons here anymore) -->
-                <div class="zoom-controls" id="slideControls" style="display:none;gap:4px;">
-                    <span class="zoom-level" id="slideLabel">1 / 1</span>
-                </div>
-                <button class="img-modal-close" onclick="closeImgModal()">✕</button>
-            </div>
-        </div>
+    <!-- IMAGE MODAL -->
+    <div class="img-modal-overlay" id="imgModalOverlay" onclick="handleImgOverlayClick(event)">
+        <div class="img-modal">
 
-        <!-- BIG SIDE ARROWS -->
-        <button class="slide-arrow slide-arrow-prev" id="slidePrevBtn" onclick="slideNav(-1)" aria-label="Previous image">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                <polyline points="15 18 9 12 15 6"/>
-            </svg>
-        </button>
-        <button class="slide-arrow slide-arrow-next" id="slideNextBtn" onclick="slideNav(1)" aria-label="Next image">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                <polyline points="9 18 15 12 9 6"/>
-            </svg>
-        </button>
+            <div class="img-modal-header">
+                <div>
+                    <div class="img-modal-tag" id="imgModalTag">Welcome Aboard</div>
+                    <div class="img-modal-title" id="imgModalTitle">Program Overview</div>
+                </div>
+                <div class="img-modal-header-right">
 
-        <div class="img-modal-img-wrap" id="imgWrap">
-            <div class="img-zoom-container" id="zoomContainer">
-                <img id="imgModalImage" src="" alt="" />
+                    <!-- ZOOM CONTROLS -->
+                    <div class="zoom-controls" id="zoomControls" style="display:none">
+                        <button class="zoom-btn" onclick="zoomOut()" title="Zoom out">−</button>
+                        <span class="zoom-level" id="zoomLevel">100%</span>
+                        <button class="zoom-btn" onclick="zoomIn()" title="Zoom in">+</button>
+                        <button class="zoom-reset-btn" onclick="zoomReset()" title="Reset zoom">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8" />
+                                <path d="M3 3v5h5" />
+                            </svg>
+                        </button>
+                    </div>
+
+                    <!-- HEADER IMAGE COUNTER + ARROWS (multi-image modals) -->
+                    <div class="zoom-controls" id="imgNavControls" style="display:none; gap:4px;">
+                        <button class="img-nav-btn" id="imgNavPrev" onclick="imgNav(-1)" title="Previous image"
+                            aria-label="Previous image">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                                stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="15 18 9 12 15 6" />
+                            </svg>
+                        </button>
+                        <span class="zoom-level" id="imgNavLabel">1 / 1</span>
+                        <button class="img-nav-btn" id="imgNavNext" onclick="imgNav(1)" title="Next image"
+                            aria-label="Next image">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                                stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="9 18 15 12 9 6" />
+                            </svg>
+                        </button>
+                    </div>
+
+                    <button class="img-modal-close" onclick="closeImgModal()">✕</button>
+                </div>
             </div>
-            <div id="imgModalPlaceholder"
-                style="position:absolute;inset:0;z-index:2;display:flex;align-items:center;justify-content:center">
+
+            <!-- SIDE ARROWS — item navigation (single-image modals only) -->
+            <button class="item-arrow item-arrow-prev" id="itemPrevBtn" onclick="itemNav(-1)"
+                aria-label="Previous item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
+                    stroke-linejoin="round">
+                    <polyline points="15 18 9 12 15 6" />
+                </svg>
+            </button>
+            <button class="item-arrow item-arrow-next" id="itemNextBtn" onclick="itemNav(1)" aria-label="Next item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
+                    stroke-linejoin="round">
+                    <polyline points="9 18 15 12 9 6" />
+                </svg>
+            </button>
+
+            <div class="img-modal-img-wrap" id="imgWrap">
+                <div class="img-zoom-container" id="zoomContainer">
+                    <img id="imgModalImage" src="" alt="" />
+                </div>
+                <div id="imgModalPlaceholder"
+                    style="position:absolute;inset:0;z-index:2;display:flex;align-items:center;justify-content:center">
+                </div>
+                <div class="zoom-hint" id="zoomHint">Scroll to zoom · Drag to pan</div>
             </div>
-            <div class="zoom-hint" id="zoomHint">Scroll to zoom · Drag to pan</div>
+
+            <div class="img-modal-desc" id="imgModalDesc"></div>
         </div>
-        <div class="img-modal-desc" id="imgModalDesc"></div>
     </div>
-</div>
 
     <!-- LOGIN MODAL -->
     <div class="modal-overlay" id="modalOverlay" onclick="handleOverlayClick(event)">
@@ -1476,68 +1904,90 @@
             <button class="btn-modal-submit" onclick="handleLogin()">Sign In →</button>
         </div>
     </div>
-<!-- FOOTER -->
-<footer style="background:var(--navy);border-top:1px solid rgba(246,148,30,.15);padding:48px 52px 32px;margin-top:0;">
-    <div style="max-width:1500px;margin:0 auto;">
-        <div style="display:flex;flex-wrap:wrap;gap:40px;justify-content:space-between;align-items:flex-start;margin-bottom:40px;">
 
-            <!-- Brand -->
-            <div style="max-width:280px;">
-                <a href="/" style="display:flex;align-items:center;gap:10px;text-decoration:none;margin-bottom:14px;">
-                    <div style="width:38px;height:38px;border-radius:7px;overflow:hidden;display:flex;align-items:center;justify-content:center;background:transparent;">
-                        <img src="logo.png" alt="FinancialCorp logo" style="width:100%;height:100%;object-fit:contain;" />
-                    </div>
-                    <span style="font-family:'Sora',sans-serif;font-size:18px;font-weight:800;color:#fff;letter-spacing:.04em;">FINANCIAL<span style="color:var(--gold)">CORP</span></span>
-                </a>
-                <p style="font-size:14px;color:rgba(255,255,255,.45);line-height:1.7;">Empowering referral partners with the tools, training, and support to grow confidently.</p>
+    <!-- FOOTER -->
+    <footer
+        style="background:var(--navy);border-top:1px solid rgba(246,148,30,.15);padding:48px 52px 32px;margin-top:0;">
+        <div style="max-width:1500px;margin:0 auto;">
+            <div
+                style="display:flex;flex-wrap:wrap;gap:40px;justify-content:space-between;align-items:flex-start;margin-bottom:40px;">
+                <div style="max-width:280px;">
+                    <a href="/"
+                        style="display:flex;align-items:center;gap:10px;text-decoration:none;margin-bottom:14px;">
+                        <div
+                            style="width:38px;height:38px;border-radius:7px;overflow:hidden;display:flex;align-items:center;justify-content:center;background:transparent;">
+                            <img src="logo.png" alt="FinancialCorp logo"
+                                style="width:100%;height:100%;object-fit:contain;" />
+                        </div>
+                        <span
+                            style="font-family:'Sora',sans-serif;font-size:18px;font-weight:800;color:#fff;letter-spacing:.04em;">FINANCIAL<span
+                                style="color:var(--gold)">CORP</span></span>
+                    </a>
+                    <p style="font-size:14px;color:rgba(255,255,255,.45);line-height:1.7;">Empowering referral partners
+                        with the tools, training, and support to grow confidently.</p>
+                </div>
+                <div>
+                    <div
+                        style="font-family:'Sora',sans-serif;font-size:11px;font-weight:700;color:var(--gold);letter-spacing:.1em;text-transform:uppercase;margin-bottom:16px;">
+                        Quick Links</div>
+                    <ul style="list-style:none;display:flex;flex-direction:column;gap:10px;">
+                        <li><a href="#" style="font-size:14px;color:rgba(255,255,255,.55);text-decoration:none;"
+                                onmouseover="this.style.color='#fff'"
+                                onmouseout="this.style.color='rgba(255,255,255,.55)'">Home</a></li>
+                        <li><a href="#education"
+                                style="font-size:14px;color:rgba(255,255,255,.55);text-decoration:none;"
+                                onmouseover="this.style.color='#fff'"
+                                onmouseout="this.style.color='rgba(255,255,255,.55)'">Education Center</a></li>
+                        <li><a href="#sales" style="font-size:14px;color:rgba(255,255,255,.55);text-decoration:none;"
+                                onmouseover="this.style.color='#fff'"
+                                onmouseout="this.style.color='rgba(255,255,255,.55)'">Sales Materials</a></li>
+                        <li><a href="#support" style="font-size:14px;color:rgba(255,255,255,.55);text-decoration:none;"
+                                onmouseover="this.style.color='#fff'"
+                                onmouseout="this.style.color='rgba(255,255,255,.55)'">Support</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <div
+                        style="font-family:'Sora',sans-serif;font-size:11px;font-weight:700;color:var(--gold);letter-spacing:.1em;text-transform:uppercase;margin-bottom:16px;">
+                        Partner Resources</div>
+                    <ul style="list-style:none;display:flex;flex-direction:column;gap:10px;">
+                        <li><a href="#" onclick="openModal();return false;"
+                                style="font-size:14px;color:rgba(255,255,255,.55);text-decoration:none;"
+                                onmouseover="this.style.color='#fff'"
+                                onmouseout="this.style.color='rgba(255,255,255,.55)'">Partner Login</a></li>
+                        <li><a href="#"
+                                onclick="openImgModalDirect('Program Overview','welcome','A complete walkthrough of the FinancialCorp partner program.');return false;"
+                                style="font-size:14px;color:rgba(255,255,255,.55);text-decoration:none;"
+                                onmouseover="this.style.color='#fff'"
+                                onmouseout="this.style.color='rgba(255,255,255,.55)'">Program Overview</a></li>
+                        <li><a href="#"
+                                onclick="openImgModalDirect('Partner Agreement','welcome','Review the terms of the FinancialCorp partner agreement.');return false;"
+                                style="font-size:14px;color:rgba(255,255,255,.55);text-decoration:none;"
+                                onmouseover="this.style.color='#fff'"
+                                onmouseout="this.style.color='rgba(255,255,255,.55)'">Partner Agreement</a></li>
+                        <li><a href="#"
+                                onclick="openImgModalDirect('Partner Guide','sales','The comprehensive partner sales guide.');return false;"
+                                style="font-size:14px;color:rgba(255,255,255,.55);text-decoration:none;"
+                                onmouseover="this.style.color='#fff'"
+                                onmouseout="this.style.color='rgba(255,255,255,.55)'">Partner Guide</a></li>
+                    </ul>
+                </div>
             </div>
-
-            <!-- Quick Links -->
-            <div>
-                <div style="font-family:'Sora',sans-serif;font-size:11px;font-weight:700;color:var(--gold);letter-spacing:.1em;text-transform:uppercase;margin-bottom:16px;">Quick Links</div>
-                <ul style="list-style:none;display:flex;flex-direction:column;gap:10px;">
-                    <li><a href="#" style="font-size:14px;color:rgba(255,255,255,.55);text-decoration:none;transition:color .2s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,.55)'">Home</a></li>
-                    <li><a href="#education" style="font-size:14px;color:rgba(255,255,255,.55);text-decoration:none;transition:color .2s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,.55)'">Education Center</a></li>
-                    <li><a href="#sales" style="font-size:14px;color:rgba(255,255,255,.55);text-decoration:none;transition:color .2s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,.55)'">Sales Materials</a></li>
-                    <li><a href="#support" style="font-size:14px;color:rgba(255,255,255,.55);text-decoration:none;transition:color .2s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,.55)'">Support</a></li>
-                </ul>
+            <div
+                style="border-top:1px solid rgba(255,255,255,.08);padding-top:24px;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px;">
+                <p style="font-size:13px;color:rgba(255,255,255,.3);">© 2025 FinancialCorp. All rights reserved.</p>
+                <p style="font-size:13px;color:rgba(255,255,255,.25);">Partner Portal · Confidential</p>
             </div>
-
-            <!-- Partner Resources -->
-            <div>
-                <div style="font-family:'Sora',sans-serif;font-size:11px;font-weight:700;color:var(--gold);letter-spacing:.1em;text-transform:uppercase;margin-bottom:16px;">Partner Resources</div>
-                <ul style="list-style:none;display:flex;flex-direction:column;gap:10px;">
-                    <li><a href="#" onclick="openModal();return false;" style="font-size:14px;color:rgba(255,255,255,.55);text-decoration:none;transition:color .2s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,.55)'">Partner Login</a></li>
-                    <li><a href="#" onclick="openImgModal('Program Overview','welcome','A complete walkthrough of the FinancialCorp partner program.');return false;" style="font-size:14px;color:rgba(255,255,255,.55);text-decoration:none;transition:color .2s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,.55)'">Program Overview</a></li>
-                    <li><a href="#" onclick="openImgModal('Partner Agreement','welcome','Review the terms of the FinancialCorp partner agreement.');return false;" style="font-size:14px;color:rgba(255,255,255,.55);text-decoration:none;transition:color .2s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,.55)'">Partner Agreement</a></li>
-                    <li><a href="#" onclick="openImgModal('Partner Guide','sales','The comprehensive partner sales guide.');return false;" style="font-size:14px;color:rgba(255,255,255,.55);text-decoration:none;transition:color .2s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,.55)'">Partner Guide</a></li>
-                </ul>
-            </div>
-
         </div>
+    </footer>
 
-        <!-- Divider + Copyright -->
-        <div style="border-top:1px solid rgba(255,255,255,.08);padding-top:24px;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px;">
-            <p style="font-size:13px;color:rgba(255,255,255,.3);">© 2025 FinancialCorp. All rights reserved.</p>
-            <p style="font-size:13px;color:rgba(255,255,255,.25);">Partner Portal · Confidential</p>
-        </div>
-    </div>
-</footer>
     <div class="toast" id="toast"></div>
-    
     <script src="script.js"></script>
+
     <script>
-        const revealObserver = new IntersectionObserver((entries) => {
-            entries.forEach(e => {
-                if (e.isIntersecting) {
-                    e.target.classList.add('revealed');
-                    revealObserver.unobserve(e.target);
-                }
-            });
-        }, { threshold: 0.12 });
-
-        document.querySelectorAll('.card, .support-banner').forEach(el => revealObserver.observe(el));
-
+        /* ═══════════════════════════════════════════════
+           DATA
+        ═══════════════════════════════════════════════ */
         const sectionLabels = {
             welcome: 'Welcome Aboard',
             education: 'Education Center',
@@ -1550,25 +2000,18 @@
             'Referral Process': 'FinancialCorp_03_Referral_Process.png',
             'Partner Agreement': 'FinancialCorp_04_Partner_Agreement.png',
             'How Payment Processing Works': 'Payment_Processing_Infographic.png',
-            'Interchange Optimization and Cash Discount Program': 'Interchange%20Optimization%20and%20Cash%20Discount%20Pricing.png',
-            'Cash Discount Pricing': 'Interchange%20Optimization%20and%20Cash%20Discount%20Pricing.png',
-            'Clover POS': 'CLOVER%20POS.png',
-            'Union POS': 'FinancialCorp_Foundation_01_Processor_vs_Gateway_vs_POS_vs_Terminal.png',
             'Industry Training': 'Image20260530011507.png',
             'How Financial Corp Lowers Costs': 'FinancialCorp_Foundation_03_How_FinancialCorp_Lowers_Costs.png',
             'What is ACH?': 'What is Arch.png',
             'Processing Statement': 'FinancialCorp_Foundation_05_How_To_Ask_For_Statement.png',
-            'Types of POS Devices': 'FinancialCorp_Foundation_06_Types_Of_POS_Devices.png',
-            'Major POS Companies': 'FinancialCorp_Foundation_07_Major_POS_Companies.png',
-            'Proprietary POS Companies': 'FinancialCorp_Foundation_08_Proprietary_POS_Companies.png',
             'E-Commerce Payment Processing': 'FinancialCorp_Foundation_09_Ecommerce_Payment_Processing.png',
             'Partner Guide': 'FinancialCorp_Sales_01_Partner_Guide.png.png',
             'Email Templates': 'FinancialCorp_Sales_02_Email_Templates.png',
             'One-Page Flyers': 'FinancialCorp_Sales_03_One_Page_Flyers.png',
             'Scripts & Talking Points': 'FinancialCorp_Sales_04_Scripts_Talking_Points.png'
-            
         };
 
+        // Multi-image items: arrows appear in HEADER, NOT on the sides
         const multiImages = {
             'POS Systems': [
                 { src: 'FinancialCorp_Foundation_07_Major_POS_Companies.png', label: 'Major POS Companies' },
@@ -1577,9 +2020,9 @@
                 { src: 'FinancialCorp_Foundation_01_Processor_vs_Gateway_vs_POS_vs_Terminal.png', label: 'Payment vs Gateway vs POS vs Terminals' }
             ],
             'Interchange Optimization and Cash Discount Program': [
-                { src: 'Interchange%20Optimization%20and%20Cash%20Discount%20Pricing.png', label: 'Interchange Optimization' },
+                { src: 'Interchange Optimization and Cash Discount Pricing.jpg', label: 'Interchange Optimization' },
                 { src: 'FinancialCorp_Foundation_04_What_Is_Cash_Discount.png', label: 'What is Cash Discount?' },
-                { src: 'FinancialCorp_Foundation_04_What_Is_Cash_Discount.png', label: 'CASH DISCOUNT PRICING' }
+                { src: 'Cash Discount.jpg', label: 'Cash Discount Pricing' }
             ],
             'Union POS': [
                 { src: 'union4.jpg', label: 'Union Overview' },
@@ -1588,68 +2031,74 @@
                 { src: 'union 3.jpg', label: 'Union Benefits' }
             ],
             'Clover POS': [
-                { src: 'clover 1.jpg', label: 'Clover Overview' },
+                { src: 'clover 1.jpg', label: 'Clover Overview' }
             ]
         };
 
-        let slideList = [], slideIndex = 0;
+        /* ═══════════════════════════════════════════════
+           STATE
+        ═══════════════════════════════════════════════ */
+        // Multi-image (header nav) state
+        let imgSlides = [], imgSlideIndex = 0;
+
+        // Item (side-arrow) nav state
+        let itemNavList = [];   // all <li> elements in the current section
+        let itemNavIndex = -1;   // which one is active
+
+        // Zoom state
         let zoomScale = 1, fitScale = 1, zoomMin = .5, zoomMax = 5, zoomStep = .25;
         let panX = 0, panY = 0, isPanning = false;
         let panStartX = 0, panStartY = 0, panOriginX = 0, panOriginY = 0;
         let hintTimer = null, hasImage = false;
 
-        const getZoomContainer = () => document.getElementById('zoomContainer');
-        const getImgWrap = () => document.getElementById('imgWrap');
+        const gZC = () => document.getElementById('zoomContainer');
+        const gIW = () => document.getElementById('imgWrap');
 
+        /* ─── zoom helpers ─── */
         function computeFitScale() {
             const img = document.getElementById('imgModalImage');
-            const wrap = getImgWrap();
+            const wrap = gIW();
             if (!img || !img.naturalWidth || !img.naturalHeight) return 1;
             return Math.min(wrap.clientWidth / img.naturalWidth, wrap.clientHeight / img.naturalHeight, 1);
         }
-
         function applyTransform() {
-            const c = getZoomContainer();
+            const c = gZC();
             c.style.transform = `translate(${panX}px,${panY}px) scale(${zoomScale})`;
             c.style.transformOrigin = '50% 50%';
             const pct = fitScale > 0 ? Math.round((zoomScale / fitScale) * 100) : Math.round(zoomScale * 100);
             document.getElementById('zoomLevel').textContent = pct + '%';
         }
-
         function clampPan() {
-            const wrap = getImgWrap();
-            const img = document.getElementById('imgModalImage');
+            const wrap = gIW(), img = document.getElementById('imgModalImage');
             if (!img || !img.naturalWidth) return;
-            const maxPanX = Math.max(0, (img.naturalWidth * zoomScale - wrap.clientWidth) / 2);
-            const maxPanY = Math.max(0, (img.naturalHeight * zoomScale - wrap.clientHeight) / 2);
-            panX = Math.max(-maxPanX, Math.min(maxPanX, panX));
-            panY = Math.max(-maxPanY, Math.min(maxPanY, panY));
+            const maxX = Math.max(0, (img.naturalWidth * zoomScale - wrap.clientWidth) / 2);
+            const maxY = Math.max(0, (img.naturalHeight * zoomScale - wrap.clientHeight) / 2);
+            panX = Math.max(-maxX, Math.min(maxX, panX));
+            panY = Math.max(-maxY, Math.min(maxY, panY));
         }
-
         function zoomTo(newScale, pvtX, pvtY) {
-            const wrap = getImgWrap(), prev = zoomScale;
-            const actualZoomMin = Math.min(fitScale, zoomMin);
-            zoomScale = Math.min(zoomMax, Math.max(actualZoomMin, newScale));
+            const wrap = gIW(), prev = zoomScale;
+            const actualMin = Math.min(fitScale, zoomMin);
+            zoomScale = Math.min(zoomMax, Math.max(actualMin, newScale));
             if (pvtX !== undefined) {
                 const r = wrap.getBoundingClientRect();
-                const cx = r.width / 2, cy = r.height / 2;
-                panX -= (pvtX - r.left - cx) * (zoomScale / prev - 1);
-                panY -= (pvtY - r.top - cy) * (zoomScale / prev - 1);
+                panX -= (pvtX - r.left - r.width / 2) * (zoomScale / prev - 1);
+                panY -= (pvtY - r.top - r.height / 2) * (zoomScale / prev - 1);
             }
             if (Math.abs(zoomScale - fitScale) < .01) { panX = 0; panY = 0; }
             clampPan(); applyTransform();
         }
-
         function zoomIn() { zoomTo(zoomScale + zoomStep * fitScale) }
         function zoomOut() { zoomTo(zoomScale - zoomStep * fitScale) }
         function zoomReset() { zoomScale = fitScale; panX = 0; panY = 0; applyTransform() }
 
+        /* ─── zoom events ─── */
         function onWheel(e) { if (!hasImage) return; e.preventDefault(); zoomTo(zoomScale + (e.deltaY > 0 ? -1 : 1) * zoomStep * fitScale, e.clientX, e.clientY) }
         function onMouseDown(e) {
             if (!hasImage || e.button !== 0) return;
             isPanning = true; panStartX = e.clientX; panStartY = e.clientY;
             panOriginX = panX; panOriginY = panY;
-            getImgWrap().classList.add('grabbing'); e.preventDefault();
+            gIW().classList.add('grabbing'); e.preventDefault();
         }
         function onMouseMove(e) {
             if (!isPanning) return;
@@ -1657,13 +2106,10 @@
             panY = panOriginY + (e.clientY - panStartY);
             clampPan(); applyTransform();
         }
-        function onMouseUp() { if (!isPanning) return; isPanning = false; getImgWrap().classList.remove('grabbing') }
+        function onMouseUp() { if (!isPanning) return; isPanning = false; gIW().classList.remove('grabbing') }
 
-        let lastTouchDist = null;
-        let touchPanStartX = 0, touchPanStartY = 0, touchPanOriginX = 0, touchPanOriginY = 0;
-
+        let lastTouchDist = null, touchPanStartX = 0, touchPanStartY = 0, touchPanOriginX = 0, touchPanOriginY = 0;
         function getTouchDist(t) { const dx = t[0].clientX - t[1].clientX, dy = t[0].clientY - t[1].clientY; return Math.sqrt(dx * dx + dy * dy) }
-
         function onTouchStart(e) {
             if (!hasImage) return;
             if (e.touches.length === 2) { lastTouchDist = getTouchDist(e.touches); e.preventDefault(); }
@@ -1676,8 +2122,7 @@
                 const d = getTouchDist(e.touches);
                 const mx = (e.touches[0].clientX + e.touches[1].clientX) / 2;
                 const my = (e.touches[0].clientY + e.touches[1].clientY) / 2;
-                zoomTo(zoomScale * (d / lastTouchDist), mx, my);
-                lastTouchDist = d;
+                zoomTo(zoomScale * (d / lastTouchDist), mx, my); lastTouchDist = d;
             } else if (e.touches.length === 1) {
                 panX = touchPanOriginX + (e.touches[0].clientX - touchPanStartX);
                 panY = touchPanOriginY + (e.touches[0].clientY - touchPanStartY);
@@ -1685,14 +2130,12 @@
             }
         }
         function onTouchEnd(e) { if (e.touches.length < 2) lastTouchDist = null }
-
         function onDblClick(e) {
             if (!hasImage) return;
             zoomScale > fitScale * 1.05 ? zoomReset() : zoomTo(fitScale * 2.5, e.clientX, e.clientY);
         }
-
         function attachZoomEvents() {
-            const w = getImgWrap();
+            const w = gIW();
             w.addEventListener('wheel', onWheel, { passive: false });
             w.addEventListener('mousedown', onMouseDown);
             document.addEventListener('mousemove', onMouseMove);
@@ -1703,7 +2146,7 @@
             w.addEventListener('dblclick', onDblClick);
         }
         function detachZoomEvents() {
-            const w = getImgWrap();
+            const w = gIW();
             w.removeEventListener('wheel', onWheel);
             w.removeEventListener('mousedown', onMouseDown);
             document.removeEventListener('mousemove', onMouseMove);
@@ -1713,45 +2156,21 @@
             w.removeEventListener('touchend', onTouchEnd);
             w.removeEventListener('dblclick', onDblClick);
         }
-
         function showHintThenHide() {
             const h = document.getElementById('zoomHint');
             h.classList.remove('hidden'); clearTimeout(hintTimer);
             hintTimer = setTimeout(() => h.classList.add('hidden'), 2800);
         }
 
-        // ─── FIXED: hide arrows AND slide counter when only 1 slide ───
-        function updateSlideUI() {
-            document.getElementById('slideLabel').textContent = `${slideIndex + 1} / ${slideList.length}`;
-            const prev = document.getElementById('slidePrevBtn');
-            const next = document.getElementById('slideNextBtn');
-            const sc   = document.getElementById('slideControls');
-
-            const hasMultiple = slideList.length > 1;
-
-            // Show/hide side arrows
-            prev.style.display = hasMultiple ? 'flex' : 'none';
-            next.style.display = hasMultiple ? 'flex' : 'none';
-
-            // Show/hide the "X / Y" counter in the header
-            sc.style.display = hasMultiple ? 'flex' : 'none';
-
-            // Disable arrows at the boundaries
-            prev.disabled = slideIndex === 0;
-            next.disabled = slideIndex === slideList.length - 1;
-            prev.style.opacity = slideIndex === 0 ? '0.25' : '1';
-            next.style.opacity = slideIndex === slideList.length - 1 ? '0.25' : '1';
-
-            document.getElementById('imgModalTitle').textContent = slideList[slideIndex].label;
-        }
-        // ─────────────────────────────────────────────────────────────
-
-        function loadSlideImage(src) {
+        /* ═══════════════════════════════════════════════
+           IMAGE LOADING
+        ═══════════════════════════════════════════════ */
+        function loadImage(src, titleForPlaceholder) {
             const img = document.getElementById('imgModalImage');
             const ph = document.getElementById('imgModalPlaceholder');
             hasImage = false; img.src = ''; ph.innerHTML = ''; ph.style.display = 'none';
             zoomScale = 1; fitScale = 1; panX = 0; panY = 0;
-            getZoomContainer().style.transform = '';
+            gZC().style.transform = '';
             document.getElementById('zoomControls').style.display = 'none';
             document.getElementById('zoomHint').classList.add('hidden');
 
@@ -1768,69 +2187,177 @@
                     img.style.display = 'none'; hasImage = false;
                     document.getElementById('zoomControls').style.display = 'none';
                     ph.style.display = 'flex';
-                    ph.innerHTML = buildPlaceholder(document.getElementById('imgModalTitle').textContent, 'Image could not be loaded.');
+                    ph.innerHTML = buildPlaceholder(titleForPlaceholder, 'Image could not be loaded.');
                 };
                 img.src = src;
             } else {
                 img.style.display = 'none'; ph.style.display = 'flex';
-                ph.innerHTML = buildPlaceholder(document.getElementById('imgModalTitle').textContent, null);
+                ph.innerHTML = buildPlaceholder(titleForPlaceholder, null);
             }
         }
 
-        function slideNav(dir) {
-            const n = slideIndex + dir;
-            if (n < 0 || n >= slideList.length) return;
-            slideIndex = n; updateSlideUI(); loadSlideImage(slideList[slideIndex].src);
+        function buildPlaceholder(title, customMsg) {
+            const msg = customMsg ||
+                'Add an image URL to the <code style="background:#f0f0f0;padding:2px 5px;border-radius:4px;font-size:12px">itemImages</code> map in the script';
+            return `<div class="img-placeholder">
+        <div class="img-placeholder-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#f6941e" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" width="36" height="36">
+                <rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/>
+            </svg>
+        </div>
+        <p style="font-size:14px;text-align:center;max-width:280px;line-height:1.6;color:#8a94aa">
+            Image for <strong style="color:#0c1a2d">${title}</strong><br>${msg}
+        </p>
+    </div>`;
         }
 
-        function openImgModal(title, section, desc) {
+        /* ═══════════════════════════════════════════════
+           HEADER IMAGE NAV  (multi-image modals)
+        ═══════════════════════════════════════════════ */
+        function updateImgNavUI() {
+            const label = document.getElementById('imgNavLabel');
+            const prevBtn = document.getElementById('imgNavPrev');
+            const nextBtn = document.getElementById('imgNavNext');
+            label.textContent = `${imgSlideIndex + 1} / ${imgSlides.length}`;
+            prevBtn.disabled = imgSlideIndex === 0;
+            nextBtn.disabled = imgSlideIndex === imgSlides.length - 1;
+            // Update title to current slide label
+            document.getElementById('imgModalTitle').textContent = imgSlides[imgSlideIndex].label;
+        }
+
+        function imgNav(dir) {
+            const n = imgSlideIndex + dir;
+            if (n < 0 || n >= imgSlides.length) return;
+            imgSlideIndex = n;
+            updateImgNavUI();
+            loadImage(imgSlides[imgSlideIndex].src, imgSlides[imgSlideIndex].label);
+        }
+
+        /* ═══════════════════════════════════════════════
+           SIDE-ARROW ITEM NAV  (single-image modals)
+        ═══════════════════════════════════════════════ */
+        function buildItemNavList(activeLi) {
+            // Collect all sibling <li> elements from the same <ul>
+            const ul = activeLi.parentElement;
+            itemNavList = Array.from(ul.querySelectorAll('li'));
+            itemNavIndex = itemNavList.indexOf(activeLi);
+        }
+
+        function updateItemNavUI() {
+            const prev = document.getElementById('itemPrevBtn');
+            const next = document.getElementById('itemNextBtn');
+            prev.style.display = 'flex';
+            next.style.display = 'flex';
+            prev.disabled = itemNavIndex === 0;
+            next.disabled = itemNavIndex === itemNavList.length - 1;
+            prev.style.opacity = itemNavIndex === 0 ? '0.25' : '1';
+            next.style.opacity = itemNavIndex === itemNavList.length - 1 ? '0.25' : '1';
+
+            // Highlight active list item
+            itemNavList.forEach((li, i) => li.classList.toggle('active-item', i === itemNavIndex));
+        }
+
+        function hideItemNavUI() {
+            document.getElementById('itemPrevBtn').style.display = 'none';
+            document.getElementById('itemNextBtn').style.display = 'none';
+            // Remove all highlights
+            itemNavList.forEach(li => li.classList.remove('active-item'));
+        }
+
+        function itemNav(dir) {
+            const n = itemNavIndex + dir;
+            if (n < 0 || n >= itemNavList.length) return;
+            itemNavIndex = n;
+            const li = itemNavList[n];
+            const title = li.dataset.title;
+            const section = li.dataset.section;
+            const desc = li.dataset.desc;
+
+            document.getElementById('imgModalTag').textContent = sectionLabels[section] || section;
+            document.getElementById('imgModalTitle').textContent = title;
+            document.getElementById('imgModalDesc').textContent = desc;
+
+            updateItemNavUI();
+
+            // Load image
+            const src = itemImages[title] || '';
+            loadImage(src, title);
+        }
+
+        /* ═══════════════════════════════════════════════
+           OPEN / CLOSE MODAL
+        ═══════════════════════════════════════════════ */
+        function openImgModal(liEl) {
+            const title = liEl.dataset.title;
+            const section = liEl.dataset.section;
+            const desc = liEl.dataset.desc;
+
             document.getElementById('imgModalTag').textContent = sectionLabels[section] || section;
             document.getElementById('imgModalDesc').textContent = desc;
-            const sc = document.getElementById('slideControls');
-            if (multiImages[title]) {
-                slideList = multiImages[title]; slideIndex = 0;
-                updateSlideUI(); loadSlideImage(slideList[0].src);
+
+            const isMulti = !!multiImages[title];
+
+            if (isMulti) {
+                // ── Multi-image: header arrows, NO side arrows ──
+                imgSlides = multiImages[title];
+                imgSlideIndex = 0;
+                document.getElementById('imgNavControls').style.display = imgSlides.length > 1 ? 'flex' : 'none';
+                updateImgNavUI();
+                loadImage(imgSlides[0].src, imgSlides[0].label);
+                // Side arrows off
+                hideItemNavUI();
+                itemNavList = [];
+                itemNavIndex = -1;
             } else {
-                slideList = []; sc.style.display = 'none';
-                // Also ensure arrows are hidden for non-multi items
-                document.getElementById('slidePrevBtn').style.display = 'none';
-                document.getElementById('slideNextBtn').style.display = 'none';
+                // ── Single-image: side arrows for item nav ──
+                imgSlides = [];
+                imgSlideIndex = 0;
+                document.getElementById('imgNavControls').style.display = 'none';
                 document.getElementById('imgModalTitle').textContent = title;
-                loadSlideImage(itemImages[title] || '');
+                loadImage(itemImages[title] || '', title);
+                // Build side-arrow nav from sibling items
+                buildItemNavList(liEl);
+                updateItemNavUI();
             }
+
             attachZoomEvents();
             document.getElementById('imgModalOverlay').classList.add('open');
             document.body.style.overflow = 'hidden';
         }
 
-        function buildPlaceholder(title, customMsg) {
-            const msg = customMsg || 'Add an image URL to the <code style="background:#f0f0f0;padding:2px 5px;border-radius:4px;font-size:12px">itemImages</code> map in the script';
-            return `<div class="img-placeholder">
-                <div class="img-placeholder-icon">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="#f6941e" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" width="36" height="36">
-                        <rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/>
-                    </svg>
-                </div>
-                <p style="font-size:14px;text-align:center;max-width:280px;line-height:1.6;color:#8a94aa">
-                    Image for <strong style="color:#0c1a2d">${title}</strong><br>${msg}
-                </p>
-            </div>`;
+        // Convenience for footer links (no <li> element available)
+        function openImgModalDirect(title, section, desc) {
+            const fakeEl = document.createElement('li');
+            fakeEl.dataset.title = title;
+            fakeEl.dataset.section = section;
+            fakeEl.dataset.desc = desc;
+            // Find matching real li so arrow nav works
+            const real = Array.from(document.querySelectorAll('.card ul li')).find(li => li.dataset.title === title);
+            openImgModal(real || fakeEl);
         }
 
         function closeImgModal() {
             detachZoomEvents();
-            zoomScale = 1; fitScale = 1; panX = 0; panY = 0;
-            hasImage = false; slideList = []; slideIndex = 0;
+            zoomScale = 1; fitScale = 1; panX = 0; panY = 0; hasImage = false;
+            imgSlides = []; imgSlideIndex = 0;
+            hideItemNavUI();
+            itemNavList = []; itemNavIndex = -1;
             document.getElementById('imgModalOverlay').classList.remove('open');
             document.body.style.overflow = '';
         }
         function handleImgOverlayClick(e) { if (e.target === document.getElementById('imgModalOverlay')) closeImgModal() }
 
+        /* ═══════════════════════════════════════════════
+           LOGIN MODAL
+        ═══════════════════════════════════════════════ */
         function openModal() { document.getElementById('modalOverlay').classList.add('open'); document.body.style.overflow = 'hidden' }
         function closeModal() { document.getElementById('modalOverlay').classList.remove('open'); document.body.style.overflow = '' }
         function handleOverlayClick(e) { if (e.target === document.getElementById('modalOverlay')) closeModal() }
         function handleLogin() { closeModal(); showToast('Welcome back! Logging you in…') }
 
+        /* ═══════════════════════════════════════════════
+           MOBILE MENU
+        ═══════════════════════════════════════════════ */
         let menuOpen = false;
         function toggleMenu() { menuOpen ? closeMenu() : openMenuFn() }
         function openMenuFn() {
@@ -1850,25 +2377,35 @@
             document.body.style.overflow = '';
         }
 
-        let toastTimer2;
+        /* ═══════════════════════════════════════════════
+           TOAST
+        ═══════════════════════════════════════════════ */
+        let toastTimer;
         function showToast(msg) {
             const t = document.getElementById('toast');
-            clearTimeout(toastTimer2);
+            clearTimeout(toastTimer);
             t.textContent = msg; t.classList.add('show');
-            toastTimer2 = setTimeout(() => t.classList.remove('show'), 3200);
+            toastTimer = setTimeout(() => t.classList.remove('show'), 3200);
         }
 
+        /* ═══════════════════════════════════════════════
+           KEYBOARD
+        ═══════════════════════════════════════════════ */
         document.addEventListener('keydown', e => {
             if (e.key === 'Escape') { closeImgModal(); closeModal(); closeMenu() }
             if (document.getElementById('imgModalOverlay').classList.contains('open')) {
                 if (e.key === '+' || e.key === '=') zoomIn();
                 if (e.key === '-') zoomOut();
                 if (e.key === '0') zoomReset();
-                if (e.key === 'ArrowLeft') slideNav(-1);
-                if (e.key === 'ArrowRight') slideNav(1);
+                // Arrow keys: image nav for multi, item nav for single
+                if (e.key === 'ArrowLeft') { imgSlides.length > 1 ? imgNav(-1) : itemNav(-1) }
+                if (e.key === 'ArrowRight') { imgSlides.length > 1 ? imgNav(1) : itemNav(1) }
             }
         });
 
+        /* ═══════════════════════════════════════════════
+           RESIZE
+        ═══════════════════════════════════════════════ */
         window.addEventListener('resize', () => {
             if (window.innerWidth > 900) closeMenu();
             if (hasImage && document.getElementById('imgModalOverlay').classList.contains('open')) {
@@ -1877,6 +2414,14 @@
                 clampPan(); applyTransform();
             }
         });
+
+        /* ═══════════════════════════════════════════════
+           SCROLL REVEAL
+        ═══════════════════════════════════════════════ */
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('revealed'); revealObserver.unobserve(e.target) } });
+        }, { threshold: 0.12 });
+        document.querySelectorAll('.card, .support-banner').forEach(el => revealObserver.observe(el));
     </script>
 </body>
 
