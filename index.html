@@ -2263,26 +2263,35 @@
             // Remove all highlights
             itemNavList.forEach(li => li.classList.remove('active-item'));
         }
+function itemNav(dir) {
+    const n = itemNavIndex + dir;
+    if (n < 0 || n >= itemNavList.length) return;
+    itemNavIndex = n;
+    const li = itemNavList[n];
+    const title = li.dataset.title;
+    const section = li.dataset.section;
+    const desc = li.dataset.desc;
 
-        function itemNav(dir) {
-            const n = itemNavIndex + dir;
-            if (n < 0 || n >= itemNavList.length) return;
-            itemNavIndex = n;
-            const li = itemNavList[n];
-            const title = li.dataset.title;
-            const section = li.dataset.section;
-            const desc = li.dataset.desc;
+    document.getElementById('imgModalTag').textContent = sectionLabels[section] || section;
+    document.getElementById('imgModalDesc').textContent = desc;
 
-            document.getElementById('imgModalTag').textContent = sectionLabels[section] || section;
-            document.getElementById('imgModalTitle').textContent = title;
-            document.getElementById('imgModalDesc').textContent = desc;
+    updateItemNavUI();
 
-            updateItemNavUI();
-
-            // Load image
-            const src = itemImages[title] || '';
-            loadImage(src, title);
-        }
+    const isMulti = !!multiImages[title];
+    if (isMulti) {
+        imgSlides = multiImages[title];
+        imgSlideIndex = 0;
+        document.getElementById('imgNavControls').style.display = imgSlides.length > 1 ? 'flex' : 'none';
+        updateImgNavUI();
+        loadImage(imgSlides[0].src, imgSlides[0].label);
+    } else {
+        imgSlides = [];
+        imgSlideIndex = 0;
+        document.getElementById('imgNavControls').style.display = 'none';
+        document.getElementById('imgModalTitle').textContent = title;
+        loadImage(itemImages[title] || '', title);
+    }
+}
 
         /* ═══════════════════════════════════════════════
            OPEN / CLOSE MODAL
@@ -2297,17 +2306,16 @@
 
             const isMulti = !!multiImages[title];
 
-            if (isMulti) {
-                // ── Multi-image: header arrows, NO side arrows ──
-                imgSlides = multiImages[title];
-                imgSlideIndex = 0;
-                document.getElementById('imgNavControls').style.display = imgSlides.length > 1 ? 'flex' : 'none';
-                updateImgNavUI();
-                loadImage(imgSlides[0].src, imgSlides[0].label);
-                // Side arrows off
-                hideItemNavUI();
-                itemNavList = [];
-                itemNavIndex = -1;
+          if (isMulti) {
+    // ── Multi-image: header arrows AND side arrows ──
+    imgSlides = multiImages[title];
+    imgSlideIndex = 0;
+    document.getElementById('imgNavControls').style.display = imgSlides.length > 1 ? 'flex' : 'none';
+    updateImgNavUI();
+    loadImage(imgSlides[0].src, imgSlides[0].label);
+    // Side arrows ON — same as single-image items
+    buildItemNavList(liEl);
+    updateItemNavUI();
             } else {
                 // ── Single-image: side arrows for item nav ──
                 imgSlides = [];
