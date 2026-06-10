@@ -62,7 +62,6 @@
             border: 2px solid rgba(246, 148, 30, .35);
             border-radius: 10px;
             display: none;
-            /* shown via JS when needed */
             align-items: center;
             justify-content: center;
             cursor: pointer;
@@ -107,43 +106,6 @@
             pointer-events: none
         }
 
-        /* ── HEADER IMAGE-COUNTER ARROWS (multi-image nav) ── */
-        .img-nav-btn {
-            background: none;
-            border: 1.5px solid rgba(246, 148, 30, .4);
-            border-radius: 7px;
-            width: 30px;
-            height: 30px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            color: var(--navy);
-            transition: background .18s, border-color .18s, transform .15s;
-            flex-shrink: 0;
-        }
-
-        .img-nav-btn svg {
-            width: 14px;
-            height: 14px
-        }
-
-        .img-nav-btn:hover {
-            background: var(--gold);
-            border-color: var(--gold);
-            color: var(--navy)
-        }
-
-        .img-nav-btn:active {
-            transform: scale(.88)
-        }
-
-        .img-nav-btn:disabled {
-            opacity: .25;
-            cursor: default;
-            pointer-events: none
-        }
-
         nav {
             position: sticky;
             top: 0;
@@ -159,15 +121,8 @@
         }
 
         @keyframes navSlideDown {
-            from {
-                transform: translateY(-100%);
-                opacity: 0
-            }
-
-            to {
-                transform: translateY(0);
-                opacity: 1
-            }
+            from { transform: translateY(-100%); opacity: 0 }
+            to { transform: translateY(0); opacity: 1 }
         }
 
         .logo {
@@ -180,15 +135,8 @@
         }
 
         @keyframes fadeInLeft {
-            from {
-                opacity: 0;
-                transform: translateX(-18px)
-            }
-
-            to {
-                opacity: 1;
-                transform: translateX(0)
-            }
+            from { opacity: 0; transform: translateX(-18px) }
+            to { opacity: 1; transform: translateX(0) }
         }
 
         .logo-icon {
@@ -204,9 +152,7 @@
             transition: transform .35s cubic-bezier(.22, .68, 0, 1.4);
         }
 
-        .logo:hover .logo-icon {
-            transform: scale(1.1)
-        }
+        .logo:hover .logo-icon { transform: scale(1.1) }
 
         .logo-icon img {
             width: 100%;
@@ -224,13 +170,9 @@
             transition: letter-spacing .3s ease;
         }
 
-        .logo:hover .logo-text {
-            letter-spacing: .07em
-        }
+        .logo:hover .logo-text { letter-spacing: .07em }
 
-        .logo-text span {
-            color: var(--gold)
-        }
+        .logo-text span { color: var(--gold) }
 
         .nav-links {
             display: flex;
@@ -239,36 +181,15 @@
             list-style: none
         }
 
-        .nav-links li {
-            animation: fadeInDown .5s both
-        }
-
-        .nav-links li:nth-child(1) {
-            animation-delay: .18s
-        }
-
-        .nav-links li:nth-child(2) {
-            animation-delay: .24s
-        }
-
-        .nav-links li:nth-child(3) {
-            animation-delay: .30s
-        }
-
-        .nav-links li:nth-child(4) {
-            animation-delay: .36s
-        }
+        .nav-links li { animation: fadeInDown .5s both }
+        .nav-links li:nth-child(1) { animation-delay: .18s }
+        .nav-links li:nth-child(2) { animation-delay: .24s }
+        .nav-links li:nth-child(3) { animation-delay: .30s }
+        .nav-links li:nth-child(4) { animation-delay: .36s }
 
         @keyframes fadeInDown {
-            from {
-                opacity: 0;
-                transform: translateY(-10px)
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0)
-            }
+            from { opacity: 0; transform: translateY(-10px) }
+            to { opacity: 1; transform: translateY(0) }
         }
 
         .nav-links a {
@@ -294,14 +215,10 @@
         }
 
         .nav-links a:hover,
-        .nav-links a.active {
-            color: var(--white)
-        }
+        .nav-links a.active { color: var(--white) }
 
         .nav-links a:hover::after,
-        .nav-links a.active::after {
-            width: 100%
-        }
+        .nav-links a.active::after { width: 100% }
 
         .nav-right {
             display: flex;
@@ -311,15 +228,8 @@
         }
 
         @keyframes fadeInRight {
-            from {
-                opacity: 0;
-                transform: translateX(18px)
-            }
-
-            to {
-                opacity: 1;
-                transform: translateX(0)
-            }
+            from { opacity: 0; transform: translateX(18px) }
+            to { opacity: 1; transform: translateX(0) }
         }
 
         .btn-login {
@@ -347,9 +257,7 @@
             box-shadow: 0 8px 24px rgba(246, 148, 30, .3);
         }
 
-        .btn-login:active {
-            transform: translateY(0) scale(.97)
-        }
+        .btn-login:active { transform: translateY(0) scale(.97) }
 
         .hamburger {
             display: none;
@@ -382,18 +290,9 @@
             transform-origin: center;
         }
 
-        .hamburger.open .bar:nth-child(1) {
-            transform: translateY(7px) rotate(45deg)
-        }
-
-        .hamburger.open .bar:nth-child(2) {
-            opacity: 0;
-            width: 0
-        }
-
-        .hamburger.open .bar:nth-child(3) {
-            transform: translateY(-7px) rotate(-45deg)
-        }
+        .hamburger.open .bar:nth-child(1) { transform: translateY(7px) rotate(45deg) }
+        .hamburger.open .bar:nth-child(2) { opacity: 0; width: 0 }
+        .hamburger.open .bar:nth-child(3) { transform: translateY(-7px) rotate(-45deg) }
 
         .mobile-menu {
             display: none;
@@ -410,10 +309,7 @@
             transition: max-height .38s cubic-bezier(.22, .68, 0, 1), padding .35s ease;
         }
 
-        .mobile-menu.open {
-            max-height: 400px;
-            padding: 16px 0 24px
-        }
+        .mobile-menu.open { max-height: 400px; padding: 16px 0 24px }
 
         .mobile-menu ul {
             list-style: none;
@@ -421,13 +317,8 @@
             margin-bottom: 20px
         }
 
-        .mobile-menu ul li {
-            border-bottom: 1px solid rgba(255, 255, 255, .06)
-        }
-
-        .mobile-menu ul li:last-child {
-            border-bottom: none
-        }
+        .mobile-menu ul li { border-bottom: 1px solid rgba(255, 255, 255, .06) }
+        .mobile-menu ul li:last-child { border-bottom: none }
 
         .mobile-menu ul a {
             display: flex;
@@ -453,20 +344,12 @@
         }
 
         .mobile-menu ul a:hover,
-        .mobile-menu ul a.active {
-            color: var(--white);
-            padding-left: 6px
-        }
+        .mobile-menu ul a.active { color: var(--white); padding-left: 6px }
 
         .mobile-menu ul a:hover::before,
-        .mobile-menu ul a.active::before {
-            opacity: 1;
-            transform: scale(1.4)
-        }
+        .mobile-menu ul a.active::before { opacity: 1; transform: scale(1.4) }
 
-        .mobile-menu-footer {
-            padding: 0 24px
-        }
+        .mobile-menu-footer { padding: 0 24px }
 
         .btn-login-mobile {
             display: flex;
@@ -486,10 +369,7 @@
             transition: background .2s, color .2s;
         }
 
-        .btn-login-mobile:hover {
-            background: var(--gold);
-            color: var(--navy)
-        }
+        .btn-login-mobile:hover { background: var(--gold); color: var(--navy) }
 
         .hero {
             position: relative;
@@ -511,15 +391,8 @@
         }
 
         @keyframes heroImageReveal {
-            from {
-                opacity: 0;
-                transform: scale(1.06)
-            }
-
-            to {
-                opacity: 1;
-                transform: scale(1)
-            }
+            from { opacity: 0; transform: scale(1.06) }
+            to { opacity: 1; transform: scale(1) }
         }
 
         .hero-content {
@@ -540,15 +413,8 @@
         }
 
         @keyframes heroHeadline {
-            from {
-                opacity: 0;
-                transform: translateY(30px)
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0)
-            }
+            from { opacity: 0; transform: translateY(30px) }
+            to { opacity: 1; transform: translateY(0) }
         }
 
         .hero-gold-rule {
@@ -562,15 +428,8 @@
         }
 
         @keyframes ruleExpand {
-            from {
-                transform: scaleX(0);
-                opacity: 0
-            }
-
-            to {
-                transform: scaleX(1);
-                opacity: 1
-            }
+            from { transform: scaleX(0); opacity: 0 }
+            to { transform: scaleX(1); opacity: 1 }
         }
 
         .hero-sub {
@@ -590,15 +449,8 @@
         }
 
         @keyframes heroFadeUp {
-            from {
-                opacity: 0;
-                transform: translateY(18px)
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0)
-            }
+            from { opacity: 0; transform: translateY(18px) }
+            to { opacity: 1; transform: translateY(0) }
         }
 
         .cards-section {
@@ -626,22 +478,10 @@
                 box-shadow .3s, border-color .3s;
         }
 
-        .card.revealed {
-            opacity: 1;
-            transform: translateY(0)
-        }
-
-        .card:nth-child(1) {
-            transition-delay: .05s
-        }
-
-        .card:nth-child(2) {
-            transition-delay: .15s
-        }
-
-        .card:nth-child(3) {
-            transition-delay: .25s
-        }
+        .card.revealed { opacity: 1; transform: translateY(0) }
+        .card:nth-child(1) { transition-delay: .05s }
+        .card:nth-child(2) { transition-delay: .15s }
+        .card:nth-child(3) { transition-delay: .25s }
 
         .card::after {
             content: '';
@@ -656,9 +496,7 @@
             transition: transform .38s cubic-bezier(.22, .68, 0, 1);
         }
 
-        .card:hover::after {
-            transform: scaleX(1)
-        }
+        .card:hover::after { transform: scaleX(1) }
 
         .card:hover {
             transform: translateY(-10px) scale(1.013) !important;
@@ -678,9 +516,7 @@
             z-index: 0;
         }
 
-        .card:hover::before {
-            left: 150%
-        }
+        .card:hover::before { left: 150% }
 
         .card-icon-wrap {
             width: 64px;
@@ -696,9 +532,7 @@
             z-index: 1;
         }
 
-        .card:hover .card-icon-wrap {
-            background: linear-gradient(135deg, var(--navy), #1a3a5c)
-        }
+        .card:hover .card-icon-wrap { background: linear-gradient(135deg, var(--navy), #1a3a5c) }
 
         .card-icon-wrap svg {
             width: 28px;
@@ -711,9 +545,7 @@
             transition: stroke-width .3s;
         }
 
-        .card:hover .card-icon-wrap svg {
-            stroke-width: 2.2
-        }
+        .card:hover .card-icon-wrap svg { stroke-width: 2.2 }
 
         .card-title-row {
             display: flex;
@@ -732,9 +564,7 @@
             transition: color .25s;
         }
 
-        .card:hover h2 {
-            color: #1a3a5c
-        }
+        .card:hover h2 { color: #1a3a5c }
 
         .card-gold-rule {
             width: 36px;
@@ -744,9 +574,7 @@
             transition: width .4s cubic-bezier(.22, .68, 0, 1);
         }
 
-        .card:hover .card-gold-rule {
-            width: 60px
-        }
+        .card:hover .card-gold-rule { width: 60px }
 
         .card ul {
             list-style: none;
@@ -780,9 +608,7 @@
             box-shadow: 0 0 0 4px rgba(246, 148, 30, .22)
         }
 
-        .card ul li:last-child {
-            border-bottom: none
-        }
+        .card ul li:last-child { border-bottom: none }
 
         .card ul li::before {
             content: '';
@@ -815,10 +641,7 @@
             transform: translateX(-8px);
         }
 
-        .card ul li:hover .li-arrow {
-            opacity: 1;
-            transform: translateX(0)
-        }
+        .card ul li:hover .li-arrow { opacity: 1; transform: translateX(0) }
 
         .support-banner {
             max-width: 1579px;
@@ -829,10 +652,7 @@
             transition: opacity .7s cubic-bezier(.22, .68, 0, 1), transform .7s cubic-bezier(.22, .68, 0, 1);
         }
 
-        .support-banner.revealed {
-            opacity: 1;
-            transform: translateY(0)
-        }
+        .support-banner.revealed { opacity: 1; transform: translateY(0) }
 
         .support-inner {
             background: var(--white);
@@ -862,9 +682,7 @@
             transition: left .7s ease;
         }
 
-        .support-inner:hover::before {
-            left: 150%
-        }
+        .support-inner:hover::before { left: 150% }
 
         .support-inner:hover {
             border-color: rgba(201, 150, 42, .3);
@@ -909,26 +727,12 @@
         }
 
         @keyframes pulseRing {
-            0% {
-                transform: scale(1);
-                opacity: .6
-            }
-
-            70% {
-                transform: scale(1.25);
-                opacity: 0
-            }
-
-            100% {
-                transform: scale(1.25);
-                opacity: 0
-            }
+            0% { transform: scale(1); opacity: .6 }
+            70% { transform: scale(1.25); opacity: 0 }
+            100% { transform: scale(1.25); opacity: 0 }
         }
 
-        .support-text {
-            flex: 1;
-            min-width: 180px
-        }
+        .support-text { flex: 1; min-width: 180px }
 
         .support-text h3 {
             font-family: 'Sora', sans-serif;
@@ -938,11 +742,7 @@
             margin-bottom: 6px
         }
 
-        .support-text p {
-            font-size: 16px;
-            color: var(--muted);
-            line-height: 1.6
-        }
+        .support-text p { font-size: 16px; color: var(--muted); line-height: 1.6 }
 
         .support-contacts {
             display: flex;
@@ -979,9 +779,7 @@
             box-shadow: 0 10px 28px rgba(246, 148, 30, .28)
         }
 
-        .support-btn-phone:active {
-            transform: translateY(-1px) scale(.97)
-        }
+        .support-btn-phone:active { transform: translateY(-1px) scale(.97) }
 
         .support-btn-email {
             background: var(--gold);
@@ -993,15 +791,9 @@
             box-shadow: 0 10px 28px rgba(246, 148, 30, .4)
         }
 
-        .support-btn-email:active {
-            transform: translateY(-1px) scale(.97)
-        }
+        .support-btn-email:active { transform: translateY(-1px) scale(.97) }
 
-        .support-btn svg {
-            width: 18px;
-            height: 18px;
-            flex-shrink: 0
-        }
+        .support-btn svg { width: 18px; height: 18px; flex-shrink: 0 }
 
         /* ══════════════════════════════════════
            IMAGE MODAL
@@ -1021,10 +813,7 @@
             padding: 20px;
         }
 
-        .img-modal-overlay.open {
-            opacity: 1;
-            pointer-events: all
-        }
+        .img-modal-overlay.open { opacity: 1; pointer-events: all }
 
         .img-modal {
             background: var(--white);
@@ -1042,9 +831,7 @@
             box-shadow: 0 40px 100px rgba(0, 0, 0, .3);
         }
 
-        .img-modal-overlay.open .img-modal {
-            transform: translateY(0) scale(1)
-        }
+        .img-modal-overlay.open .img-modal { transform: translateY(0) scale(1) }
 
         .img-modal-header {
             display: flex;
@@ -1094,14 +881,8 @@
             flex-shrink: 0;
         }
 
-        .zoom-btn:hover {
-            background: var(--navy);
-            color: var(--gold)
-        }
-
-        .zoom-btn:active {
-            transform: scale(.88)
-        }
+        .zoom-btn:hover { background: var(--navy); color: var(--gold) }
+        .zoom-btn:active { transform: scale(.88) }
 
         .zoom-level {
             font-family: 'Sora', sans-serif;
@@ -1128,14 +909,8 @@
             flex-shrink: 0;
         }
 
-        .zoom-reset-btn:hover {
-            background: var(--navy);
-            color: var(--gold)
-        }
-
-        .zoom-reset-btn:active {
-            transform: rotate(360deg)
-        }
+        .zoom-reset-btn:hover { background: var(--navy); color: var(--gold) }
+        .zoom-reset-btn:active { transform: rotate(360deg) }
 
         .img-modal-close {
             background: none;
@@ -1149,14 +924,8 @@
             line-height: 1;
         }
 
-        .img-modal-close:hover {
-            color: var(--navy);
-            background: rgba(0, 0, 0, .06)
-        }
-
-        .img-modal-close:active {
-            transform: scale(.88)
-        }
+        .img-modal-close:hover { color: var(--navy); background: rgba(0, 0, 0, .06) }
+        .img-modal-close:active { transform: scale(.88) }
 
         .img-modal-img-wrap {
             flex: 1;
@@ -1167,9 +936,7 @@
             cursor: grab;
         }
 
-        .img-modal-img-wrap.grabbing {
-            cursor: grabbing
-        }
+        .img-modal-img-wrap.grabbing { cursor: grabbing }
 
         .img-zoom-container {
             position: absolute;
@@ -1248,33 +1015,137 @@
             z-index: 5;
         }
 
-        .zoom-hint.hidden {
-            opacity: 0
+        .zoom-hint.hidden { opacity: 0 }
+
+        /* ══════════════════════════════════════
+           BOTTOM IMAGE NAV BAR  (replaces header nav)
+        ══════════════════════════════════════ */
+        .img-modal-footer {
+            flex-shrink: 0;
+            background: var(--white);
+            border-top: 1px solid rgba(11, 17, 32, .08);
+            padding: 0;
         }
 
+        /* Description row */
         .img-modal-desc {
-            padding: 10px 24px 16px;
+            padding: 10px 24px 0;
             font-size: 14px;
             color: var(--muted);
             line-height: 1.6;
+        }
+
+        /* Image nav bar — only shown when multi-image */
+        .img-bottom-nav {
+            display: none; /* shown via JS */
+            align-items: center;
+            gap: 10px;
+            padding: 12px 20px 14px;
+        }
+
+        .img-bottom-nav-btn {
+            flex-shrink: 0;
+            width: 44px;
+            height: 44px;
+            border-radius: 10px;
+            border: 2px solid rgba(246, 148, 30, .35);
+            background: #f8f9fb;
+            color: var(--navy);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: background .2s, border-color .2s, transform .2s, box-shadow .2s;
+        }
+
+        .img-bottom-nav-btn svg { width: 20px; height: 20px; flex-shrink: 0 }
+
+        .img-bottom-nav-btn:hover {
+            background: var(--gold);
+            border-color: var(--gold);
+            color: var(--navy);
+            transform: scale(1.08);
+            box-shadow: 0 6px 18px rgba(246, 148, 30, .35);
+        }
+
+        .img-bottom-nav-btn:active { transform: scale(.93) }
+
+        .img-bottom-nav-btn:disabled {
+            opacity: .3;
+            cursor: default;
+            pointer-events: none;
+        }
+
+        /* Pill strip */
+      .img-pill-strip {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    overflow-x: auto;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    padding: 2px 0;
+    justify-content: center;
+}
+
+        .img-pill-strip::-webkit-scrollbar { display: none }
+
+        .img-pill {
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            gap: 7px;
+            padding: 8px 16px;
+            border-radius: 100px;
+            border: 2px solid rgba(11, 17, 32, .12);
+            background: #f4f5f7;
+            color: var(--muted);
+            font-family: 'DM Sans', sans-serif;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background .2s, border-color .2s, color .2s, transform .2s, box-shadow .2s;
+            white-space: nowrap;
+            user-select: none;
+        }
+
+        .img-pill .pill-num {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: rgba(11, 17, 32, .1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 10px;
+            font-weight: 800;
+            font-family: 'Sora', sans-serif;
+            transition: background .2s, color .2s;
             flex-shrink: 0;
         }
 
-        .img-modal-tag {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            background: rgba(201, 150, 42, .1);
-            border: 1px solid rgba(201, 150, 42, .25);
-            border-radius: 100px;
-            padding: 4px 12px;
-            font-size: 11px;
-            font-weight: 700;
-            color: var(--gold);
-            letter-spacing: .08em;
-            text-transform: uppercase;
-            margin-bottom: 10px;
+        .img-pill:hover {
+            border-color: rgba(246, 148, 30, .5);
+            background: rgba(246, 148, 30, .08);
+            color: var(--navy);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 14px rgba(246, 148, 30, .18);
         }
+
+        .img-pill.active {
+            background: var(--navy);
+            border-color: var(--navy);
+            color: var(--gold);
+            box-shadow: 0 4px 16px rgba(12, 26, 45, .25);
+        }
+
+        .img-pill.active .pill-num {
+            background: rgba(246, 148, 30, .25);
+            color: var(--gold);
+        }
+
+        .img-pill:active { transform: translateY(0) scale(.96) }
 
         /* ── ITEM NAV (side arrows) ── */
         .item-arrow {
@@ -1287,7 +1158,6 @@
             background: rgba(255, 255, 255, .92);
             border: 2px solid rgba(246, 148, 30, .35);
             display: none;
-            /* shown via JS */
             align-items: center;
             justify-content: center;
             cursor: pointer;
@@ -1296,11 +1166,7 @@
             color: var(--navy);
         }
 
-        .item-arrow svg {
-            width: 24px;
-            height: 24px;
-            flex-shrink: 0
-        }
+        .item-arrow svg { width: 24px; height: 24px; flex-shrink: 0 }
 
         .item-arrow-prev {
             left: 0;
@@ -1322,9 +1188,7 @@
             box-shadow: 0 8px 28px rgba(246, 148, 30, .35);
         }
 
-        .item-arrow:active {
-            transform: translateY(-50%) scale(.96)
-        }
+        .item-arrow:active { transform: translateY(-50%) scale(.96) }
 
         .item-arrow:disabled {
             opacity: .25;
@@ -1347,10 +1211,7 @@
             transition: opacity .3s;
         }
 
-        .modal-overlay.open {
-            opacity: 1;
-            pointer-events: all
-        }
+        .modal-overlay.open { opacity: 1; pointer-events: all }
 
         .modal {
             background: var(--white);
@@ -1365,9 +1226,7 @@
             box-shadow: 0 30px 80px rgba(0, 0, 0, .2);
         }
 
-        .modal-overlay.open .modal {
-            transform: translateY(0) scale(1)
-        }
+        .modal-overlay.open .modal { transform: translateY(0) scale(1) }
 
         .modal-logo {
             width: 48px;
@@ -1381,15 +1240,9 @@
             transition: transform .4s cubic-bezier(.22, .68, 0, 1.4);
         }
 
-        .modal:hover .modal-logo {
-            transform: rotate(-8deg) scale(1.08)
-        }
+        .modal:hover .modal-logo { transform: rotate(-8deg) scale(1.08) }
 
-        .modal-logo svg {
-            width: 26px;
-            height: 26px;
-            fill: var(--gold)
-        }
+        .modal-logo svg { width: 26px; height: 26px; fill: var(--gold) }
 
         .modal h2 {
             font-family: 'Sora', sans-serif;
@@ -1411,14 +1264,9 @@
             transition: color .2s, transform .2s;
         }
 
-        .modal-close:hover {
-            color: var(--navy);
-            transform: rotate(90deg)
-        }
+        .modal-close:hover { color: var(--navy); transform: rotate(90deg) }
 
-        .field {
-            margin-bottom: 18px
-        }
+        .field { margin-bottom: 18px }
 
         .field label {
             display: block;
@@ -1483,13 +1331,8 @@
             box-shadow: 0 10px 28px rgba(246, 148, 30, .35)
         }
 
-        .btn-modal-submit:hover::after {
-            transform: translateX(200%)
-        }
-
-        .btn-modal-submit:active {
-            transform: translateY(0) scale(.98)
-        }
+        .btn-modal-submit:hover::after { transform: translateX(200%) }
+        .btn-modal-submit:active { transform: translateY(0) scale(.98) }
 
         .toast {
             position: fixed;
@@ -1510,10 +1353,7 @@
             box-shadow: 0 16px 40px rgba(0, 0, 0, .2);
         }
 
-        .toast.show {
-            transform: translateY(0) scale(1);
-            opacity: 1
-        }
+        .toast.show { transform: translateY(0) scale(1); opacity: 1 }
 
         .menu-backdrop {
             display: none;
@@ -1525,31 +1365,34 @@
             transition: opacity .3s;
         }
 
-        .menu-backdrop.visible {
-            display: block
+        .menu-backdrop.visible { display: block }
+
+        .img-modal-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: rgba(201, 150, 42, .1);
+            border: 1px solid rgba(201, 150, 42, .25);
+            border-radius: 100px;
+            padding: 4px 12px;
+            font-size: 11px;
+            font-weight: 700;
+            color: var(--gold);
+            letter-spacing: .08em;
+            text-transform: uppercase;
+            margin-bottom: 4px;
         }
 
         @media(max-width:900px) {
-            nav {
-                padding: 0 24px
-            }
+            nav { padding: 0 24px }
 
             .nav-links,
-            .btn-login {
-                display: none
-            }
+            .btn-login { display: none }
 
-            .hamburger {
-                display: flex
-            }
+            .hamburger { display: flex }
+            .mobile-menu { display: block }
 
-            .mobile-menu {
-                display: block
-            }
-
-            .hero {
-                padding: 52px 24px 64px
-            }
+            .hero { padding: 52px 24px 64px }
 
             .cards-section {
                 grid-template-columns: 1fr;
@@ -1557,36 +1400,21 @@
                 margin-top: -40px
             }
 
-            .support-banner {
-                padding: 0 24px;
-                margin-bottom: 60px
-            }
+            .support-banner { padding: 0 24px; margin-bottom: 60px }
 
-            .support-inner {
-                padding: 24px
-            }
+            .support-inner { padding: 24px }
 
-            .support-contacts {
-                width: 100%;
-                margin-left: 0;
-                justify-content: stretch
-            }
+            .support-contacts { width: 100%; margin-left: 0; justify-content: stretch }
 
-            .support-btn {
-                flex: 1;
-                justify-content: center
-            }
+            .support-btn { flex: 1; justify-content: center }
 
-            .img-modal {
-                width: 98vw;
-                height: 90vh
-            }
+            .img-modal { width: 98vw; height: 90vh }
+
+            .img-pill { font-size: 12px; padding: 7px 12px }
         }
 
         @media(min-width:540px) and (max-width:900px) {
-            .cards-section {
-                grid-template-columns: repeat(2, 1fr)
-            }
+            .cards-section { grid-template-columns: repeat(2, 1fr) }
         }
     </style>
 </head>
@@ -1815,13 +1643,13 @@
     <div class="img-modal-overlay" id="imgModalOverlay" onclick="handleImgOverlayClick(event)">
         <div class="img-modal">
 
+            <!-- HEADER: title + zoom only (no image nav here anymore) -->
             <div class="img-modal-header">
                 <div>
                     <div class="img-modal-tag" id="imgModalTag">Welcome Aboard</div>
                     <div class="img-modal-title" id="imgModalTitle">Program Overview</div>
                 </div>
                 <div class="img-modal-header-right">
-
                     <!-- ZOOM CONTROLS -->
                     <div class="zoom-controls" id="zoomControls" style="display:none">
                         <button class="zoom-btn" onclick="zoomOut()" title="Zoom out">−</button>
@@ -1835,33 +1663,12 @@
                             </svg>
                         </button>
                     </div>
-
-                    <!-- HEADER IMAGE COUNTER + ARROWS (multi-image modals) -->
-                    <div class="zoom-controls" id="imgNavControls" style="display:none; gap:4px;">
-                        <button class="img-nav-btn" id="imgNavPrev" onclick="imgNav(-1)" title="Previous image"
-                            aria-label="Previous image">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
-                                stroke-linecap="round" stroke-linejoin="round">
-                                <polyline points="15 18 9 12 15 6" />
-                            </svg>
-                        </button>
-                        <span class="zoom-level" id="imgNavLabel">1 / 1</span>
-                        <button class="img-nav-btn" id="imgNavNext" onclick="imgNav(1)" title="Next image"
-                            aria-label="Next image">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
-                                stroke-linecap="round" stroke-linejoin="round">
-                                <polyline points="9 18 15 12 9 6" />
-                            </svg>
-                        </button>
-                    </div>
-
                     <button class="img-modal-close" onclick="closeImgModal()">✕</button>
                 </div>
             </div>
 
-            <!-- SIDE ARROWS — item navigation (single-image modals only) -->
-            <button class="item-arrow item-arrow-prev" id="itemPrevBtn" onclick="itemNav(-1)"
-                aria-label="Previous item">
+            <!-- SIDE ARROWS — item navigation -->
+            <button class="item-arrow item-arrow-prev" id="itemPrevBtn" onclick="itemNav(-1)" aria-label="Previous item">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
                     stroke-linejoin="round">
                     <polyline points="15 18 9 12 15 6" />
@@ -1874,6 +1681,7 @@
                 </svg>
             </button>
 
+            <!-- IMAGE AREA -->
             <div class="img-modal-img-wrap" id="imgWrap">
                 <div class="img-zoom-container" id="zoomContainer">
                     <img id="imgModalImage" src="" alt="" />
@@ -1884,7 +1692,30 @@
                 <div class="zoom-hint" id="zoomHint">Scroll to zoom · Drag to pan</div>
             </div>
 
-            <div class="img-modal-desc" id="imgModalDesc"></div>
+            <!-- FOOTER: description + bottom image nav -->
+            <div class="img-modal-footer">
+                <div class="img-modal-desc" id="imgModalDesc"></div>
+
+                <!-- BOTTOM IMAGE NAV (multi-image only) -->
+                <div class="img-bottom-nav" id="imgBottomNav">
+                    <button class="img-bottom-nav-btn" id="imgNavPrev" onclick="imgNav(-1)" aria-label="Previous image">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="15 18 9 12 15 6" />
+                        </svg>
+                    </button>
+
+                    <div class="img-pill-strip" id="imgPillStrip"></div>
+
+                    <button class="img-bottom-nav-btn" id="imgNavNext" onclick="imgNav(1)" aria-label="Next image">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="9 18 15 12 9 6" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
         </div>
     </div>
 
@@ -1906,75 +1737,38 @@
     </div>
 
     <!-- FOOTER -->
-    <footer
-        style="background:var(--navy);border-top:1px solid rgba(246,148,30,.15);padding:48px 52px 32px;margin-top:0;">
+    <footer style="background:var(--navy);border-top:1px solid rgba(246,148,30,.15);padding:48px 52px 32px;margin-top:0;">
         <div style="max-width:1500px;margin:0 auto;">
-            <div
-                style="display:flex;flex-wrap:wrap;gap:40px;justify-content:space-between;align-items:flex-start;margin-bottom:40px;">
+            <div style="display:flex;flex-wrap:wrap;gap:40px;justify-content:space-between;align-items:flex-start;margin-bottom:40px;">
                 <div style="max-width:280px;">
-                    <a href="/"
-                        style="display:flex;align-items:center;gap:10px;text-decoration:none;margin-bottom:14px;">
-                        <div
-                            style="width:38px;height:38px;border-radius:7px;overflow:hidden;display:flex;align-items:center;justify-content:center;background:transparent;">
-                            <img src="logo.png" alt="FinancialCorp logo"
-                                style="width:100%;height:100%;object-fit:contain;" />
+                    <a href="/" style="display:flex;align-items:center;gap:10px;text-decoration:none;margin-bottom:14px;">
+                        <div style="width:38px;height:38px;border-radius:7px;overflow:hidden;display:flex;align-items:center;justify-content:center;background:transparent;">
+                            <img src="logo.png" alt="FinancialCorp logo" style="width:100%;height:100%;object-fit:contain;" />
                         </div>
-                        <span
-                            style="font-family:'Sora',sans-serif;font-size:18px;font-weight:800;color:#fff;letter-spacing:.04em;">FINANCIAL<span
-                                style="color:var(--gold)">CORP</span></span>
+                        <span style="font-family:'Sora',sans-serif;font-size:18px;font-weight:800;color:#fff;letter-spacing:.04em;">FINANCIAL<span style="color:var(--gold)">CORP</span></span>
                     </a>
-                    <p style="font-size:14px;color:rgba(255,255,255,.45);line-height:1.7;">Empowering referral partners
-                        with the tools, training, and support to grow confidently.</p>
+                    <p style="font-size:14px;color:rgba(255,255,255,.45);line-height:1.7;">Empowering referral partners with the tools, training, and support to grow confidently.</p>
                 </div>
                 <div>
-                    <div
-                        style="font-family:'Sora',sans-serif;font-size:11px;font-weight:700;color:var(--gold);letter-spacing:.1em;text-transform:uppercase;margin-bottom:16px;">
-                        Quick Links</div>
+                    <div style="font-family:'Sora',sans-serif;font-size:11px;font-weight:700;color:var(--gold);letter-spacing:.1em;text-transform:uppercase;margin-bottom:16px;">Quick Links</div>
                     <ul style="list-style:none;display:flex;flex-direction:column;gap:10px;">
-                        <li><a href="#" style="font-size:14px;color:rgba(255,255,255,.55);text-decoration:none;"
-                                onmouseover="this.style.color='#fff'"
-                                onmouseout="this.style.color='rgba(255,255,255,.55)'">Home</a></li>
-                        <li><a href="#education"
-                                style="font-size:14px;color:rgba(255,255,255,.55);text-decoration:none;"
-                                onmouseover="this.style.color='#fff'"
-                                onmouseout="this.style.color='rgba(255,255,255,.55)'">Education Center</a></li>
-                        <li><a href="#sales" style="font-size:14px;color:rgba(255,255,255,.55);text-decoration:none;"
-                                onmouseover="this.style.color='#fff'"
-                                onmouseout="this.style.color='rgba(255,255,255,.55)'">Sales Materials</a></li>
-                        <li><a href="#support" style="font-size:14px;color:rgba(255,255,255,.55);text-decoration:none;"
-                                onmouseover="this.style.color='#fff'"
-                                onmouseout="this.style.color='rgba(255,255,255,.55)'">Support</a></li>
+                        <li><a href="#" style="font-size:14px;color:rgba(255,255,255,.55);text-decoration:none;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,.55)'">Home</a></li>
+                        <li><a href="#education" style="font-size:14px;color:rgba(255,255,255,.55);text-decoration:none;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,.55)'">Education Center</a></li>
+                        <li><a href="#sales" style="font-size:14px;color:rgba(255,255,255,.55);text-decoration:none;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,.55)'">Sales Materials</a></li>
+                        <li><a href="#support" style="font-size:14px;color:rgba(255,255,255,.55);text-decoration:none;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,.55)'">Support</a></li>
                     </ul>
                 </div>
                 <div>
-                    <div
-                        style="font-family:'Sora',sans-serif;font-size:11px;font-weight:700;color:var(--gold);letter-spacing:.1em;text-transform:uppercase;margin-bottom:16px;">
-                        Partner Resources</div>
+                    <div style="font-family:'Sora',sans-serif;font-size:11px;font-weight:700;color:var(--gold);letter-spacing:.1em;text-transform:uppercase;margin-bottom:16px;">Partner Resources</div>
                     <ul style="list-style:none;display:flex;flex-direction:column;gap:10px;">
-                        <li><a href="#" onclick="openModal();return false;"
-                                style="font-size:14px;color:rgba(255,255,255,.55);text-decoration:none;"
-                                onmouseover="this.style.color='#fff'"
-                                onmouseout="this.style.color='rgba(255,255,255,.55)'">Partner Login</a></li>
-                        <li><a href="#"
-                                onclick="openImgModalDirect('Program Overview','welcome','A complete walkthrough of the FinancialCorp partner program.');return false;"
-                                style="font-size:14px;color:rgba(255,255,255,.55);text-decoration:none;"
-                                onmouseover="this.style.color='#fff'"
-                                onmouseout="this.style.color='rgba(255,255,255,.55)'">Program Overview</a></li>
-                        <li><a href="#"
-                                onclick="openImgModalDirect('Partner Agreement','welcome','Review the terms of the FinancialCorp partner agreement.');return false;"
-                                style="font-size:14px;color:rgba(255,255,255,.55);text-decoration:none;"
-                                onmouseover="this.style.color='#fff'"
-                                onmouseout="this.style.color='rgba(255,255,255,.55)'">Partner Agreement</a></li>
-                        <li><a href="#"
-                                onclick="openImgModalDirect('Partner Guide','sales','The comprehensive partner sales guide.');return false;"
-                                style="font-size:14px;color:rgba(255,255,255,.55);text-decoration:none;"
-                                onmouseover="this.style.color='#fff'"
-                                onmouseout="this.style.color='rgba(255,255,255,.55)'">Partner Guide</a></li>
+                        <li><a href="#" onclick="openModal();return false;" style="font-size:14px;color:rgba(255,255,255,.55);text-decoration:none;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,.55)'">Partner Login</a></li>
+                        <li><a href="#" onclick="openImgModalDirect('Program Overview','welcome','A complete walkthrough of the FinancialCorp partner program.');return false;" style="font-size:14px;color:rgba(255,255,255,.55);text-decoration:none;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,.55)'">Program Overview</a></li>
+                        <li><a href="#" onclick="openImgModalDirect('Partner Agreement','welcome','Review the terms of the FinancialCorp partner agreement.');return false;" style="font-size:14px;color:rgba(255,255,255,.55);text-decoration:none;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,.55)'">Partner Agreement</a></li>
+                        <li><a href="#" onclick="openImgModalDirect('Partner Guide','sales','The comprehensive partner sales guide.');return false;" style="font-size:14px;color:rgba(255,255,255,.55);text-decoration:none;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,.55)'">Partner Guide</a></li>
                     </ul>
                 </div>
             </div>
-            <div
-                style="border-top:1px solid rgba(255,255,255,.08);padding-top:24px;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px;">
+            <div style="border-top:1px solid rgba(255,255,255,.08);padding-top:24px;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px;">
                 <p style="font-size:13px;color:rgba(255,255,255,.3);">© 2025 FinancialCorp. All rights reserved.</p>
                 <p style="font-size:13px;color:rgba(255,255,255,.25);">Partner Portal · Confidential</p>
             </div>
@@ -2011,7 +1805,6 @@
             'Scripts & Talking Points': 'FinancialCorp_Sales_04_Scripts_Talking_Points.png'
         };
 
-        // Multi-image items: arrows appear in HEADER, NOT on the sides
         const multiImages = {
             'POS Systems': [
                 { src: 'FinancialCorp_Foundation_07_Major_POS_Companies.png', label: 'Major POS Companies' },
@@ -2038,14 +1831,8 @@
         /* ═══════════════════════════════════════════════
            STATE
         ═══════════════════════════════════════════════ */
-        // Multi-image (header nav) state
         let imgSlides = [], imgSlideIndex = 0;
-
-        // Item (side-arrow) nav state
-        let itemNavList = [];   // all <li> elements in the current section
-        let itemNavIndex = -1;   // which one is active
-
-        // Zoom state
+        let itemNavList = [], itemNavIndex = -1;
         let zoomScale = 1, fitScale = 1, zoomMin = .5, zoomMax = 5, zoomStep = .25;
         let panX = 0, panY = 0, isPanning = false;
         let panStartX = 0, panStartY = 0, panOriginX = 0, panOriginY = 0;
@@ -2212,16 +1999,30 @@
         }
 
         /* ═══════════════════════════════════════════════
-           HEADER IMAGE NAV  (multi-image modals)
+           BOTTOM IMAGE NAV  (pill strip)
         ═══════════════════════════════════════════════ */
-        function updateImgNavUI() {
-            const label = document.getElementById('imgNavLabel');
-            const prevBtn = document.getElementById('imgNavPrev');
-            const nextBtn = document.getElementById('imgNavNext');
-            label.textContent = `${imgSlideIndex + 1} / ${imgSlides.length}`;
-            prevBtn.disabled = imgSlideIndex === 0;
-            nextBtn.disabled = imgSlideIndex === imgSlides.length - 1;
-            // Update title to current slide label
+        function buildPillStrip() {
+            const strip = document.getElementById('imgPillStrip');
+            strip.innerHTML = '';
+            imgSlides.forEach((slide, i) => {
+                const pill = document.createElement('button');
+                pill.className = 'img-pill' + (i === imgSlideIndex ? ' active' : '');
+                pill.innerHTML = `<span class="pill-num">${i + 1}</span>${slide.label}`;
+                pill.onclick = () => { imgSlideIndex = i; syncImgNav(); loadImage(imgSlides[i].src, imgSlides[i].label); };
+                strip.appendChild(pill);
+            });
+        }
+
+        function syncImgNav() {
+            // Update pill highlights
+            const pills = document.querySelectorAll('#imgPillStrip .img-pill');
+            pills.forEach((p, i) => p.classList.toggle('active', i === imgSlideIndex));
+            // Scroll active pill into view
+            if (pills[imgSlideIndex]) pills[imgSlideIndex].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+            // Arrow states
+            document.getElementById('imgNavPrev').disabled = imgSlideIndex === 0;
+            document.getElementById('imgNavNext').disabled = imgSlideIndex === imgSlides.length - 1;
+            // Update modal title to current slide label
             document.getElementById('imgModalTitle').textContent = imgSlides[imgSlideIndex].label;
         }
 
@@ -2229,15 +2030,18 @@
             const n = imgSlideIndex + dir;
             if (n < 0 || n >= imgSlides.length) return;
             imgSlideIndex = n;
-            updateImgNavUI();
+            syncImgNav();
             loadImage(imgSlides[imgSlideIndex].src, imgSlides[imgSlideIndex].label);
         }
 
+        function showBottomNav(show) {
+            document.getElementById('imgBottomNav').style.display = show ? 'flex' : 'none';
+        }
+
         /* ═══════════════════════════════════════════════
-           SIDE-ARROW ITEM NAV  (single-image modals)
+           SIDE-ARROW ITEM NAV
         ═══════════════════════════════════════════════ */
         function buildItemNavList(activeLi) {
-            // Collect all sibling <li> elements from the same <ul>
             const ul = activeLi.parentElement;
             itemNavList = Array.from(ul.querySelectorAll('li'));
             itemNavIndex = itemNavList.indexOf(activeLi);
@@ -2252,46 +2056,44 @@
             next.disabled = itemNavIndex === itemNavList.length - 1;
             prev.style.opacity = itemNavIndex === 0 ? '0.25' : '1';
             next.style.opacity = itemNavIndex === itemNavList.length - 1 ? '0.25' : '1';
-
-            // Highlight active list item
             itemNavList.forEach((li, i) => li.classList.toggle('active-item', i === itemNavIndex));
         }
 
         function hideItemNavUI() {
             document.getElementById('itemPrevBtn').style.display = 'none';
             document.getElementById('itemNextBtn').style.display = 'none';
-            // Remove all highlights
             itemNavList.forEach(li => li.classList.remove('active-item'));
         }
-function itemNav(dir) {
-    const n = itemNavIndex + dir;
-    if (n < 0 || n >= itemNavList.length) return;
-    itemNavIndex = n;
-    const li = itemNavList[n];
-    const title = li.dataset.title;
-    const section = li.dataset.section;
-    const desc = li.dataset.desc;
 
-    document.getElementById('imgModalTag').textContent = sectionLabels[section] || section;
-    document.getElementById('imgModalDesc').textContent = desc;
+        function itemNav(dir) {
+            const n = itemNavIndex + dir;
+            if (n < 0 || n >= itemNavList.length) return;
+            itemNavIndex = n;
+            const li = itemNavList[n];
+            const title = li.dataset.title;
+            const section = li.dataset.section;
+            const desc = li.dataset.desc;
 
-    updateItemNavUI();
+            document.getElementById('imgModalTag').textContent = sectionLabels[section] || section;
+            document.getElementById('imgModalDesc').textContent = desc;
+            updateItemNavUI();
 
-    const isMulti = !!multiImages[title];
-    if (isMulti) {
-        imgSlides = multiImages[title];
-        imgSlideIndex = 0;
-        document.getElementById('imgNavControls').style.display = imgSlides.length > 1 ? 'flex' : 'none';
-        updateImgNavUI();
-        loadImage(imgSlides[0].src, imgSlides[0].label);
-    } else {
-        imgSlides = [];
-        imgSlideIndex = 0;
-        document.getElementById('imgNavControls').style.display = 'none';
-        document.getElementById('imgModalTitle').textContent = title;
-        loadImage(itemImages[title] || '', title);
-    }
-}
+            const isMulti = !!multiImages[title];
+            if (isMulti) {
+                imgSlides = multiImages[title];
+                imgSlideIndex = 0;
+                const show = imgSlides.length > 1;
+                showBottomNav(show);
+                if (show) { buildPillStrip(); syncImgNav(); }
+                loadImage(imgSlides[0].src, imgSlides[0].label);
+            } else {
+                imgSlides = [];
+                imgSlideIndex = 0;
+                showBottomNav(false);
+                document.getElementById('imgModalTitle').textContent = title;
+                loadImage(itemImages[title] || '', title);
+            }
+        }
 
         /* ═══════════════════════════════════════════════
            OPEN / CLOSE MODAL
@@ -2306,40 +2108,35 @@ function itemNav(dir) {
 
             const isMulti = !!multiImages[title];
 
-          if (isMulti) {
-    // ── Multi-image: header arrows AND side arrows ──
-    imgSlides = multiImages[title];
-    imgSlideIndex = 0;
-    document.getElementById('imgNavControls').style.display = imgSlides.length > 1 ? 'flex' : 'none';
-    updateImgNavUI();
-    loadImage(imgSlides[0].src, imgSlides[0].label);
-    // Side arrows ON — same as single-image items
-    buildItemNavList(liEl);
-    updateItemNavUI();
+            if (isMulti) {
+                imgSlides = multiImages[title];
+                imgSlideIndex = 0;
+                const show = imgSlides.length > 1;
+                showBottomNav(show);
+                if (show) { buildPillStrip(); syncImgNav(); }
+                else { showBottomNav(false); }
+                document.getElementById('imgModalTitle').textContent = imgSlides[0].label;
+                loadImage(imgSlides[0].src, imgSlides[0].label);
             } else {
-                // ── Single-image: side arrows for item nav ──
                 imgSlides = [];
                 imgSlideIndex = 0;
-                document.getElementById('imgNavControls').style.display = 'none';
+                showBottomNav(false);
                 document.getElementById('imgModalTitle').textContent = title;
                 loadImage(itemImages[title] || '', title);
-                // Build side-arrow nav from sibling items
-                buildItemNavList(liEl);
-                updateItemNavUI();
             }
 
+            buildItemNavList(liEl);
+            updateItemNavUI();
             attachZoomEvents();
             document.getElementById('imgModalOverlay').classList.add('open');
             document.body.style.overflow = 'hidden';
         }
 
-        // Convenience for footer links (no <li> element available)
         function openImgModalDirect(title, section, desc) {
             const fakeEl = document.createElement('li');
             fakeEl.dataset.title = title;
             fakeEl.dataset.section = section;
             fakeEl.dataset.desc = desc;
-            // Find matching real li so arrow nav works
             const real = Array.from(document.querySelectorAll('.card ul li')).find(li => li.dataset.title === title);
             openImgModal(real || fakeEl);
         }
@@ -2348,11 +2145,13 @@ function itemNav(dir) {
             detachZoomEvents();
             zoomScale = 1; fitScale = 1; panX = 0; panY = 0; hasImage = false;
             imgSlides = []; imgSlideIndex = 0;
+            showBottomNav(false);
             hideItemNavUI();
             itemNavList = []; itemNavIndex = -1;
             document.getElementById('imgModalOverlay').classList.remove('open');
             document.body.style.overflow = '';
         }
+
         function handleImgOverlayClick(e) { if (e.target === document.getElementById('imgModalOverlay')) closeImgModal() }
 
         /* ═══════════════════════════════════════════════
@@ -2405,7 +2204,6 @@ function itemNav(dir) {
                 if (e.key === '+' || e.key === '=') zoomIn();
                 if (e.key === '-') zoomOut();
                 if (e.key === '0') zoomReset();
-                // Arrow keys: image nav for multi, item nav for single
                 if (e.key === 'ArrowLeft') { imgSlides.length > 1 ? imgNav(-1) : itemNav(-1) }
                 if (e.key === 'ArrowRight') { imgSlides.length > 1 ? imgNav(1) : itemNav(1) }
             }
